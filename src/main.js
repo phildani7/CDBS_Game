@@ -5,16 +5,46 @@
 import './styles.css';
 import { Game } from './game.js';
 import * as C from './config.js';
+import youtubeVideos from './data/youtube.json';
 
-// Rotate YouTube sidebar video with real CDBS video links
-function rotateYouTubeLink() {
-  const videos = C.YOUTUBE_VIDEOS;
-  if (!videos || videos.length === 0) return;
-  const video = videos[Math.floor(Math.random() * videos.length)];
+// Show a RELATED YouTube video in sidebar based on current verse
+function showRelatedVideo(game) {
   const link = document.getElementById('yt-link');
   const title = document.getElementById('yt-title');
-  if (link) link.href = `https://www.youtube.com/watch?v=${video.id}&list=${C.YOUTUBE_PLAYLIST}`;
-  if (title) title.textContent = video.title;
+  if (!link || !youtubeVideos || youtubeVideos.length === 0) return;
+
+  let video = null;
+
+  // Try to find a video related to the current verse
+  if (game && game.currentVerse) {
+    const ref = game.currentVerse.ref.toLowerCase();
+    // Extract book name from reference
+    const bookMatch = ref.match(/^(\d?\s*[a-z]+)/);
+    const book = bookMatch ? bookMatch[1].replace(/\s/g, '') : '';
+
+    // Search for videos matching the same book
+    const related = youtubeVideos.filter(v => {
+      const vTitle = v.title.toLowerCase();
+      const vPassage = (v.passage || '').toLowerCase().replace(/\s/g, '');
+      // Exact passage match first
+      if (vPassage && ref.replace(/\s/g, '').includes(vPassage.split(':')[0])) return true;
+      // Book match
+      if (book && vTitle.includes(book)) return true;
+      return false;
+    });
+
+    if (related.length > 0) {
+      video = related[Math.floor(Math.random() * related.length)];
+    }
+  }
+
+  // Fallback: pick a random video
+  if (!video) {
+    video = youtubeVideos[Math.floor(Math.random() * youtubeVideos.length)];
+  }
+
+  link.href = `https://www.youtube.com/watch?v=${video.id}&list=${C.YOUTUBE_PLAYLIST}`;
+  title.textContent = video.title;
 }
 
 // Update memorization count in sidebar
@@ -65,9 +95,9 @@ document.fonts.ready.then(() => {
   // Start game
   const game = new Game(canvas);
 
-  // Setup sidebar
-  rotateYouTubeLink();
-  setInterval(rotateYouTubeLink, 30000); // rotate every 30s
+  // Setup sidebar with related video
+  showRelatedVideo(game);
+  setInterval(() => showRelatedVideo(game), 20000); // rotate every 20s
   setInterval(() => updateMemorizationDisplay(game), 5000);
 
   // Expose for debugging

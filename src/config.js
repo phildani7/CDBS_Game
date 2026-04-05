@@ -214,14 +214,10 @@ export const FONT = {
   miniGame: "600 22px 'Rajdhani', sans-serif"
 };
 
-// CDBS YouTube – CartoonForChrist channel
+// CDBS YouTube – CartoonForChrist channel (190 videos loaded from JSON)
 export const YOUTUBE_CHANNEL = '@CartoonForChrist';
 export const YOUTUBE_PLAYLIST = 'PL_zwO2E6LyLJUq9r68bF-zXd8lw_phslx';
-export const YOUTUBE_VIDEOS = [
-  { id: 'GOQ2rucwR8Y', title: 'Two Debtors (Luke 7:41-43)' },
-  { id: 'O9x_13oqbZI', title: 'The Sower Part A (Luke 8:5-10)' },
-  { id: '0hbQAFknTic', title: 'Weeds & Wheat Part B (Mat 13:37-43)' }
-];
+// Videos loaded dynamically from src/data/youtube.json in main.js
 
 // Lesson categories for quiz
 export const LESSON_CATEGORIES = [
@@ -232,3 +228,16 @@ export const LESSON_CATEGORIES = [
 
 // Mini-game types
 export const MINIGAME_TYPES = ['reassemble', 'missing_word', 'category_sort'];
+
+// Activity scoring
+export const QUIZ_CORRECT_POINTS = 75;       // Per correct quiz answer
+export const QUIZ_PERFECT_BONUS = 300;        // All 3 correct
+export const MINI_CORRECT_POINTS = 50;        // Per correct mini-game step
+export const MINI_PERFECT_BONUS = 400;        // Perfect mini-game
+export const POWERUP_COLLECT_POINTS = 50;     // Points per power-up collected (was 35)
+
+// Score popup visibility
+export const SCORE_POPUP_LIFE = 2.2;          // Seconds popup is visible (was 1.2)
+export const SCORE_POPUP_SPEED = 35;          // Upward speed (was 60 - slower = more visible)
+export const BONUS_POPUP_LIFE = 3.0;          // Bonus popups last even longer
+export const BONUS_FLASH_DURATION = 0.8;      // Flash duration for big bonuses

@@ -6,6 +6,7 @@
 import * as C from './config.js';
 import { AudioManager } from './audio.js';
 import versesData from './data/verses.json';
+import youtubeVideos from './data/youtube.json';
 
 // ── Optional module imports (loaded asynchronously) ──────────
 
@@ -186,7 +187,7 @@ export class Game {
     this.shareClipboardFeedback = 0;
 
     // YouTube sidebar (Feature #13)
-    this.youtubeVideoIndex = Math.floor(Math.random() * C.YOUTUBE_VIDEOS.length);
+    this.youtubeVideoIndex = Math.floor(Math.random() * youtubeVideos.length);
     this.youtubeSidebarRect = { x: C.CANVAS_W - 45, y: C.HUD_HEIGHT + 5, w: 40, h: C.PLAY_RECT.h - 10 };
 
     // Bind
@@ -289,7 +290,7 @@ export class Game {
     if (this.state === 'serve' || this.state === 'playing') {
       const yt = this.youtubeSidebarRect;
       if (this._isInRect(pos, yt.x, yt.y, yt.w, yt.h)) {
-        const video = C.YOUTUBE_VIDEOS[this.youtubeVideoIndex];
+        const video = youtubeVideos[this.youtubeVideoIndex];
         if (video) {
           window.open(`https://www.youtube.com/watch?v=${video.id}`, '_blank');
         }
@@ -472,7 +473,7 @@ export class Game {
     this._recordVersePlayed();
 
     // Pick a new YouTube video for this level
-    this.youtubeVideoIndex = Math.floor(Math.random() * C.YOUTUBE_VIDEOS.length);
+    this.youtubeVideoIndex = Math.floor(Math.random() * youtubeVideos.length);
 
     // Trigger intro animation
     this.totalBricksInLevel = this.bricks.length;
@@ -1125,11 +1126,11 @@ export class Game {
     this.particles.push({
       x: brick.x,
       y: brick.y - 15,
-      vx: 0, vy: -60,
-      life: 1.2, maxLife: 1.2,
+      vx: 0, vy: -C.SCORE_POPUP_SPEED,
+      life: C.SCORE_POPUP_LIFE, maxLife: C.SCORE_POPUP_LIFE,
       char: `${prefix}${points}`,
       color: points >= 0 ? brick.color : C.COLORS.bad,
-      size: 16,
+      size: 20,
       rotation: 0, rotSpeed: 0,
       affectsWall: false,
       isScore: true
@@ -1138,14 +1139,14 @@ export class Game {
     // Order bonus popup (if significant)
     if (orderBonus >= 30) {
       this.particles.push({
-        x: brick.x + 40,
-        y: brick.y - 5,
-        vx: 15, vy: -40,
-        life: 1.0, maxLife: 1.0,
-        char: `+${orderBonus} order`,
-        color: C.COLORS.god, size: 12,
+        x: brick.x + 50,
+        y: brick.y - 10,
+        vx: 12, vy: -25,
+        life: C.BONUS_POPUP_LIFE, maxLife: C.BONUS_POPUP_LIFE,
+        char: `+${orderBonus} ORDER BONUS`,
+        color: C.COLORS.god, size: 15,
         rotation: 0, rotSpeed: 0,
-        affectsWall: false, isScore: true
+        affectsWall: false, isScore: true, isBonus: true
       });
     }
 
@@ -1268,8 +1269,19 @@ export class Game {
   }
 
   _activatePowerup(pu) {
-    this.score += 35;
+    this.score += C.POWERUP_COLLECT_POINTS;
     this.audio.playPowerUp(pu.kind);
+
+    // Power-up collect popup
+    this.particles.push({
+      x: pu.x, y: pu.y - 20,
+      vx: 0, vy: -C.SCORE_POPUP_SPEED,
+      life: C.SCORE_POPUP_LIFE, maxLife: C.SCORE_POPUP_LIFE,
+      char: `+${C.POWERUP_COLLECT_POINTS} ${pu.symbol || ''}`,
+      color: pu.color, size: 18,
+      rotation: 0, rotSpeed: 0,
+      affectsWall: false, isScore: true
+    });
 
     // Burst effect
     const chars = pu.label.split('').filter(c => c !== ' ');
@@ -1731,14 +1743,14 @@ export class Game {
     lesson.correct = correct;
 
     if (correct) {
-      this.quizScore += 100;
-      this.score += 100;
-      this.quizFeedback = { text: 'Correct! +100', color: C.COLORS.good, timer: 1.0 };
+      this.quizScore += C.QUIZ_CORRECT_POINTS;
+      this.score += C.QUIZ_CORRECT_POINTS;
+      this.quizFeedback = { text: `Correct! +${C.QUIZ_CORRECT_POINTS}`, color: C.COLORS.good, timer: 1.2 };
     } else {
       this.quizFeedback = {
         text: `Not quite. It's "${categories.find(c => c.key === lesson.correctKey)?.label || 'unknown'}"`,
         color: C.COLORS.bad,
-        timer: 1.5
+        timer: 1.8
       };
     }
   }
@@ -1764,6 +1776,22 @@ export class Game {
   }
 
   _endLessonQuiz() {
+    // Perfect bonus: all 3 correct
+    const allCorrect = this.quizLessons.every(l => l.correct);
+    if (allCorrect) {
+      this.score += C.QUIZ_PERFECT_BONUS;
+      this.particles.push({
+        x: C.CANVAS_W / 2, y: C.CANVAS_H / 2 - 30,
+        vx: 0, vy: -20,
+        life: C.BONUS_POPUP_LIFE, maxLife: C.BONUS_POPUP_LIFE,
+        char: `+${C.QUIZ_PERFECT_BONUS} PERFECT QUIZ!`,
+        color: C.COLORS.god, size: 22,
+        rotation: 0, rotSpeed: 0,
+        affectsWall: false, isScore: true, isBonus: true
+      });
+      this.flashAlpha = 0.3;
+      this.flashColor = C.COLORS.god;
+    }
     // Transition to mini-game
     this._startMiniGame();
   }
@@ -1986,6 +2014,28 @@ export class Game {
   }
 
   _endMiniGame() {
+    // Perfect mini-game bonus
+    if (this.miniComplete && this.miniScore > 0) {
+      // Check if all correct (no wrong answers)
+      let perfect = false;
+      if (this.miniGameType === 'reassemble') {
+        perfect = this.miniSelected.length === this.miniCorrectOrder.length;
+      } else if (this.miniGameType === 'missing_word') {
+        perfect = this.miniBlanksFilled && this.miniBlanksFilled.every(b => b);
+      }
+      if (perfect) {
+        this.score += C.MINI_PERFECT_BONUS;
+        this.particles.push({
+          x: C.CANVAS_W / 2, y: C.CANVAS_H / 2,
+          vx: 0, vy: -20,
+          life: C.BONUS_POPUP_LIFE, maxLife: C.BONUS_POPUP_LIFE,
+          char: `+${C.MINI_PERFECT_BONUS} PERFECT!`,
+          color: C.COLORS.god, size: 22,
+          rotation: 0, rotSpeed: 0,
+          affectsWall: false, isScore: true, isBonus: true
+        });
+      }
+    }
     // Advance to next level
     if (this.level >= C.TOTAL_LEVELS) {
       this._onGameComplete();
@@ -2256,7 +2306,7 @@ export class Game {
   }
 
   _renderTextWall(ctx) {
-    // Fill entire play area with the current verse text, repeating
+    // Fill ENTIRE play area with the current verse text, flowing and wavy
     if (!this.currentVerse) return;
     ctx.save();
     ctx.font = C.WALL_FONT;
@@ -2266,27 +2316,34 @@ export class Game {
     const startY = C.PLAY_RECT.y + 5;
     const endY = C.PLAY_RECT.y + C.PLAY_RECT.h;
     const startX = C.PLAY_RECT.x + 5;
-    const lineWidth = C.PLAY_RECT.w - 10;
+    const t = this.stateTime || 0;
+
+    const wallColors = ['#ff9c5b', '#f0c35f', '#84d96c', '#55c6d9', '#8ba7ff'];
 
     let charIdx = 0;
-    let colorIdx = 0;
+    let lineIdx = 0;
     for (let y = startY; y < endY; y += lineH) {
-      // Cycle through muted category colors for visual interest
-      const categoryColors = [
-        C.COLORS.god, C.COLORS.good, C.COLORS.connector, C.COLORS.other
-      ];
-      ctx.fillStyle = categoryColors[colorIdx % categoryColors.length];
-      ctx.globalAlpha = 0.12;
-      colorIdx++;
+      // Wavy horizontal offset per line (PreText-style flowing effect)
+      const wave = Math.sin((y * 0.02) + t * 0.8) * 12;
+      const wave2 = Math.cos((y * 0.015) + t * 0.5) * 6;
+      const xOffset = wave + wave2;
 
-      // Build a line from the repeating verse text
+      // Bold, strong alpha like PreText Breaker
+      const alphaWave = 0.42 + Math.sin((y * 0.03) + t * 0.6) * 0.1;
+
+      ctx.fillStyle = wallColors[lineIdx % wallColors.length];
+      ctx.globalAlpha = alphaWave;
+
+      // Build line from repeating verse text
       let line = '';
-      const charsPerLine = 85;
+      const charsPerLine = 90;
       for (let c = 0; c < charsPerLine; c++) {
         line += verseText[(charIdx + c) % verseText.length];
       }
-      ctx.fillText(line, startX, y);
+
+      ctx.fillText(line, startX + xOffset, y);
       charIdx += charsPerLine;
+      lineIdx++;
     }
 
     ctx.restore();
@@ -2577,13 +2634,26 @@ export class Game {
       ctx.rotate(p.rotation);
 
       if (p.isScore) {
+        // Bonus popups flash and scale
+        let scale = 1;
+        if (p.isBonus) {
+          const flashT = (p.maxLife - p.life);
+          scale = flashT < C.BONUS_FLASH_DURATION
+            ? 1 + Math.sin(flashT * 12) * 0.3
+            : 1;
+        }
+        ctx.scale(scale, scale);
         ctx.font = `bold ${p.size}px 'Orbitron', sans-serif`;
         ctx.fillStyle = p.color;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.shadowColor = p.color;
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = p.isBonus ? 16 : 10;
         ctx.fillText(p.char, 0, 0);
+        // White outline for readability
+        ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+        ctx.lineWidth = 0.5;
+        ctx.strokeText(p.char, 0, 0);
       } else {
         ctx.font = `${p.size}px 'Share Tech Mono', monospace`;
         ctx.fillStyle = p.color;
@@ -2602,7 +2672,7 @@ export class Game {
   _renderYouTubeSidebar(ctx) {
     ctx.save();
     const yt = this.youtubeSidebarRect;
-    const video = C.YOUTUBE_VIDEOS[this.youtubeVideoIndex];
+    const video = youtubeVideos[this.youtubeVideoIndex];
 
     // Semi-transparent background
     ctx.fillStyle = 'rgba(7, 13, 24, 0.75)';
