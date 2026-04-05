@@ -1,0 +1,5356 @@
+{
+  "verses": [
+    {
+      "ref": "Genesis 1:1",
+      "text": "In the beginning God created the heavens and the earth.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "In the beginning",
+          "c": "other"
+        },
+        {
+          "t": "God created",
+          "c": "god"
+        },
+        {
+          "t": "the heavens",
+          "c": "good"
+        },
+        {
+          "t": "and the earth.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Genesis 1:27",
+      "text": "So God created mankind in his own image, in the image of God he created them; male and female he created them.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "So God created",
+          "c": "god"
+        },
+        {
+          "t": "mankind in his own image,",
+          "c": "god"
+        },
+        {
+          "t": "in the image of God",
+          "c": "god"
+        },
+        {
+          "t": "he created them;",
+          "c": "god"
+        },
+        {
+          "t": "male and female",
+          "c": "other"
+        },
+        {
+          "t": "he created them.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Genesis 12:2",
+      "text": "I will make you into a great nation, and I will bless you; I will make your name great, and you will be a blessing.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "I will make you",
+          "c": "god"
+        },
+        {
+          "t": "into a great nation,",
+          "c": "good"
+        },
+        {
+          "t": "and I will bless you;",
+          "c": "god"
+        },
+        {
+          "t": "I will make your name great,",
+          "c": "god"
+        },
+        {
+          "t": "and you will be",
+          "c": "connector"
+        },
+        {
+          "t": "a blessing.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Genesis 50:20",
+      "text": "You intended to harm me, but God intended it for good to accomplish what is now being done, the saving of many lives.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "You intended to harm me,",
+          "c": "bad"
+        },
+        {
+          "t": "but God intended it",
+          "c": "god"
+        },
+        {
+          "t": "for good",
+          "c": "good"
+        },
+        {
+          "t": "to accomplish what is now being done,",
+          "c": "connector"
+        },
+        {
+          "t": "the saving of many lives.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Exodus 14:14",
+      "text": "The LORD will fight for you; you need only to be still.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "The LORD will fight",
+          "c": "god"
+        },
+        {
+          "t": "for you;",
+          "c": "good"
+        },
+        {
+          "t": "you need only",
+          "c": "connector"
+        },
+        {
+          "t": "to be still.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Deuteronomy 6:5",
+      "text": "Love the LORD your God with all your heart and with all your soul and with all your strength.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Love the LORD your God",
+          "c": "god"
+        },
+        {
+          "t": "with all your heart",
+          "c": "good"
+        },
+        {
+          "t": "and with all your soul",
+          "c": "good"
+        },
+        {
+          "t": "and with all your strength.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Deuteronomy 31:6",
+      "text": "Be strong and courageous. Do not be afraid or terrified because of them, for the LORD your God goes with you; he will never leave you nor forsake you.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "Be strong and courageous.",
+          "c": "good"
+        },
+        {
+          "t": "Do not be afraid",
+          "c": "good"
+        },
+        {
+          "t": "or terrified because of them,",
+          "c": "bad"
+        },
+        {
+          "t": "for the LORD your God",
+          "c": "god"
+        },
+        {
+          "t": "goes with you;",
+          "c": "god"
+        },
+        {
+          "t": "he will never leave you",
+          "c": "god"
+        },
+        {
+          "t": "nor forsake you.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Deuteronomy 31:8",
+      "text": "The LORD himself goes before you and will be with you; he will never leave you nor forsake you. Do not be afraid; do not be discouraged.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "The LORD himself goes before you",
+          "c": "god"
+        },
+        {
+          "t": "and will be with you;",
+          "c": "god"
+        },
+        {
+          "t": "he will never leave you",
+          "c": "god"
+        },
+        {
+          "t": "nor forsake you.",
+          "c": "god"
+        },
+        {
+          "t": "Do not be afraid;",
+          "c": "good"
+        },
+        {
+          "t": "do not be discouraged.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Joshua 1:9",
+      "text": "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the LORD your God will be with you wherever you go.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "Have I not commanded you?",
+          "c": "god"
+        },
+        {
+          "t": "Be strong and courageous.",
+          "c": "good"
+        },
+        {
+          "t": "Do not be afraid;",
+          "c": "good"
+        },
+        {
+          "t": "do not be discouraged,",
+          "c": "good"
+        },
+        {
+          "t": "for the LORD your God",
+          "c": "god"
+        },
+        {
+          "t": "will be with you",
+          "c": "god"
+        },
+        {
+          "t": "wherever you go.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "1 Samuel 16:7",
+      "text": "The LORD does not look at the things people look at. People look at the outward appearance, but the LORD looks at the heart.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "The LORD does not look at",
+          "c": "god"
+        },
+        {
+          "t": "the things people look at.",
+          "c": "other"
+        },
+        {
+          "t": "People look at",
+          "c": "other"
+        },
+        {
+          "t": "the outward appearance,",
+          "c": "other"
+        },
+        {
+          "t": "but the LORD looks at",
+          "c": "god"
+        },
+        {
+          "t": "the heart.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "2 Samuel 22:31",
+      "text": "As for God, his way is perfect: The LORD’s word is flawless; he shields all who take refuge in him.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "As for God,",
+          "c": "god"
+        },
+        {
+          "t": "his way is perfect:",
+          "c": "god"
+        },
+        {
+          "t": "The LORD’s word is flawless;",
+          "c": "god"
+        },
+        {
+          "t": "he shields all",
+          "c": "god"
+        },
+        {
+          "t": "who take refuge in him.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 1:1",
+      "text": "Blessed is the one who does not walk in step with the wicked or stand in the way that sinners take or sit in the company of mockers,",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "Blessed is the one",
+          "c": "good"
+        },
+        {
+          "t": "who does not walk",
+          "c": "good"
+        },
+        {
+          "t": "in step with the wicked",
+          "c": "bad"
+        },
+        {
+          "t": "or stand in the way",
+          "c": "connector"
+        },
+        {
+          "t": "that sinners take",
+          "c": "bad"
+        },
+        {
+          "t": "or sit in the company",
+          "c": "connector"
+        },
+        {
+          "t": "of mockers,",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 18:2",
+      "text": "The LORD is my rock, my fortress and my deliverer; my God is my rock, in whom I take refuge, my shield and the horn of my salvation, my stronghold.",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "The LORD is my rock,",
+          "c": "god"
+        },
+        {
+          "t": "my fortress and my deliverer;",
+          "c": "god"
+        },
+        {
+          "t": "my God is my rock,",
+          "c": "god"
+        },
+        {
+          "t": "in whom I take refuge,",
+          "c": "good"
+        },
+        {
+          "t": "my shield and the horn",
+          "c": "god"
+        },
+        {
+          "t": "of my salvation,",
+          "c": "god"
+        },
+        {
+          "t": "my stronghold.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 19:1",
+      "text": "The heavens declare the glory of God; the skies proclaim the work of his hands.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "The heavens declare",
+          "c": "other"
+        },
+        {
+          "t": "the glory of God;",
+          "c": "god"
+        },
+        {
+          "t": "the skies proclaim",
+          "c": "other"
+        },
+        {
+          "t": "the work of his hands.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 19:14",
+      "text": "May these words of my mouth and this meditation of my heart be pleasing in your sight, LORD, my Rock and my Redeemer.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "May these words of my mouth",
+          "c": "good"
+        },
+        {
+          "t": "and this meditation of my heart",
+          "c": "good"
+        },
+        {
+          "t": "be pleasing in your sight,",
+          "c": "good"
+        },
+        {
+          "t": "LORD, my Rock",
+          "c": "god"
+        },
+        {
+          "t": "and my Redeemer.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 23:1",
+      "text": "The LORD is my shepherd, I lack nothing.",
+      "difficulty": 1,
+      "phrases": [
+        {
+          "t": "The LORD is",
+          "c": "god"
+        },
+        {
+          "t": "my shepherd,",
+          "c": "god"
+        },
+        {
+          "t": "I lack nothing.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 23:4",
+      "text": "Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Even though I walk through",
+          "c": "connector"
+        },
+        {
+          "t": "the darkest valley,",
+          "c": "bad"
+        },
+        {
+          "t": "I will fear no evil,",
+          "c": "good"
+        },
+        {
+          "t": "for you are with me;",
+          "c": "god"
+        },
+        {
+          "t": "your rod and your staff,",
+          "c": "god"
+        },
+        {
+          "t": "they comfort me.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 27:1",
+      "text": "The LORD is my light and my salvation — whom shall I fear? The LORD is the stronghold of my life — of whom shall I be afraid?",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "The LORD is my light",
+          "c": "god"
+        },
+        {
+          "t": "and my salvation —",
+          "c": "god"
+        },
+        {
+          "t": "whom shall I fear?",
+          "c": "good"
+        },
+        {
+          "t": "The LORD is the stronghold",
+          "c": "god"
+        },
+        {
+          "t": "of my life —",
+          "c": "other"
+        },
+        {
+          "t": "of whom shall I be afraid?",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 27:4",
+      "text": "One thing I ask from the LORD, this only do I seek: that I may dwell in the house of the LORD all the days of my life, to gaze on the beauty of the LORD and to seek him in his temple.",
+      "difficulty": 9,
+      "phrases": [
+        {
+          "t": "One thing I ask from the LORD,",
+          "c": "god"
+        },
+        {
+          "t": "this only do I seek:",
+          "c": "good"
+        },
+        {
+          "t": "that I may dwell",
+          "c": "connector"
+        },
+        {
+          "t": "in the house of the LORD",
+          "c": "god"
+        },
+        {
+          "t": "all the days of my life,",
+          "c": "other"
+        },
+        {
+          "t": "to gaze on the beauty of the LORD",
+          "c": "god"
+        },
+        {
+          "t": "and to seek him in his temple.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 32:8",
+      "text": "I will instruct you and teach you in the way you should go; I will counsel you with my loving eye on you.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "I will instruct you",
+          "c": "god"
+        },
+        {
+          "t": "and teach you",
+          "c": "god"
+        },
+        {
+          "t": "in the way you should go;",
+          "c": "good"
+        },
+        {
+          "t": "I will counsel you",
+          "c": "god"
+        },
+        {
+          "t": "with my loving eye on you.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 34:8",
+      "text": "Taste and see that the LORD is good; blessed is the one who takes refuge in him.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Taste and see",
+          "c": "good"
+        },
+        {
+          "t": "that the LORD is good;",
+          "c": "god"
+        },
+        {
+          "t": "blessed is the one",
+          "c": "good"
+        },
+        {
+          "t": "who takes refuge in him.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 34:18",
+      "text": "The LORD is close to the brokenhearted and saves those who are crushed in spirit.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "The LORD is close to",
+          "c": "god"
+        },
+        {
+          "t": "the brokenhearted",
+          "c": "bad"
+        },
+        {
+          "t": "and saves those",
+          "c": "god"
+        },
+        {
+          "t": "who are crushed in spirit.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 37:4",
+      "text": "Take delight in the LORD, and he will give you the desires of your heart.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Take delight",
+          "c": "good"
+        },
+        {
+          "t": "in the LORD,",
+          "c": "god"
+        },
+        {
+          "t": "and he will give you",
+          "c": "god"
+        },
+        {
+          "t": "the desires of your heart.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 37:5",
+      "text": "Commit your way to the LORD; trust in him and he will do this:",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Commit your way",
+          "c": "good"
+        },
+        {
+          "t": "to the LORD;",
+          "c": "god"
+        },
+        {
+          "t": "trust in him",
+          "c": "good"
+        },
+        {
+          "t": "and he will do this:",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 46:1",
+      "text": "God is our refuge and strength, an ever-present help in trouble.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "God is our refuge",
+          "c": "god"
+        },
+        {
+          "t": "and strength,",
+          "c": "god"
+        },
+        {
+          "t": "an ever-present help",
+          "c": "god"
+        },
+        {
+          "t": "in trouble.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 46:10",
+      "text": "He says, “Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.”",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "He says, “Be still,",
+          "c": "god"
+        },
+        {
+          "t": "and know that I am God;",
+          "c": "god"
+        },
+        {
+          "t": "I will be exalted",
+          "c": "god"
+        },
+        {
+          "t": "among the nations,",
+          "c": "other"
+        },
+        {
+          "t": "I will be exalted",
+          "c": "god"
+        },
+        {
+          "t": "in the earth.”",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 51:10",
+      "text": "Create in me a pure heart, O God, and renew a steadfast spirit within me.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Create in me",
+          "c": "god"
+        },
+        {
+          "t": "a pure heart,",
+          "c": "good"
+        },
+        {
+          "t": "O God,",
+          "c": "god"
+        },
+        {
+          "t": "and renew a steadfast spirit",
+          "c": "good"
+        },
+        {
+          "t": "within me.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 56:3",
+      "text": "When I am afraid, I put my trust in you.",
+      "difficulty": 1,
+      "phrases": [
+        {
+          "t": "When I am afraid,",
+          "c": "bad"
+        },
+        {
+          "t": "I put my trust",
+          "c": "good"
+        },
+        {
+          "t": "in you.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 90:12",
+      "text": "Teach us to number our days, that we may gain a heart of wisdom.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Teach us to number",
+          "c": "god"
+        },
+        {
+          "t": "our days,",
+          "c": "other"
+        },
+        {
+          "t": "that we may gain",
+          "c": "connector"
+        },
+        {
+          "t": "a heart of wisdom.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 91:1",
+      "text": "Whoever dwells in the shelter of the Most High will rest in the shadow of the Almighty.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Whoever dwells",
+          "c": "good"
+        },
+        {
+          "t": "in the shelter of the Most High",
+          "c": "god"
+        },
+        {
+          "t": "will rest in the shadow",
+          "c": "good"
+        },
+        {
+          "t": "of the Almighty.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 91:11",
+      "text": "For he will command his angels concerning you to guard you in all your ways;",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "For he will command",
+          "c": "god"
+        },
+        {
+          "t": "his angels concerning you",
+          "c": "god"
+        },
+        {
+          "t": "to guard you",
+          "c": "good"
+        },
+        {
+          "t": "in all your ways;",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 103:12",
+      "text": "As far as the east is from the west, so far has he removed our transgressions from us.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "As far as the east is",
+          "c": "other"
+        },
+        {
+          "t": "from the west,",
+          "c": "other"
+        },
+        {
+          "t": "so far has he removed",
+          "c": "god"
+        },
+        {
+          "t": "our transgressions from us.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 107:1",
+      "text": "Give thanks to the LORD, for he is good; his love endures forever.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Give thanks to the LORD,",
+          "c": "good"
+        },
+        {
+          "t": "for he is good;",
+          "c": "god"
+        },
+        {
+          "t": "his love endures forever.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 118:24",
+      "text": "The LORD has done it this very day; let us rejoice today and be glad.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "The LORD has done it",
+          "c": "god"
+        },
+        {
+          "t": "this very day;",
+          "c": "other"
+        },
+        {
+          "t": "let us rejoice today",
+          "c": "good"
+        },
+        {
+          "t": "and be glad.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 119:9",
+      "text": "How can a young person stay on the path of purity? By living according to your word.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "How can a young person",
+          "c": "other"
+        },
+        {
+          "t": "stay on the path of purity?",
+          "c": "good"
+        },
+        {
+          "t": "By living according",
+          "c": "good"
+        },
+        {
+          "t": "to your word.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 119:105",
+      "text": "Your word is a lamp for my feet, a light on my path.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Your word is a lamp",
+          "c": "god"
+        },
+        {
+          "t": "for my feet,",
+          "c": "good"
+        },
+        {
+          "t": "a light on my path.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 119:11",
+      "text": "I have hidden your word in my heart that I might not sin against you.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "I have hidden your word",
+          "c": "good"
+        },
+        {
+          "t": "in my heart",
+          "c": "good"
+        },
+        {
+          "t": "that I might not sin",
+          "c": "bad"
+        },
+        {
+          "t": "against you.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 121:1-2",
+      "text": "I lift up my eyes to the mountains — where does my help come from? My help comes from the LORD, the Maker of heaven and earth.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "I lift up my eyes",
+          "c": "good"
+        },
+        {
+          "t": "to the mountains —",
+          "c": "other"
+        },
+        {
+          "t": "where does my help come from?",
+          "c": "other"
+        },
+        {
+          "t": "My help comes from the LORD,",
+          "c": "god"
+        },
+        {
+          "t": "the Maker of heaven and earth.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 139:14",
+      "text": "I praise you because I am fearfully and wonderfully made; your works are wonderful, I know that full well.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "I praise you because",
+          "c": "good"
+        },
+        {
+          "t": "I am fearfully and wonderfully made;",
+          "c": "god"
+        },
+        {
+          "t": "your works are wonderful,",
+          "c": "god"
+        },
+        {
+          "t": "I know that full well.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 145:9",
+      "text": "The LORD is good to all; he has compassion on all he has made.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "The LORD is good to all;",
+          "c": "god"
+        },
+        {
+          "t": "he has compassion",
+          "c": "god"
+        },
+        {
+          "t": "on all he has made.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Psalm 147:3",
+      "text": "He heals the brokenhearted and binds up their wounds.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "He heals the brokenhearted",
+          "c": "god"
+        },
+        {
+          "t": "and binds up",
+          "c": "god"
+        },
+        {
+          "t": "their wounds.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 1:7",
+      "text": "The fear of the LORD is the beginning of knowledge, but fools despise wisdom and instruction.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "The fear of the LORD",
+          "c": "god"
+        },
+        {
+          "t": "is the beginning of knowledge,",
+          "c": "good"
+        },
+        {
+          "t": "but fools despise",
+          "c": "bad"
+        },
+        {
+          "t": "wisdom and instruction.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 3:5-6",
+      "text": "Trust in the LORD with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "Trust in the LORD",
+          "c": "good"
+        },
+        {
+          "t": "with all your heart",
+          "c": "good"
+        },
+        {
+          "t": "and lean not on",
+          "c": "connector"
+        },
+        {
+          "t": "your own understanding;",
+          "c": "other"
+        },
+        {
+          "t": "in all your ways submit to him,",
+          "c": "good"
+        },
+        {
+          "t": "and he will make",
+          "c": "god"
+        },
+        {
+          "t": "your paths straight.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 3:9",
+      "text": "Honor the LORD with your wealth, with the firstfruits of all your crops;",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Honor the LORD",
+          "c": "god"
+        },
+        {
+          "t": "with your wealth,",
+          "c": "good"
+        },
+        {
+          "t": "with the firstfruits",
+          "c": "good"
+        },
+        {
+          "t": "of all your crops;",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 4:23",
+      "text": "Above all else, guard your heart, for everything you do flows from it.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Above all else,",
+          "c": "other"
+        },
+        {
+          "t": "guard your heart,",
+          "c": "good"
+        },
+        {
+          "t": "for everything you do",
+          "c": "connector"
+        },
+        {
+          "t": "flows from it.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 10:9",
+      "text": "Whoever walks in integrity walks securely, but whoever takes crooked paths will be found out.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Whoever walks in integrity",
+          "c": "good"
+        },
+        {
+          "t": "walks securely,",
+          "c": "good"
+        },
+        {
+          "t": "but whoever takes crooked paths",
+          "c": "bad"
+        },
+        {
+          "t": "will be found out.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 11:25",
+      "text": "A generous person will prosper; whoever refreshes others will be refreshed.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "A generous person",
+          "c": "good"
+        },
+        {
+          "t": "will prosper;",
+          "c": "good"
+        },
+        {
+          "t": "whoever refreshes others",
+          "c": "good"
+        },
+        {
+          "t": "will be refreshed.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 12:25",
+      "text": "Anxiety weighs down the heart, but a kind word cheers it up.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Anxiety weighs down",
+          "c": "bad"
+        },
+        {
+          "t": "the heart,",
+          "c": "other"
+        },
+        {
+          "t": "but a kind word",
+          "c": "good"
+        },
+        {
+          "t": "cheers it up.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 14:12",
+      "text": "There is a way that appears to be right, but in the end it leads to death.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "There is a way",
+          "c": "other"
+        },
+        {
+          "t": "that appears to be right,",
+          "c": "other"
+        },
+        {
+          "t": "but in the end",
+          "c": "connector"
+        },
+        {
+          "t": "it leads to death.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 16:3",
+      "text": "Commit to the LORD whatever you do, and he will establish your plans.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Commit to the LORD",
+          "c": "god"
+        },
+        {
+          "t": "whatever you do,",
+          "c": "other"
+        },
+        {
+          "t": "and he will establish",
+          "c": "god"
+        },
+        {
+          "t": "your plans.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 16:9",
+      "text": "In their hearts humans plan their course, but the LORD establishes their steps.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "In their hearts",
+          "c": "other"
+        },
+        {
+          "t": "humans plan their course,",
+          "c": "other"
+        },
+        {
+          "t": "but the LORD establishes",
+          "c": "god"
+        },
+        {
+          "t": "their steps.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 17:17",
+      "text": "A friend loves at all times, and a brother is born for a time of adversity.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "A friend loves at all times,",
+          "c": "good"
+        },
+        {
+          "t": "and a brother is born",
+          "c": "good"
+        },
+        {
+          "t": "for a time",
+          "c": "connector"
+        },
+        {
+          "t": "of adversity.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 18:10",
+      "text": "The name of the LORD is a fortified tower; the righteous run to it and are safe.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "The name of the LORD",
+          "c": "god"
+        },
+        {
+          "t": "is a fortified tower;",
+          "c": "god"
+        },
+        {
+          "t": "the righteous run to it",
+          "c": "good"
+        },
+        {
+          "t": "and are safe.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 22:6",
+      "text": "Start children off on the way they should go, and even when they are old they will not turn from it.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Start children off",
+          "c": "good"
+        },
+        {
+          "t": "on the way they should go,",
+          "c": "good"
+        },
+        {
+          "t": "and even when they are old",
+          "c": "connector"
+        },
+        {
+          "t": "they will not turn from it.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 27:17",
+      "text": "As iron sharpens iron, so one person sharpens another.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "As iron sharpens iron,",
+          "c": "other"
+        },
+        {
+          "t": "so one person",
+          "c": "connector"
+        },
+        {
+          "t": "sharpens another.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Proverbs 31:30",
+      "text": "Charm is deceptive, and beauty is fleeting; but a woman who fears the LORD is to be praised.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Charm is deceptive,",
+          "c": "bad"
+        },
+        {
+          "t": "and beauty is fleeting;",
+          "c": "other"
+        },
+        {
+          "t": "but a woman who fears the LORD",
+          "c": "good"
+        },
+        {
+          "t": "is to be praised.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Ecclesiastes 3:1",
+      "text": "There is a time for everything, and a season for every activity under the heavens:",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "There is a time for everything,",
+          "c": "other"
+        },
+        {
+          "t": "and a season",
+          "c": "connector"
+        },
+        {
+          "t": "for every activity",
+          "c": "other"
+        },
+        {
+          "t": "under the heavens:",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Ecclesiastes 12:13",
+      "text": "Now all has been heard; here is the conclusion of the matter: Fear God and keep his commandments, for this is the duty of all mankind.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Now all has been heard;",
+          "c": "other"
+        },
+        {
+          "t": "here is the conclusion of the matter:",
+          "c": "other"
+        },
+        {
+          "t": "Fear God",
+          "c": "god"
+        },
+        {
+          "t": "and keep his commandments,",
+          "c": "good"
+        },
+        {
+          "t": "for this is the duty",
+          "c": "connector"
+        },
+        {
+          "t": "of all mankind.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Isaiah 1:18",
+      "text": "\"Come now, let us settle the matter,\" says the LORD. \"Though your sins are like scarlet, they shall be as white as snow; though they are red as crimson, they shall be like wool.\"",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "\"Come now, let us settle the matter,\"",
+          "c": "god"
+        },
+        {
+          "t": "says the LORD.",
+          "c": "god"
+        },
+        {
+          "t": "\"Though your sins are like scarlet,",
+          "c": "bad"
+        },
+        {
+          "t": "they shall be as white as snow;",
+          "c": "good"
+        },
+        {
+          "t": "though they are red as crimson,",
+          "c": "bad"
+        },
+        {
+          "t": "they shall be like wool.\"",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Isaiah 9:6",
+      "text": "For to us a child is born, to us a son is given, and the government will be on his shoulders. And he will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace.",
+      "difficulty": 9,
+      "phrases": [
+        {
+          "t": "For to us a child is born,",
+          "c": "god"
+        },
+        {
+          "t": "to us a son is given,",
+          "c": "god"
+        },
+        {
+          "t": "and the government will be on his shoulders.",
+          "c": "god"
+        },
+        {
+          "t": "And he will be called",
+          "c": "connector"
+        },
+        {
+          "t": "Wonderful Counselor, Mighty God,",
+          "c": "god"
+        },
+        {
+          "t": "Everlasting Father, Prince of Peace.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Isaiah 26:3",
+      "text": "You will keep in perfect peace those whose minds are steadfast, because they trust in you.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "You will keep in perfect peace",
+          "c": "god"
+        },
+        {
+          "t": "those whose minds are steadfast,",
+          "c": "good"
+        },
+        {
+          "t": "because they trust",
+          "c": "good"
+        },
+        {
+          "t": "in you.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Isaiah 40:8",
+      "text": "The grass withers and the flowers fall, but the word of our God endures forever.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "The grass withers",
+          "c": "other"
+        },
+        {
+          "t": "and the flowers fall,",
+          "c": "other"
+        },
+        {
+          "t": "but the word of our God",
+          "c": "god"
+        },
+        {
+          "t": "endures forever.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Isaiah 40:31",
+      "text": "But those who hope in the LORD will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "But those who hope in the LORD",
+          "c": "good"
+        },
+        {
+          "t": "will renew their strength.",
+          "c": "god"
+        },
+        {
+          "t": "They will soar on wings like eagles;",
+          "c": "good"
+        },
+        {
+          "t": "they will run and not grow weary,",
+          "c": "good"
+        },
+        {
+          "t": "they will walk and not be faint.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Isaiah 41:10",
+      "text": "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "So do not fear,",
+          "c": "good"
+        },
+        {
+          "t": "for I am with you;",
+          "c": "god"
+        },
+        {
+          "t": "do not be dismayed,",
+          "c": "good"
+        },
+        {
+          "t": "for I am your God.",
+          "c": "god"
+        },
+        {
+          "t": "I will strengthen you",
+          "c": "god"
+        },
+        {
+          "t": "and help you;",
+          "c": "god"
+        },
+        {
+          "t": "I will uphold you",
+          "c": "god"
+        },
+        {
+          "t": "with my righteous right hand.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Isaiah 43:2",
+      "text": "When you pass through the waters, I will be with you; and when you pass through the rivers, they will not sweep over you.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "When you pass through the waters,",
+          "c": "bad"
+        },
+        {
+          "t": "I will be with you;",
+          "c": "god"
+        },
+        {
+          "t": "and when you pass through",
+          "c": "connector"
+        },
+        {
+          "t": "the rivers,",
+          "c": "bad"
+        },
+        {
+          "t": "they will not sweep over you.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Isaiah 53:5",
+      "text": "But he was pierced for our transgressions, he was crushed for our iniquities; the punishment that brought us peace was on him, and by his wounds we are healed.",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "But he was pierced",
+          "c": "god"
+        },
+        {
+          "t": "for our transgressions,",
+          "c": "bad"
+        },
+        {
+          "t": "he was crushed for our iniquities;",
+          "c": "bad"
+        },
+        {
+          "t": "the punishment that brought us peace",
+          "c": "god"
+        },
+        {
+          "t": "was on him,",
+          "c": "god"
+        },
+        {
+          "t": "and by his wounds",
+          "c": "god"
+        },
+        {
+          "t": "we are healed.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Isaiah 53:6",
+      "text": "We all, like sheep, have gone astray, each of us has turned to our own way; and the LORD has laid on him the iniquity of us all.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "We all, like sheep,",
+          "c": "other"
+        },
+        {
+          "t": "have gone astray,",
+          "c": "bad"
+        },
+        {
+          "t": "each of us has turned",
+          "c": "bad"
+        },
+        {
+          "t": "to our own way;",
+          "c": "bad"
+        },
+        {
+          "t": "and the LORD has laid on him",
+          "c": "god"
+        },
+        {
+          "t": "the iniquity of us all.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Isaiah 55:8",
+      "text": "\"For my thoughts are not your thoughts, neither are your ways my ways,\" declares the LORD.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "\"For my thoughts",
+          "c": "god"
+        },
+        {
+          "t": "are not your thoughts,",
+          "c": "other"
+        },
+        {
+          "t": "neither are your ways my ways,\"",
+          "c": "god"
+        },
+        {
+          "t": "declares the LORD.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Isaiah 55:11",
+      "text": "So is my word that goes out from my mouth: It will not return to me empty, but will accomplish what I desire and achieve the purpose for which I sent it.",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "So is my word",
+          "c": "god"
+        },
+        {
+          "t": "that goes out from my mouth:",
+          "c": "god"
+        },
+        {
+          "t": "It will not return to me empty,",
+          "c": "god"
+        },
+        {
+          "t": "but will accomplish",
+          "c": "connector"
+        },
+        {
+          "t": "what I desire",
+          "c": "god"
+        },
+        {
+          "t": "and achieve the purpose for which I sent it.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Jeremiah 17:7",
+      "text": "\"But blessed is the one who trusts in the LORD, whose confidence is in him.\"",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "\"But blessed is the one",
+          "c": "good"
+        },
+        {
+          "t": "who trusts in the LORD,",
+          "c": "good"
+        },
+        {
+          "t": "whose confidence is",
+          "c": "good"
+        },
+        {
+          "t": "in him.\"",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Jeremiah 29:11",
+      "text": "For I know the plans I have for you,\" declares the LORD, \"plans to prosper you and not to harm you, plans to give you hope and a future.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "For I know the plans",
+          "c": "god"
+        },
+        {
+          "t": "I have for you,\"",
+          "c": "god"
+        },
+        {
+          "t": "declares the LORD,",
+          "c": "god"
+        },
+        {
+          "t": "\"plans to prosper you",
+          "c": "good"
+        },
+        {
+          "t": "and not to harm you,",
+          "c": "good"
+        },
+        {
+          "t": "plans to give you hope",
+          "c": "good"
+        },
+        {
+          "t": "and a future.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Jeremiah 33:3",
+      "text": "Call to me and I will answer you and tell you great and unsearchable things you do not know.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Call to me",
+          "c": "good"
+        },
+        {
+          "t": "and I will answer you",
+          "c": "god"
+        },
+        {
+          "t": "and tell you great",
+          "c": "god"
+        },
+        {
+          "t": "and unsearchable things",
+          "c": "god"
+        },
+        {
+          "t": "you do not know.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Lamentations 3:22-23",
+      "text": "Because of the LORD’s great love we are not consumed, for his compassions never fail. They are new every morning; great is your faithfulness.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Because of the LORD’s great love",
+          "c": "god"
+        },
+        {
+          "t": "we are not consumed,",
+          "c": "good"
+        },
+        {
+          "t": "for his compassions never fail.",
+          "c": "god"
+        },
+        {
+          "t": "They are new every morning;",
+          "c": "good"
+        },
+        {
+          "t": "great is your faithfulness.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Daniel 3:17",
+      "text": "If we are thrown into the blazing furnace, the God we serve is able to deliver us from it, and he will deliver us from Your Majesty’s hand.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "If we are thrown",
+          "c": "connector"
+        },
+        {
+          "t": "into the blazing furnace,",
+          "c": "bad"
+        },
+        {
+          "t": "the God we serve",
+          "c": "god"
+        },
+        {
+          "t": "is able to deliver us from it,",
+          "c": "god"
+        },
+        {
+          "t": "and he will deliver us",
+          "c": "god"
+        },
+        {
+          "t": "from Your Majesty’s hand.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Micah 6:8",
+      "text": "He has shown you, O mortal, what is good. And what does the LORD require of you? To act justly and to love mercy and to walk humbly with your God.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "He has shown you, O mortal,",
+          "c": "god"
+        },
+        {
+          "t": "what is good.",
+          "c": "good"
+        },
+        {
+          "t": "And what does the LORD require of you?",
+          "c": "god"
+        },
+        {
+          "t": "To act justly",
+          "c": "good"
+        },
+        {
+          "t": "and to love mercy",
+          "c": "good"
+        },
+        {
+          "t": "and to walk humbly",
+          "c": "good"
+        },
+        {
+          "t": "with your God.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Nahum 1:7",
+      "text": "The LORD is good, a refuge in times of trouble. He cares for those who trust in him,",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "The LORD is good,",
+          "c": "god"
+        },
+        {
+          "t": "a refuge in times of trouble.",
+          "c": "god"
+        },
+        {
+          "t": "He cares for those",
+          "c": "god"
+        },
+        {
+          "t": "who trust in him,",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Habakkuk 2:14",
+      "text": "For the earth will be filled with the knowledge of the glory of the LORD as the waters cover the sea.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "For the earth will be filled",
+          "c": "other"
+        },
+        {
+          "t": "with the knowledge of the glory",
+          "c": "good"
+        },
+        {
+          "t": "of the LORD",
+          "c": "god"
+        },
+        {
+          "t": "as the waters cover the sea.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 4:4",
+      "text": "Jesus answered, “It is written: ‘Man shall not live on bread alone, but on every word that comes from the mouth of God.’”",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "Jesus answered, “It is written:",
+          "c": "god"
+        },
+        {
+          "t": "‘Man shall not live",
+          "c": "other"
+        },
+        {
+          "t": "on bread alone,",
+          "c": "other"
+        },
+        {
+          "t": "but on every word",
+          "c": "god"
+        },
+        {
+          "t": "that comes from the mouth of God.’”",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 5:6",
+      "text": "Blessed are those who hunger and thirst for righteousness, for they will be filled.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Blessed are those",
+          "c": "good"
+        },
+        {
+          "t": "who hunger and thirst",
+          "c": "good"
+        },
+        {
+          "t": "for righteousness,",
+          "c": "good"
+        },
+        {
+          "t": "for they will be filled.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 5:14",
+      "text": "You are the light of the world. A town built on a hill cannot be hidden.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "You are the light",
+          "c": "good"
+        },
+        {
+          "t": "of the world.",
+          "c": "other"
+        },
+        {
+          "t": "A town built on a hill",
+          "c": "other"
+        },
+        {
+          "t": "cannot be hidden.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 5:16",
+      "text": "In the same way, let your light shine before others, that they may see your good deeds and glorify your Father in heaven.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "In the same way,",
+          "c": "connector"
+        },
+        {
+          "t": "let your light shine",
+          "c": "good"
+        },
+        {
+          "t": "before others,",
+          "c": "other"
+        },
+        {
+          "t": "that they may see your good deeds",
+          "c": "good"
+        },
+        {
+          "t": "and glorify your Father",
+          "c": "god"
+        },
+        {
+          "t": "in heaven.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 5:44",
+      "text": "But I tell you, love your enemies and pray for those who persecute you,",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "But I tell you,",
+          "c": "god"
+        },
+        {
+          "t": "love your enemies",
+          "c": "good"
+        },
+        {
+          "t": "and pray for those",
+          "c": "good"
+        },
+        {
+          "t": "who persecute you,",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 6:26",
+      "text": "Look at the birds of the air; they do not sow or reap or store away in barns, and yet your heavenly Father feeds them. Are you not much more valuable than they?",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Look at the birds of the air;",
+          "c": "other"
+        },
+        {
+          "t": "they do not sow or reap",
+          "c": "other"
+        },
+        {
+          "t": "or store away in barns,",
+          "c": "other"
+        },
+        {
+          "t": "and yet your heavenly Father feeds them.",
+          "c": "god"
+        },
+        {
+          "t": "Are you not much more valuable",
+          "c": "good"
+        },
+        {
+          "t": "than they?",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 6:33",
+      "text": "But seek first his kingdom and his righteousness, and all these things will be given to you as well.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "But seek first",
+          "c": "good"
+        },
+        {
+          "t": "his kingdom and his righteousness,",
+          "c": "god"
+        },
+        {
+          "t": "and all these things",
+          "c": "connector"
+        },
+        {
+          "t": "will be given to you as well.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 6:34",
+      "text": "Therefore do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Therefore do not worry",
+          "c": "good"
+        },
+        {
+          "t": "about tomorrow,",
+          "c": "other"
+        },
+        {
+          "t": "for tomorrow will worry about itself.",
+          "c": "other"
+        },
+        {
+          "t": "Each day has enough trouble",
+          "c": "bad"
+        },
+        {
+          "t": "of its own.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 7:7",
+      "text": "Ask and it will be given to you; seek and you will find; knock and the door will be opened to you.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "Ask and it will be given to you;",
+          "c": "god"
+        },
+        {
+          "t": "seek and you will find;",
+          "c": "good"
+        },
+        {
+          "t": "knock and the door",
+          "c": "good"
+        },
+        {
+          "t": "will be opened to you.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 11:28",
+      "text": "Come to me, all you who are weary and burdened, and I will give you rest.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Come to me,",
+          "c": "god"
+        },
+        {
+          "t": "all you who are weary",
+          "c": "bad"
+        },
+        {
+          "t": "and burdened,",
+          "c": "bad"
+        },
+        {
+          "t": "and I will give you rest.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 11:29",
+      "text": "Take my yoke upon you and learn from me, for I am gentle and humble in heart, and you will find rest for your souls.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Take my yoke upon you",
+          "c": "god"
+        },
+        {
+          "t": "and learn from me,",
+          "c": "god"
+        },
+        {
+          "t": "for I am gentle and humble in heart,",
+          "c": "god"
+        },
+        {
+          "t": "and you will find rest",
+          "c": "good"
+        },
+        {
+          "t": "for your souls.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 16:26",
+      "text": "What good will it be for someone to gain the whole world, yet forfeit their soul? Or what can anyone give in exchange for their soul?",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "What good will it be",
+          "c": "other"
+        },
+        {
+          "t": "for someone to gain the whole world,",
+          "c": "other"
+        },
+        {
+          "t": "yet forfeit their soul?",
+          "c": "bad"
+        },
+        {
+          "t": "Or what can anyone give",
+          "c": "other"
+        },
+        {
+          "t": "in exchange for their soul?",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 19:26",
+      "text": "Jesus looked at them and said, “With man this is impossible, but with God all things are possible.”",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Jesus looked at them and said,",
+          "c": "god"
+        },
+        {
+          "t": "“With man this is impossible,",
+          "c": "other"
+        },
+        {
+          "t": "but with God",
+          "c": "god"
+        },
+        {
+          "t": "all things are possible.”",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 22:37-39",
+      "text": "Jesus replied: “‘Love the Lord your God with all your heart and with all your soul and with all your mind.’ This is the first and greatest commandment. And the second is like it: ‘Love your neighbor as yourself.’”",
+      "difficulty": 10,
+      "phrases": [
+        {
+          "t": "Jesus replied: “‘Love the Lord your God",
+          "c": "god"
+        },
+        {
+          "t": "with all your heart and with all your soul",
+          "c": "good"
+        },
+        {
+          "t": "and with all your mind.’",
+          "c": "good"
+        },
+        {
+          "t": "This is the first and greatest commandment.",
+          "c": "god"
+        },
+        {
+          "t": "And the second is like it:",
+          "c": "connector"
+        },
+        {
+          "t": "‘Love your neighbor as yourself.’”",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Matthew 28:18-20",
+      "text": "Then Jesus came to them and said, “All authority in heaven and on earth has been given to me. Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, and teaching them to obey everything I have commanded you. And surely I am with you always, to the very end of the age.”",
+      "difficulty": 10,
+      "phrases": [
+        {
+          "t": "Then Jesus came to them and said,",
+          "c": "god"
+        },
+        {
+          "t": "“All authority in heaven and on earth has been given to me.",
+          "c": "god"
+        },
+        {
+          "t": "Therefore go and make disciples of all nations,",
+          "c": "good"
+        },
+        {
+          "t": "baptizing them in the name of the Father and of the Son and of the Holy Spirit,",
+          "c": "god"
+        },
+        {
+          "t": "and teaching them to obey everything I have commanded you.",
+          "c": "good"
+        },
+        {
+          "t": "And surely I am with you always, to the very end of the age.”",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Mark 8:36",
+      "text": "What good is it for someone to gain the whole world, yet forfeit their soul?",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "What good is it for someone",
+          "c": "other"
+        },
+        {
+          "t": "to gain the whole world,",
+          "c": "other"
+        },
+        {
+          "t": "yet forfeit",
+          "c": "connector"
+        },
+        {
+          "t": "their soul?",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Mark 11:24",
+      "text": "Therefore I tell you, whatever you ask for in prayer, believe that you have received it, and it will be yours.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "Therefore I tell you,",
+          "c": "god"
+        },
+        {
+          "t": "whatever you ask for in prayer,",
+          "c": "good"
+        },
+        {
+          "t": "believe that you have received it,",
+          "c": "good"
+        },
+        {
+          "t": "and it will be yours.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Luke 1:37",
+      "text": "For no word from God will ever fail.",
+      "difficulty": 1,
+      "phrases": [
+        {
+          "t": "For no word from God",
+          "c": "god"
+        },
+        {
+          "t": "will ever fail.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Luke 6:31",
+      "text": "Do to others as you would have them do to you.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Do to others",
+          "c": "good"
+        },
+        {
+          "t": "as you would have them",
+          "c": "connector"
+        },
+        {
+          "t": "do to you.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Luke 6:37",
+      "text": "Do not judge, and you will not be judged. Do not condemn, and you will not be condemned. Forgive, and you will be forgiven.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Do not judge,",
+          "c": "good"
+        },
+        {
+          "t": "and you will not be judged.",
+          "c": "good"
+        },
+        {
+          "t": "Do not condemn,",
+          "c": "good"
+        },
+        {
+          "t": "and you will not be condemned.",
+          "c": "good"
+        },
+        {
+          "t": "Forgive,",
+          "c": "good"
+        },
+        {
+          "t": "and you will be forgiven.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "John 1:1",
+      "text": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "In the beginning",
+          "c": "other"
+        },
+        {
+          "t": "was the Word,",
+          "c": "god"
+        },
+        {
+          "t": "and the Word was with God,",
+          "c": "god"
+        },
+        {
+          "t": "and the Word was God.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "John 1:12",
+      "text": "Yet to all who did receive him, to those who believed in his name, he gave the right to become children of God —",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "Yet to all who did receive him,",
+          "c": "good"
+        },
+        {
+          "t": "to those who believed in his name,",
+          "c": "good"
+        },
+        {
+          "t": "he gave the right",
+          "c": "god"
+        },
+        {
+          "t": "to become children of God —",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "John 3:16",
+      "text": "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "For God so loved",
+          "c": "god"
+        },
+        {
+          "t": "the world",
+          "c": "good"
+        },
+        {
+          "t": "that he gave",
+          "c": "connector"
+        },
+        {
+          "t": "his one and only Son,",
+          "c": "god"
+        },
+        {
+          "t": "that whoever believes in him",
+          "c": "good"
+        },
+        {
+          "t": "shall not perish",
+          "c": "bad"
+        },
+        {
+          "t": "but have",
+          "c": "connector"
+        },
+        {
+          "t": "eternal life.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "John 3:17",
+      "text": "For God did not send his Son into the world to condemn the world, but to save the world through him.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "For God did not send his Son",
+          "c": "god"
+        },
+        {
+          "t": "into the world",
+          "c": "other"
+        },
+        {
+          "t": "to condemn the world,",
+          "c": "bad"
+        },
+        {
+          "t": "but to save the world",
+          "c": "god"
+        },
+        {
+          "t": "through him.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "John 3:36",
+      "text": "Whoever believes in the Son has eternal life, but whoever rejects the Son will not see life, for God’s wrath remains on them.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Whoever believes in the Son",
+          "c": "good"
+        },
+        {
+          "t": "has eternal life,",
+          "c": "good"
+        },
+        {
+          "t": "but whoever rejects the Son",
+          "c": "bad"
+        },
+        {
+          "t": "will not see life,",
+          "c": "bad"
+        },
+        {
+          "t": "for God’s wrath remains",
+          "c": "god"
+        },
+        {
+          "t": "on them.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "John 8:12",
+      "text": "When Jesus spoke again to the people, he said, “I am the light of the world. Whoever follows me will never walk in darkness, but will have the light of life.”",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "When Jesus spoke again to the people,",
+          "c": "god"
+        },
+        {
+          "t": "he said, “I am the light of the world.",
+          "c": "god"
+        },
+        {
+          "t": "Whoever follows me",
+          "c": "good"
+        },
+        {
+          "t": "will never walk in darkness,",
+          "c": "bad"
+        },
+        {
+          "t": "but will have",
+          "c": "connector"
+        },
+        {
+          "t": "the light of life.”",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "John 8:32",
+      "text": "Then you will know the truth, and the truth will set you free.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Then you will know",
+          "c": "good"
+        },
+        {
+          "t": "the truth,",
+          "c": "god"
+        },
+        {
+          "t": "and the truth will set you free.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "John 10:10",
+      "text": "The thief comes only to steal and kill and destroy; I have come that they may have life, and have it to the full.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "The thief comes only",
+          "c": "bad"
+        },
+        {
+          "t": "to steal and kill and destroy;",
+          "c": "bad"
+        },
+        {
+          "t": "I have come that they may have life,",
+          "c": "god"
+        },
+        {
+          "t": "and have it to the full.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "John 10:28",
+      "text": "I give them eternal life, and they shall never perish; no one will snatch them out of my hand.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "I give them eternal life,",
+          "c": "god"
+        },
+        {
+          "t": "and they shall never perish;",
+          "c": "good"
+        },
+        {
+          "t": "no one will snatch them",
+          "c": "good"
+        },
+        {
+          "t": "out of my hand.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "John 11:25-26",
+      "text": "Jesus said to her, “I am the resurrection and the life. The one who believes in me will live, even though they die; and whoever lives by believing in me will never die. Do you believe this?”",
+      "difficulty": 9,
+      "phrases": [
+        {
+          "t": "Jesus said to her, “I am the resurrection",
+          "c": "god"
+        },
+        {
+          "t": "and the life.",
+          "c": "god"
+        },
+        {
+          "t": "The one who believes in me will live,",
+          "c": "good"
+        },
+        {
+          "t": "even though they die;",
+          "c": "bad"
+        },
+        {
+          "t": "and whoever lives by believing in me",
+          "c": "good"
+        },
+        {
+          "t": "will never die.",
+          "c": "good"
+        },
+        {
+          "t": "Do you believe this?”",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "John 13:34",
+      "text": "A new command I give you: Love one another. As I have loved you, so you must love one another.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "A new command I give you:",
+          "c": "god"
+        },
+        {
+          "t": "Love one another.",
+          "c": "good"
+        },
+        {
+          "t": "As I have loved you,",
+          "c": "god"
+        },
+        {
+          "t": "so you must love one another.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "John 14:6",
+      "text": "Jesus answered, “I am the way and the truth and the life. No one comes to the Father except through me.”",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Jesus answered, “I am the way",
+          "c": "god"
+        },
+        {
+          "t": "and the truth and the life.",
+          "c": "god"
+        },
+        {
+          "t": "No one comes to the Father",
+          "c": "good"
+        },
+        {
+          "t": "except through me.”",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "John 14:27",
+      "text": "Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "Peace I leave with you;",
+          "c": "god"
+        },
+        {
+          "t": "my peace I give you.",
+          "c": "god"
+        },
+        {
+          "t": "I do not give to you",
+          "c": "god"
+        },
+        {
+          "t": "as the world gives.",
+          "c": "other"
+        },
+        {
+          "t": "Do not let your hearts be troubled",
+          "c": "good"
+        },
+        {
+          "t": "and do not be afraid.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "John 15:5",
+      "text": "I am the vine; you are the branches. If you remain in me and I in you, you will bear much fruit; apart from me you can do nothing.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "I am the vine;",
+          "c": "god"
+        },
+        {
+          "t": "you are the branches.",
+          "c": "other"
+        },
+        {
+          "t": "If you remain in me",
+          "c": "good"
+        },
+        {
+          "t": "and I in you,",
+          "c": "god"
+        },
+        {
+          "t": "you will bear much fruit;",
+          "c": "good"
+        },
+        {
+          "t": "apart from me you can do nothing.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "John 15:13",
+      "text": "Greater love has no one than this: to lay down one’s life for one’s friends.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Greater love has no one",
+          "c": "good"
+        },
+        {
+          "t": "than this:",
+          "c": "connector"
+        },
+        {
+          "t": "to lay down one’s life",
+          "c": "good"
+        },
+        {
+          "t": "for one’s friends.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "John 16:33",
+      "text": "I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "I have told you these things,",
+          "c": "god"
+        },
+        {
+          "t": "so that in me you may have peace.",
+          "c": "good"
+        },
+        {
+          "t": "In this world you will have trouble.",
+          "c": "bad"
+        },
+        {
+          "t": "But take heart!",
+          "c": "good"
+        },
+        {
+          "t": "I have overcome the world.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Acts 1:8",
+      "text": "But you will receive power when the Holy Spirit comes on you; and you will be my witnesses in Jerusalem, and in all Judea and Samaria, and to the ends of the earth.",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "But you will receive power",
+          "c": "good"
+        },
+        {
+          "t": "when the Holy Spirit comes on you;",
+          "c": "god"
+        },
+        {
+          "t": "and you will be my witnesses",
+          "c": "good"
+        },
+        {
+          "t": "in Jerusalem,",
+          "c": "other"
+        },
+        {
+          "t": "and in all Judea and Samaria,",
+          "c": "other"
+        },
+        {
+          "t": "and to the ends of the earth.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Acts 2:38",
+      "text": "Peter replied, “Repent and be baptized, every one of you, in the name of Jesus Christ for the forgiveness of your sins. And you will receive the gift of the Holy Spirit.”",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "Peter replied, “Repent",
+          "c": "good"
+        },
+        {
+          "t": "and be baptized,",
+          "c": "good"
+        },
+        {
+          "t": "every one of you,",
+          "c": "other"
+        },
+        {
+          "t": "in the name of Jesus Christ",
+          "c": "god"
+        },
+        {
+          "t": "for the forgiveness of your sins.",
+          "c": "bad"
+        },
+        {
+          "t": "And you will receive the gift",
+          "c": "good"
+        },
+        {
+          "t": "of the Holy Spirit.”",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Acts 4:12",
+      "text": "Salvation is found in no one else, for there is no other name under heaven given to mankind by which we must be saved.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "Salvation is found",
+          "c": "good"
+        },
+        {
+          "t": "in no one else,",
+          "c": "god"
+        },
+        {
+          "t": "for there is no other name",
+          "c": "god"
+        },
+        {
+          "t": "under heaven given to mankind",
+          "c": "other"
+        },
+        {
+          "t": "by which we must be saved.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 1:16",
+      "text": "For I am not ashamed of the gospel, because it is the power of God that brings salvation to everyone who believes: first to the Jew, then to the Gentile.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "For I am not ashamed",
+          "c": "good"
+        },
+        {
+          "t": "of the gospel,",
+          "c": "good"
+        },
+        {
+          "t": "because it is the power of God",
+          "c": "god"
+        },
+        {
+          "t": "that brings salvation",
+          "c": "good"
+        },
+        {
+          "t": "to everyone who believes:",
+          "c": "good"
+        },
+        {
+          "t": "first to the Jew,",
+          "c": "other"
+        },
+        {
+          "t": "then to the Gentile.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 3:23",
+      "text": "For all have sinned and fall short of the glory of God,",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "For all have sinned",
+          "c": "bad"
+        },
+        {
+          "t": "and fall short",
+          "c": "bad"
+        },
+        {
+          "t": "of the glory of God,",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 5:1",
+      "text": "Therefore, since we have been justified through faith, we have peace with God through our Lord Jesus Christ,",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "Therefore, since we have been justified",
+          "c": "good"
+        },
+        {
+          "t": "through faith,",
+          "c": "good"
+        },
+        {
+          "t": "we have peace with God",
+          "c": "good"
+        },
+        {
+          "t": "through our Lord Jesus Christ,",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 5:8",
+      "text": "But God demonstrates his own love for us in this: While we were still sinners, Christ died for us.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "But God demonstrates",
+          "c": "god"
+        },
+        {
+          "t": "his own love for us",
+          "c": "god"
+        },
+        {
+          "t": "in this:",
+          "c": "connector"
+        },
+        {
+          "t": "While we were still sinners,",
+          "c": "bad"
+        },
+        {
+          "t": "Christ died for us.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 6:23",
+      "text": "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "For the wages of sin",
+          "c": "bad"
+        },
+        {
+          "t": "is death,",
+          "c": "bad"
+        },
+        {
+          "t": "but the gift of God",
+          "c": "god"
+        },
+        {
+          "t": "is eternal life",
+          "c": "good"
+        },
+        {
+          "t": "in Christ Jesus our Lord.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 8:1",
+      "text": "Therefore, there is now no condemnation for those who are in Christ Jesus,",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Therefore, there is now",
+          "c": "connector"
+        },
+        {
+          "t": "no condemnation",
+          "c": "good"
+        },
+        {
+          "t": "for those who are",
+          "c": "connector"
+        },
+        {
+          "t": "in Christ Jesus,",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 8:18",
+      "text": "I consider that our present sufferings are not worth comparing with the glory that will be revealed in us.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "I consider that our present sufferings",
+          "c": "bad"
+        },
+        {
+          "t": "are not worth comparing",
+          "c": "connector"
+        },
+        {
+          "t": "with the glory",
+          "c": "good"
+        },
+        {
+          "t": "that will be revealed in us.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 8:28",
+      "text": "And we know that in all things God works for the good of those who love him, who have been called according to his purpose.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "And we know that",
+          "c": "connector"
+        },
+        {
+          "t": "in all things God works",
+          "c": "god"
+        },
+        {
+          "t": "for the good of those",
+          "c": "good"
+        },
+        {
+          "t": "who love him,",
+          "c": "good"
+        },
+        {
+          "t": "who have been called",
+          "c": "good"
+        },
+        {
+          "t": "according to his purpose.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 8:31",
+      "text": "What, then, shall we say in response to these things? If God is for us, who can be against us?",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "What, then, shall we say",
+          "c": "other"
+        },
+        {
+          "t": "in response to these things?",
+          "c": "other"
+        },
+        {
+          "t": "If God is for us,",
+          "c": "god"
+        },
+        {
+          "t": "who can be against us?",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 8:38-39",
+      "text": "For I am convinced that neither death nor life, neither angels nor demons, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.",
+      "difficulty": 10,
+      "phrases": [
+        {
+          "t": "For I am convinced that neither death nor life,",
+          "c": "good"
+        },
+        {
+          "t": "neither angels nor demons,",
+          "c": "other"
+        },
+        {
+          "t": "neither the present nor the future, nor any powers,",
+          "c": "other"
+        },
+        {
+          "t": "neither height nor depth,",
+          "c": "other"
+        },
+        {
+          "t": "nor anything else in all creation,",
+          "c": "other"
+        },
+        {
+          "t": "will be able to separate us",
+          "c": "good"
+        },
+        {
+          "t": "from the love of God",
+          "c": "god"
+        },
+        {
+          "t": "that is in Christ Jesus our Lord.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 10:9",
+      "text": "If you declare with your mouth, “Jesus is Lord,” and believe in your heart that God raised him from the dead, you will be saved.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "If you declare with your mouth,",
+          "c": "good"
+        },
+        {
+          "t": "“Jesus is Lord,”",
+          "c": "god"
+        },
+        {
+          "t": "and believe in your heart",
+          "c": "good"
+        },
+        {
+          "t": "that God raised him from the dead,",
+          "c": "god"
+        },
+        {
+          "t": "you will be saved.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 10:17",
+      "text": "Consequently, faith comes from hearing the message, and the message is heard through the word about Christ.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Consequently, faith comes",
+          "c": "good"
+        },
+        {
+          "t": "from hearing the message,",
+          "c": "good"
+        },
+        {
+          "t": "and the message is heard",
+          "c": "connector"
+        },
+        {
+          "t": "through the word about Christ.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 12:1",
+      "text": "Therefore, I urge you, brothers and sisters, in view of God’s mercy, to offer your bodies as a living sacrifice, holy and pleasing to God — this is your true and proper worship.",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "Therefore, I urge you, brothers and sisters,",
+          "c": "other"
+        },
+        {
+          "t": "in view of God’s mercy,",
+          "c": "god"
+        },
+        {
+          "t": "to offer your bodies",
+          "c": "good"
+        },
+        {
+          "t": "as a living sacrifice,",
+          "c": "good"
+        },
+        {
+          "t": "holy and pleasing to God —",
+          "c": "god"
+        },
+        {
+          "t": "this is your true and proper worship.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 12:2",
+      "text": "Do not conform to the pattern of this world, but be transformed by the renewing of your mind. Then you will be able to test and approve what God’s will is — his good, pleasing and perfect will.",
+      "difficulty": 9,
+      "phrases": [
+        {
+          "t": "Do not conform",
+          "c": "good"
+        },
+        {
+          "t": "to the pattern of this world,",
+          "c": "bad"
+        },
+        {
+          "t": "but be transformed",
+          "c": "good"
+        },
+        {
+          "t": "by the renewing of your mind.",
+          "c": "good"
+        },
+        {
+          "t": "Then you will be able to test and approve",
+          "c": "good"
+        },
+        {
+          "t": "what God’s will is —",
+          "c": "god"
+        },
+        {
+          "t": "his good, pleasing and perfect will.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 12:12",
+      "text": "Be joyful in hope, patient in affliction, faithful in prayer.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Be joyful in hope,",
+          "c": "good"
+        },
+        {
+          "t": "patient in affliction,",
+          "c": "bad"
+        },
+        {
+          "t": "faithful in prayer.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Romans 15:13",
+      "text": "May the God of hope fill you with all joy and peace as you trust in him, so that you may overflow with hope by the power of the Holy Spirit.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "May the God of hope",
+          "c": "god"
+        },
+        {
+          "t": "fill you with all joy and peace",
+          "c": "good"
+        },
+        {
+          "t": "as you trust in him,",
+          "c": "good"
+        },
+        {
+          "t": "so that you may overflow with hope",
+          "c": "good"
+        },
+        {
+          "t": "by the power of the Holy Spirit.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "1 Corinthians 2:9",
+      "text": "However, as it is written: “What no eye has seen, what no ear has heard, and what no human mind has conceived” — the things God has prepared for those who love him —",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "However, as it is written:",
+          "c": "other"
+        },
+        {
+          "t": "“What no eye has seen,",
+          "c": "other"
+        },
+        {
+          "t": "what no ear has heard,",
+          "c": "other"
+        },
+        {
+          "t": "and what no human mind has conceived” —",
+          "c": "other"
+        },
+        {
+          "t": "the things God has prepared",
+          "c": "god"
+        },
+        {
+          "t": "for those who love him —",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "1 Corinthians 10:13",
+      "text": "No temptation has overtaken you except what is common to mankind. And God is faithful; he will not let you be tempted beyond what you can bear. But when you are tempted, he will also provide a way out so that you can endure it.",
+      "difficulty": 10,
+      "phrases": [
+        {
+          "t": "No temptation has overtaken you",
+          "c": "bad"
+        },
+        {
+          "t": "except what is common to mankind.",
+          "c": "other"
+        },
+        {
+          "t": "And God is faithful;",
+          "c": "god"
+        },
+        {
+          "t": "he will not let you be tempted",
+          "c": "god"
+        },
+        {
+          "t": "beyond what you can bear.",
+          "c": "good"
+        },
+        {
+          "t": "But when you are tempted,",
+          "c": "bad"
+        },
+        {
+          "t": "he will also provide a way out",
+          "c": "god"
+        },
+        {
+          "t": "so that you can endure it.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "1 Corinthians 13:4-5",
+      "text": "Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.",
+      "difficulty": 9,
+      "phrases": [
+        {
+          "t": "Love is patient, love is kind.",
+          "c": "good"
+        },
+        {
+          "t": "It does not envy,",
+          "c": "bad"
+        },
+        {
+          "t": "it does not boast, it is not proud.",
+          "c": "bad"
+        },
+        {
+          "t": "It does not dishonor others,",
+          "c": "good"
+        },
+        {
+          "t": "it is not self-seeking,",
+          "c": "good"
+        },
+        {
+          "t": "it is not easily angered,",
+          "c": "good"
+        },
+        {
+          "t": "it keeps no record of wrongs.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "1 Corinthians 13:13",
+      "text": "And now these three remain: faith, hope and love. But the greatest of these is love.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "And now these three remain:",
+          "c": "other"
+        },
+        {
+          "t": "faith, hope and love.",
+          "c": "good"
+        },
+        {
+          "t": "But the greatest of these",
+          "c": "connector"
+        },
+        {
+          "t": "is love.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "1 Corinthians 15:58",
+      "text": "Therefore, my dear brothers and sisters, stand firm. Let nothing move you. Always give yourselves fully to the work of the Lord, because you know that your labor in the Lord is not in vain.",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "Therefore, my dear brothers and sisters,",
+          "c": "other"
+        },
+        {
+          "t": "stand firm.",
+          "c": "good"
+        },
+        {
+          "t": "Let nothing move you.",
+          "c": "good"
+        },
+        {
+          "t": "Always give yourselves fully",
+          "c": "good"
+        },
+        {
+          "t": "to the work of the Lord,",
+          "c": "god"
+        },
+        {
+          "t": "because you know that your labor",
+          "c": "connector"
+        },
+        {
+          "t": "in the Lord is not in vain.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "2 Corinthians 4:18",
+      "text": "So we fix our eyes not on what is seen, but on what is unseen, since what is seen is temporary, but what is unseen is eternal.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "So we fix our eyes",
+          "c": "good"
+        },
+        {
+          "t": "not on what is seen,",
+          "c": "other"
+        },
+        {
+          "t": "but on what is unseen,",
+          "c": "good"
+        },
+        {
+          "t": "since what is seen is temporary,",
+          "c": "other"
+        },
+        {
+          "t": "but what is unseen is eternal.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "2 Corinthians 5:17",
+      "text": "Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Therefore, if anyone is in Christ,",
+          "c": "god"
+        },
+        {
+          "t": "the new creation has come:",
+          "c": "good"
+        },
+        {
+          "t": "The old has gone,",
+          "c": "other"
+        },
+        {
+          "t": "the new is here!",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "2 Corinthians 5:21",
+      "text": "God made him who had no sin to be sin for us, so that in him we might become the righteousness of God.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "God made him who had no sin",
+          "c": "god"
+        },
+        {
+          "t": "to be sin for us,",
+          "c": "bad"
+        },
+        {
+          "t": "so that in him",
+          "c": "god"
+        },
+        {
+          "t": "we might become",
+          "c": "connector"
+        },
+        {
+          "t": "the righteousness of God.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "2 Corinthians 12:9",
+      "text": "But he said to me, “My grace is sufficient for you, for my power is made perfect in weakness.” Therefore I will boast all the more gladly about my weaknesses, so that Christ’s power may rest on me.",
+      "difficulty": 9,
+      "phrases": [
+        {
+          "t": "But he said to me,",
+          "c": "god"
+        },
+        {
+          "t": "“My grace is sufficient for you,",
+          "c": "god"
+        },
+        {
+          "t": "for my power is made perfect in weakness.”",
+          "c": "god"
+        },
+        {
+          "t": "Therefore I will boast all the more gladly",
+          "c": "good"
+        },
+        {
+          "t": "about my weaknesses,",
+          "c": "bad"
+        },
+        {
+          "t": "so that Christ’s power",
+          "c": "god"
+        },
+        {
+          "t": "may rest on me.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Galatians 2:20",
+      "text": "I have been crucified with Christ and I no longer live, but Christ lives in me. The life I now live in the body, I live by faith in the Son of God, who loved me and gave himself for me.",
+      "difficulty": 9,
+      "phrases": [
+        {
+          "t": "I have been crucified with Christ",
+          "c": "god"
+        },
+        {
+          "t": "and I no longer live,",
+          "c": "other"
+        },
+        {
+          "t": "but Christ lives in me.",
+          "c": "god"
+        },
+        {
+          "t": "The life I now live in the body,",
+          "c": "other"
+        },
+        {
+          "t": "I live by faith",
+          "c": "good"
+        },
+        {
+          "t": "in the Son of God,",
+          "c": "god"
+        },
+        {
+          "t": "who loved me and gave himself for me.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Galatians 5:22-23",
+      "text": "But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control. Against such things there is no law.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "But the fruit of the Spirit is",
+          "c": "god"
+        },
+        {
+          "t": "love, joy, peace,",
+          "c": "good"
+        },
+        {
+          "t": "forbearance, kindness, goodness,",
+          "c": "good"
+        },
+        {
+          "t": "faithfulness, gentleness and self-control.",
+          "c": "good"
+        },
+        {
+          "t": "Against such things",
+          "c": "connector"
+        },
+        {
+          "t": "there is no law.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Galatians 6:9",
+      "text": "Let us not become weary in doing good, for at the proper time we will reap a harvest if we do not give up.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "Let us not become weary",
+          "c": "good"
+        },
+        {
+          "t": "in doing good,",
+          "c": "good"
+        },
+        {
+          "t": "for at the proper time",
+          "c": "connector"
+        },
+        {
+          "t": "we will reap a harvest",
+          "c": "good"
+        },
+        {
+          "t": "if we do not give up.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Ephesians 2:8-9",
+      "text": "For it is by grace you have been saved, through faith — and this is not from yourselves, it is the gift of God — not by works, so that no one can boast.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "For it is by grace",
+          "c": "god"
+        },
+        {
+          "t": "you have been saved,",
+          "c": "good"
+        },
+        {
+          "t": "through faith —",
+          "c": "good"
+        },
+        {
+          "t": "and this is not from yourselves,",
+          "c": "other"
+        },
+        {
+          "t": "it is the gift of God —",
+          "c": "god"
+        },
+        {
+          "t": "not by works,",
+          "c": "other"
+        },
+        {
+          "t": "so that no one can boast.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Ephesians 2:10",
+      "text": "For we are God’s handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "For we are God’s handiwork,",
+          "c": "god"
+        },
+        {
+          "t": "created in Christ Jesus",
+          "c": "god"
+        },
+        {
+          "t": "to do good works,",
+          "c": "good"
+        },
+        {
+          "t": "which God prepared in advance",
+          "c": "god"
+        },
+        {
+          "t": "for us to do.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Ephesians 3:20",
+      "text": "Now to him who is able to do immeasurably more than all we ask or imagine, according to his power that is at work within us,",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Now to him who is able",
+          "c": "god"
+        },
+        {
+          "t": "to do immeasurably more",
+          "c": "god"
+        },
+        {
+          "t": "than all we ask or imagine,",
+          "c": "other"
+        },
+        {
+          "t": "according to his power",
+          "c": "god"
+        },
+        {
+          "t": "that is at work within us,",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Ephesians 4:32",
+      "text": "Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Be kind and compassionate",
+          "c": "good"
+        },
+        {
+          "t": "to one another,",
+          "c": "good"
+        },
+        {
+          "t": "forgiving each other,",
+          "c": "good"
+        },
+        {
+          "t": "just as in Christ",
+          "c": "god"
+        },
+        {
+          "t": "God forgave you.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Ephesians 6:10",
+      "text": "Finally, be strong in the Lord and in his mighty power.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Finally, be strong",
+          "c": "good"
+        },
+        {
+          "t": "in the Lord",
+          "c": "god"
+        },
+        {
+          "t": "and in his mighty power.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Ephesians 6:11",
+      "text": "Put on the full armor of God, so that you can take your stand against the devil’s schemes.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Put on the full armor",
+          "c": "good"
+        },
+        {
+          "t": "of God,",
+          "c": "god"
+        },
+        {
+          "t": "so that you can take your stand",
+          "c": "good"
+        },
+        {
+          "t": "against the devil’s schemes.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Philippians 1:6",
+      "text": "Being confident of this, that he who began a good work in you will carry it on to completion until the day of Christ Jesus.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "Being confident of this,",
+          "c": "good"
+        },
+        {
+          "t": "that he who began",
+          "c": "god"
+        },
+        {
+          "t": "a good work in you",
+          "c": "good"
+        },
+        {
+          "t": "will carry it on to completion",
+          "c": "god"
+        },
+        {
+          "t": "until the day of Christ Jesus.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Philippians 2:3",
+      "text": "Do nothing out of selfish ambition or vain conceit. Rather, in humility value others above yourselves,",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Do nothing out of selfish ambition",
+          "c": "bad"
+        },
+        {
+          "t": "or vain conceit.",
+          "c": "bad"
+        },
+        {
+          "t": "Rather, in humility",
+          "c": "good"
+        },
+        {
+          "t": "value others above yourselves,",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Philippians 2:10-11",
+      "text": "That at the name of Jesus every knee should bow, in heaven and on earth and under the earth, and every tongue acknowledge that Jesus Christ is Lord, to the glory of God the Father.",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "That at the name of Jesus",
+          "c": "god"
+        },
+        {
+          "t": "every knee should bow,",
+          "c": "good"
+        },
+        {
+          "t": "in heaven and on earth",
+          "c": "other"
+        },
+        {
+          "t": "and under the earth,",
+          "c": "other"
+        },
+        {
+          "t": "and every tongue acknowledge",
+          "c": "good"
+        },
+        {
+          "t": "that Jesus Christ is Lord,",
+          "c": "god"
+        },
+        {
+          "t": "to the glory of God the Father.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Philippians 4:6",
+      "text": "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "Do not be anxious about anything,",
+          "c": "good"
+        },
+        {
+          "t": "but in every situation,",
+          "c": "connector"
+        },
+        {
+          "t": "by prayer and petition,",
+          "c": "good"
+        },
+        {
+          "t": "with thanksgiving,",
+          "c": "good"
+        },
+        {
+          "t": "present your requests to God.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Philippians 4:7",
+      "text": "And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "And the peace of God,",
+          "c": "god"
+        },
+        {
+          "t": "which transcends all understanding,",
+          "c": "god"
+        },
+        {
+          "t": "will guard your hearts",
+          "c": "good"
+        },
+        {
+          "t": "and your minds",
+          "c": "good"
+        },
+        {
+          "t": "in Christ Jesus.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Philippians 4:8",
+      "text": "Finally, brothers and sisters, whatever is true, whatever is noble, whatever is right, whatever is pure, whatever is lovely, whatever is admirable — if anything is excellent or praiseworthy — think about such things.",
+      "difficulty": 9,
+      "phrases": [
+        {
+          "t": "Finally, brothers and sisters,",
+          "c": "other"
+        },
+        {
+          "t": "whatever is true, whatever is noble,",
+          "c": "good"
+        },
+        {
+          "t": "whatever is right, whatever is pure,",
+          "c": "good"
+        },
+        {
+          "t": "whatever is lovely, whatever is admirable —",
+          "c": "good"
+        },
+        {
+          "t": "if anything is excellent or praiseworthy —",
+          "c": "good"
+        },
+        {
+          "t": "think about such things.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Philippians 4:13",
+      "text": "I can do all this through him who gives me strength.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "I can do all this",
+          "c": "good"
+        },
+        {
+          "t": "through him",
+          "c": "god"
+        },
+        {
+          "t": "who gives me strength.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Philippians 4:19",
+      "text": "And my God will meet all your needs according to the riches of his glory in Christ Jesus.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "And my God will meet",
+          "c": "god"
+        },
+        {
+          "t": "all your needs",
+          "c": "good"
+        },
+        {
+          "t": "according to the riches",
+          "c": "connector"
+        },
+        {
+          "t": "of his glory",
+          "c": "god"
+        },
+        {
+          "t": "in Christ Jesus.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Colossians 3:2",
+      "text": "Set your minds on things above, not on earthly things.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Set your minds on things above,",
+          "c": "good"
+        },
+        {
+          "t": "not on earthly things.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Colossians 3:12",
+      "text": "Therefore, as God’s chosen people, holy and dearly loved, clothe yourselves with compassion, kindness, humility, gentleness and patience.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Therefore, as God’s chosen people,",
+          "c": "god"
+        },
+        {
+          "t": "holy and dearly loved,",
+          "c": "good"
+        },
+        {
+          "t": "clothe yourselves with compassion,",
+          "c": "good"
+        },
+        {
+          "t": "kindness, humility,",
+          "c": "good"
+        },
+        {
+          "t": "gentleness and patience.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Colossians 3:23",
+      "text": "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters,",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "Whatever you do,",
+          "c": "other"
+        },
+        {
+          "t": "work at it with all your heart,",
+          "c": "good"
+        },
+        {
+          "t": "as working for the Lord,",
+          "c": "god"
+        },
+        {
+          "t": "not for human masters,",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "1 Thessalonians 5:16-18",
+      "text": "Rejoice always, pray continually, give thanks in all circumstances; for this is God’s will for you in Christ Jesus.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "Rejoice always,",
+          "c": "good"
+        },
+        {
+          "t": "pray continually,",
+          "c": "good"
+        },
+        {
+          "t": "give thanks in all circumstances;",
+          "c": "good"
+        },
+        {
+          "t": "for this is God’s will for you",
+          "c": "god"
+        },
+        {
+          "t": "in Christ Jesus.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "2 Thessalonians 3:3",
+      "text": "But the Lord is faithful, and he will strengthen and protect you from the evil one.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "But the Lord is faithful,",
+          "c": "god"
+        },
+        {
+          "t": "and he will strengthen",
+          "c": "god"
+        },
+        {
+          "t": "and protect you",
+          "c": "good"
+        },
+        {
+          "t": "from the evil one.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "1 Timothy 4:12",
+      "text": "Don’t let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "Don’t let anyone look down on you",
+          "c": "good"
+        },
+        {
+          "t": "because you are young,",
+          "c": "other"
+        },
+        {
+          "t": "but set an example",
+          "c": "good"
+        },
+        {
+          "t": "for the believers in speech,",
+          "c": "good"
+        },
+        {
+          "t": "in conduct, in love,",
+          "c": "good"
+        },
+        {
+          "t": "in faith and in purity.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "1 Timothy 6:12",
+      "text": "Fight the good fight of the faith. Take hold of the eternal life to which you were called when you made your good confession in the presence of many witnesses.",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "Fight the good fight of the faith.",
+          "c": "good"
+        },
+        {
+          "t": "Take hold of the eternal life",
+          "c": "good"
+        },
+        {
+          "t": "to which you were called",
+          "c": "god"
+        },
+        {
+          "t": "when you made your good confession",
+          "c": "good"
+        },
+        {
+          "t": "in the presence of many witnesses.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "2 Timothy 1:7",
+      "text": "For the Spirit God gave us does not make us timid, but gives us power, love and self-discipline.",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "For the Spirit God gave us",
+          "c": "god"
+        },
+        {
+          "t": "does not make us timid,",
+          "c": "good"
+        },
+        {
+          "t": "but gives us power,",
+          "c": "good"
+        },
+        {
+          "t": "love and self-discipline.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "2 Timothy 3:16",
+      "text": "All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness,",
+      "difficulty": 4,
+      "phrases": [
+        {
+          "t": "All Scripture is God-breathed",
+          "c": "god"
+        },
+        {
+          "t": "and is useful for teaching,",
+          "c": "good"
+        },
+        {
+          "t": "rebuking, correcting",
+          "c": "good"
+        },
+        {
+          "t": "and training in righteousness,",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Titus 3:5",
+      "text": "He saved us, not because of righteous things we had done, but because of his mercy. He saved us through the washing of rebirth and renewal by the Holy Spirit,",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "He saved us,",
+          "c": "god"
+        },
+        {
+          "t": "not because of righteous things we had done,",
+          "c": "other"
+        },
+        {
+          "t": "but because of his mercy.",
+          "c": "god"
+        },
+        {
+          "t": "He saved us through the washing",
+          "c": "god"
+        },
+        {
+          "t": "of rebirth and renewal",
+          "c": "good"
+        },
+        {
+          "t": "by the Holy Spirit,",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Hebrews 4:12",
+      "text": "For the word of God is alive and active. Sharper than any double-edged sword, it penetrates even to dividing soul and spirit, joints and marrow; it judges the thoughts and attitudes of the heart.",
+      "difficulty": 9,
+      "phrases": [
+        {
+          "t": "For the word of God is alive and active.",
+          "c": "god"
+        },
+        {
+          "t": "Sharper than any double-edged sword,",
+          "c": "god"
+        },
+        {
+          "t": "it penetrates even to dividing",
+          "c": "god"
+        },
+        {
+          "t": "soul and spirit, joints and marrow;",
+          "c": "other"
+        },
+        {
+          "t": "it judges the thoughts and attitudes",
+          "c": "god"
+        },
+        {
+          "t": "of the heart.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Hebrews 4:16",
+      "text": "Let us then approach God’s throne of grace with confidence, so that we may receive mercy and find grace to help us in our time of need.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Let us then approach",
+          "c": "good"
+        },
+        {
+          "t": "God’s throne of grace",
+          "c": "god"
+        },
+        {
+          "t": "with confidence,",
+          "c": "good"
+        },
+        {
+          "t": "so that we may receive mercy",
+          "c": "good"
+        },
+        {
+          "t": "and find grace to help us",
+          "c": "god"
+        },
+        {
+          "t": "in our time of need.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "Hebrews 10:25",
+      "text": "Not giving up meeting together, as some are in the habit of doing, but encouraging one another — and all the more as you see the Day approaching.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Not giving up meeting together,",
+          "c": "good"
+        },
+        {
+          "t": "as some are in the habit of doing,",
+          "c": "bad"
+        },
+        {
+          "t": "but encouraging one another —",
+          "c": "good"
+        },
+        {
+          "t": "and all the more",
+          "c": "connector"
+        },
+        {
+          "t": "as you see the Day approaching.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Hebrews 11:1",
+      "text": "Now faith is confidence in what we hope for and assurance about what we do not see.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Now faith is confidence",
+          "c": "good"
+        },
+        {
+          "t": "in what we hope for",
+          "c": "good"
+        },
+        {
+          "t": "and assurance about",
+          "c": "good"
+        },
+        {
+          "t": "what we do not see.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "Hebrews 11:6",
+      "text": "And without faith it is impossible to please God, because anyone who comes to him must believe that he exists and that he rewards those who earnestly seek him.",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "And without faith",
+          "c": "good"
+        },
+        {
+          "t": "it is impossible to please God,",
+          "c": "god"
+        },
+        {
+          "t": "because anyone who comes to him",
+          "c": "good"
+        },
+        {
+          "t": "must believe that he exists",
+          "c": "good"
+        },
+        {
+          "t": "and that he rewards those",
+          "c": "god"
+        },
+        {
+          "t": "who earnestly seek him.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Hebrews 12:2",
+      "text": "Fixing our eyes on Jesus, the pioneer and perfecter of faith. For the joy set before him he endured the cross, scorning its shame, and sat down at the right hand of the throne of God.",
+      "difficulty": 9,
+      "phrases": [
+        {
+          "t": "Fixing our eyes on Jesus,",
+          "c": "god"
+        },
+        {
+          "t": "the pioneer and perfecter of faith.",
+          "c": "god"
+        },
+        {
+          "t": "For the joy set before him",
+          "c": "good"
+        },
+        {
+          "t": "he endured the cross,",
+          "c": "god"
+        },
+        {
+          "t": "scorning its shame,",
+          "c": "bad"
+        },
+        {
+          "t": "and sat down at the right hand",
+          "c": "god"
+        },
+        {
+          "t": "of the throne of God.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Hebrews 13:5",
+      "text": "Keep your lives free from the love of money and be content with what you have, because God has said, “Never will I leave you; never will I forsake you.”",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "Keep your lives free from",
+          "c": "good"
+        },
+        {
+          "t": "the love of money",
+          "c": "bad"
+        },
+        {
+          "t": "and be content with what you have,",
+          "c": "good"
+        },
+        {
+          "t": "because God has said,",
+          "c": "god"
+        },
+        {
+          "t": "“Never will I leave you;",
+          "c": "god"
+        },
+        {
+          "t": "never will I forsake you.”",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Hebrews 13:8",
+      "text": "Jesus Christ is the same yesterday and today and forever.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Jesus Christ is the same",
+          "c": "god"
+        },
+        {
+          "t": "yesterday and today",
+          "c": "other"
+        },
+        {
+          "t": "and forever.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "James 1:2-3",
+      "text": "Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "Consider it pure joy,",
+          "c": "good"
+        },
+        {
+          "t": "my brothers and sisters,",
+          "c": "other"
+        },
+        {
+          "t": "whenever you face trials of many kinds,",
+          "c": "bad"
+        },
+        {
+          "t": "because you know that the testing",
+          "c": "connector"
+        },
+        {
+          "t": "of your faith",
+          "c": "good"
+        },
+        {
+          "t": "produces perseverance.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "James 1:5",
+      "text": "If any of you lacks wisdom, you should ask God, who gives generously to all without finding fault, and it will be given to you.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "If any of you lacks wisdom,",
+          "c": "other"
+        },
+        {
+          "t": "you should ask God,",
+          "c": "god"
+        },
+        {
+          "t": "who gives generously to all",
+          "c": "god"
+        },
+        {
+          "t": "without finding fault,",
+          "c": "god"
+        },
+        {
+          "t": "and it will be given to you.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "James 1:12",
+      "text": "Blessed is the one who perseveres under trial because, having stood the test, that person will receive the crown of life that the Lord has promised to those who love him.",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "Blessed is the one who perseveres",
+          "c": "good"
+        },
+        {
+          "t": "under trial because,",
+          "c": "bad"
+        },
+        {
+          "t": "having stood the test,",
+          "c": "good"
+        },
+        {
+          "t": "that person will receive",
+          "c": "good"
+        },
+        {
+          "t": "the crown of life",
+          "c": "good"
+        },
+        {
+          "t": "that the Lord has promised",
+          "c": "god"
+        },
+        {
+          "t": "to those who love him.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "James 1:17",
+      "text": "Every good and perfect gift is from above, coming down from the Father of the heavenly lights, who does not change like shifting shadows.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Every good and perfect gift",
+          "c": "good"
+        },
+        {
+          "t": "is from above,",
+          "c": "god"
+        },
+        {
+          "t": "coming down from the Father",
+          "c": "god"
+        },
+        {
+          "t": "of the heavenly lights,",
+          "c": "god"
+        },
+        {
+          "t": "who does not change",
+          "c": "god"
+        },
+        {
+          "t": "like shifting shadows.",
+          "c": "other"
+        }
+      ]
+    },
+    {
+      "ref": "James 4:7",
+      "text": "Submit yourselves, then, to God. Resist the devil, and he will flee from you.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "Submit yourselves, then, to God.",
+          "c": "god"
+        },
+        {
+          "t": "Resist the devil,",
+          "c": "bad"
+        },
+        {
+          "t": "and he will flee",
+          "c": "good"
+        },
+        {
+          "t": "from you.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "James 4:8",
+      "text": "Come near to God and he will come near to you. Wash your hands, you sinners, and purify your hearts, you double-minded.",
+      "difficulty": 6,
+      "phrases": [
+        {
+          "t": "Come near to God",
+          "c": "god"
+        },
+        {
+          "t": "and he will come near to you.",
+          "c": "god"
+        },
+        {
+          "t": "Wash your hands, you sinners,",
+          "c": "bad"
+        },
+        {
+          "t": "and purify your hearts,",
+          "c": "good"
+        },
+        {
+          "t": "you double-minded.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "1 Peter 2:9",
+      "text": "But you are a chosen people, a royal priesthood, a holy nation, God’s special possession, that you may declare the praises of him who called you out of darkness into his wonderful light.",
+      "difficulty": 9,
+      "phrases": [
+        {
+          "t": "But you are a chosen people,",
+          "c": "god"
+        },
+        {
+          "t": "a royal priesthood, a holy nation,",
+          "c": "good"
+        },
+        {
+          "t": "God’s special possession,",
+          "c": "god"
+        },
+        {
+          "t": "that you may declare the praises",
+          "c": "good"
+        },
+        {
+          "t": "of him who called you",
+          "c": "god"
+        },
+        {
+          "t": "out of darkness",
+          "c": "bad"
+        },
+        {
+          "t": "into his wonderful light.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "1 Peter 2:24",
+      "text": "“He himself bore our sins” in his body on the cross, so that we might die to sins and live for righteousness; “by his wounds you have been healed.”",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "“He himself bore our sins”",
+          "c": "god"
+        },
+        {
+          "t": "in his body on the cross,",
+          "c": "god"
+        },
+        {
+          "t": "so that we might die to sins",
+          "c": "bad"
+        },
+        {
+          "t": "and live for righteousness;",
+          "c": "good"
+        },
+        {
+          "t": "“by his wounds",
+          "c": "god"
+        },
+        {
+          "t": "you have been healed.”",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "1 Peter 3:15",
+      "text": "But in your hearts revere Christ as Lord. Always be prepared to give an answer to everyone who asks you to give the reason for the hope that you have. But do this with gentleness and respect,",
+      "difficulty": 9,
+      "phrases": [
+        {
+          "t": "But in your hearts revere Christ as Lord.",
+          "c": "god"
+        },
+        {
+          "t": "Always be prepared to give an answer",
+          "c": "good"
+        },
+        {
+          "t": "to everyone who asks you",
+          "c": "other"
+        },
+        {
+          "t": "to give the reason for the hope",
+          "c": "good"
+        },
+        {
+          "t": "that you have.",
+          "c": "good"
+        },
+        {
+          "t": "But do this with gentleness and respect,",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "1 Peter 5:7",
+      "text": "Cast all your anxiety on him because he cares for you.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Cast all your anxiety",
+          "c": "bad"
+        },
+        {
+          "t": "on him",
+          "c": "god"
+        },
+        {
+          "t": "because he cares for you.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "1 Peter 5:8",
+      "text": "Be alert and of sober mind. Your enemy the devil prowls around like a roaring lion looking for someone to devour.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "Be alert and of sober mind.",
+          "c": "good"
+        },
+        {
+          "t": "Your enemy the devil",
+          "c": "bad"
+        },
+        {
+          "t": "prowls around like a roaring lion",
+          "c": "bad"
+        },
+        {
+          "t": "looking for someone to devour.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "2 Peter 1:3",
+      "text": "His divine power has given us everything we need for a godly life through our knowledge of him who called us by his own glory and goodness.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "His divine power has given us",
+          "c": "god"
+        },
+        {
+          "t": "everything we need",
+          "c": "good"
+        },
+        {
+          "t": "for a godly life",
+          "c": "good"
+        },
+        {
+          "t": "through our knowledge of him",
+          "c": "good"
+        },
+        {
+          "t": "who called us by his own glory",
+          "c": "god"
+        },
+        {
+          "t": "and goodness.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "2 Peter 3:9",
+      "text": "The Lord is not slow in keeping his promise, as some understand slowness. Instead he is patient with you, not wanting anyone to perish, but everyone to come to repentance.",
+      "difficulty": 8,
+      "phrases": [
+        {
+          "t": "The Lord is not slow",
+          "c": "god"
+        },
+        {
+          "t": "in keeping his promise,",
+          "c": "god"
+        },
+        {
+          "t": "as some understand slowness.",
+          "c": "other"
+        },
+        {
+          "t": "Instead he is patient with you,",
+          "c": "god"
+        },
+        {
+          "t": "not wanting anyone to perish,",
+          "c": "bad"
+        },
+        {
+          "t": "but everyone to come to repentance.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "1 John 1:9",
+      "text": "If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "If we confess our sins,",
+          "c": "bad"
+        },
+        {
+          "t": "he is faithful and just",
+          "c": "god"
+        },
+        {
+          "t": "and will forgive us our sins",
+          "c": "god"
+        },
+        {
+          "t": "and purify us",
+          "c": "good"
+        },
+        {
+          "t": "from all unrighteousness.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "1 John 3:1",
+      "text": "See what great love the Father has lavished on us, that we should be called children of God! And that is what we are!",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "See what great love the Father",
+          "c": "god"
+        },
+        {
+          "t": "has lavished on us,",
+          "c": "god"
+        },
+        {
+          "t": "that we should be called",
+          "c": "connector"
+        },
+        {
+          "t": "children of God!",
+          "c": "good"
+        },
+        {
+          "t": "And that is what we are!",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "1 John 4:4",
+      "text": "You, dear children, are from God and have overcome them, because the one who is in you is greater than the one who is in the world.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "You, dear children, are from God",
+          "c": "god"
+        },
+        {
+          "t": "and have overcome them,",
+          "c": "good"
+        },
+        {
+          "t": "because the one who is in you",
+          "c": "god"
+        },
+        {
+          "t": "is greater than",
+          "c": "god"
+        },
+        {
+          "t": "the one who is in the world.",
+          "c": "bad"
+        }
+      ]
+    },
+    {
+      "ref": "1 John 4:7",
+      "text": "Dear friends, let us love one another, for love comes from God. Everyone who loves has been born of God and knows God.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "Dear friends, let us love one another,",
+          "c": "good"
+        },
+        {
+          "t": "for love comes from God.",
+          "c": "god"
+        },
+        {
+          "t": "Everyone who loves",
+          "c": "good"
+        },
+        {
+          "t": "has been born of God",
+          "c": "god"
+        },
+        {
+          "t": "and knows God.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "1 John 4:8",
+      "text": "Whoever does not love does not know God, because God is love.",
+      "difficulty": 2,
+      "phrases": [
+        {
+          "t": "Whoever does not love",
+          "c": "bad"
+        },
+        {
+          "t": "does not know God,",
+          "c": "bad"
+        },
+        {
+          "t": "because God is love.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "1 John 4:18",
+      "text": "There is no fear in love. But perfect love drives out fear, because fear has to do with punishment. The one who fears is not made perfect in love.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "There is no fear in love.",
+          "c": "good"
+        },
+        {
+          "t": "But perfect love drives out fear,",
+          "c": "good"
+        },
+        {
+          "t": "because fear has to do",
+          "c": "connector"
+        },
+        {
+          "t": "with punishment.",
+          "c": "bad"
+        },
+        {
+          "t": "The one who fears",
+          "c": "bad"
+        },
+        {
+          "t": "is not made perfect in love.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "1 John 4:19",
+      "text": "We love because he first loved us.",
+      "difficulty": 1,
+      "phrases": [
+        {
+          "t": "We love",
+          "c": "good"
+        },
+        {
+          "t": "because he first loved us.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "1 John 5:14",
+      "text": "This is the confidence we have in approaching God: that if we ask anything according to his will, he hears us.",
+      "difficulty": 5,
+      "phrases": [
+        {
+          "t": "This is the confidence we have",
+          "c": "good"
+        },
+        {
+          "t": "in approaching God:",
+          "c": "god"
+        },
+        {
+          "t": "that if we ask anything",
+          "c": "good"
+        },
+        {
+          "t": "according to his will,",
+          "c": "god"
+        },
+        {
+          "t": "he hears us.",
+          "c": "god"
+        }
+      ]
+    },
+    {
+      "ref": "Revelation 3:20",
+      "text": "Here I am! I stand at the door and knock. If anyone hears my voice and opens the door, I will come in and eat with that person, and they with me.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "Here I am!",
+          "c": "god"
+        },
+        {
+          "t": "I stand at the door and knock.",
+          "c": "god"
+        },
+        {
+          "t": "If anyone hears my voice",
+          "c": "good"
+        },
+        {
+          "t": "and opens the door,",
+          "c": "good"
+        },
+        {
+          "t": "I will come in",
+          "c": "god"
+        },
+        {
+          "t": "and eat with that person,",
+          "c": "good"
+        },
+        {
+          "t": "and they with me.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Revelation 21:4",
+      "text": "‘He will wipe every tear from their eyes. There will be no more death’ or mourning or crying or pain, for the old order of things has passed away.",
+      "difficulty": 7,
+      "phrases": [
+        {
+          "t": "‘He will wipe every tear",
+          "c": "god"
+        },
+        {
+          "t": "from their eyes.",
+          "c": "good"
+        },
+        {
+          "t": "There will be no more death’",
+          "c": "good"
+        },
+        {
+          "t": "or mourning or crying or pain,",
+          "c": "bad"
+        },
+        {
+          "t": "for the old order of things",
+          "c": "other"
+        },
+        {
+          "t": "has passed away.",
+          "c": "good"
+        }
+      ]
+    },
+    {
+      "ref": "Revelation 22:13",
+      "text": "I am the Alpha and the Omega, the First and the Last, the Beginning and the End.",
+      "difficulty": 3,
+      "phrases": [
+        {
+          "t": "I am the Alpha and the Omega,",
+          "c": "god"
+        },
+        {
+          "t": "the First and the Last,",
+          "c": "god"
+        },
+        {
+          "t": "the Beginning and the End.",
+          "c": "other"
+        }
+      ]
+    }
+  ]
+}
