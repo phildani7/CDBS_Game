@@ -6,14 +6,14 @@ import './styles.css';
 import { Game } from './game.js';
 import * as C from './config.js';
 
-// Rotate YouTube sidebar video
+// Rotate YouTube sidebar video with real CDBS video links
 function rotateYouTubeLink() {
   const videos = C.YOUTUBE_VIDEOS;
   if (!videos || videos.length === 0) return;
   const video = videos[Math.floor(Math.random() * videos.length)];
   const link = document.getElementById('yt-link');
   const title = document.getElementById('yt-title');
-  if (link) link.href = `https://www.youtube.com/playlist?list=${C.YOUTUBE_PLAYLIST}`;
+  if (link) link.href = `https://www.youtube.com/watch?v=${video.id}&list=${C.YOUTUBE_PLAYLIST}`;
   if (title) title.textContent = video.title;
 }
 

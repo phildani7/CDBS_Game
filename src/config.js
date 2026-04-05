@@ -124,8 +124,21 @@ export const MAX_LIVES = 6;
 export const INTRO_DURATION = 2.34;
 export const CLEAR_DURATION = 2.18;
 export const OPENING_DURATION = 3.1;
-export const QUIZ_DURATION = 15;
-export const MINIGAME_DURATION = 20;
+export const QUIZ_DURATION = 30;
+export const MINIGAME_DURATION = 40;
+
+// Order bonus – points awarded based on which category brick is hit first
+export const ORDER_BONUS = {
+  god: 200,       // Max bonus – about God first
+  royal: 150,     // Royalty/kingdom early
+  good: 120,      // Good for us
+  earth: 80,      // Earth/foundation
+  other: 50,      // Neutral
+  connector: 30,  // Connectors
+  bad: 0          // No bonus for bad first
+};
+// Bonus decays: each subsequent brick gets ORDER_BONUS[cat] * (1 - position/total)
+export const RED_ONLY_CLEAR_BONUS = 500; // Bonus for auto-clearing when only red bricks remain
 
 // Levels – 20 levels with graduated difficulty
 export const TOTAL_LEVELS = 20;
@@ -201,22 +214,13 @@ export const FONT = {
   miniGame: "600 22px 'Rajdhani', sans-serif"
 };
 
-// CDBS YouTube playlist
+// CDBS YouTube – CartoonForChrist channel
+export const YOUTUBE_CHANNEL = '@CartoonForChrist';
 export const YOUTUBE_PLAYLIST = 'PL_zwO2E6LyLJUq9r68bF-zXd8lw_phslx';
 export const YOUTUBE_VIDEOS = [
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: Build on the Rock (Luke 6:47-49)' },
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: Two Debtors (Luke 7:41-43)' },
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: The Sower Part A (Luke 8:5-10)' },
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: The Sower Part B (Luke 8:11-15)' },
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: Weeds & Wheat Part A (Mat 13:24-30)' },
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: Weeds & Wheat Part B (Mat 13:36-43)' },
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: The Lost Sheep (Mat 18:10-14)' },
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: Salt and Light (Mat 5:13-16)' },
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: Unmerciful Servant A (Mat 18:21-27)' },
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: Unmerciful Servant B (Mat 18:28-35)' },
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: Hidden Treasure (Mat 13:44)' },
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: Mustard Seed (Mat 13:31-32)' },
-  { id: 'dQw4w9WgXcQ', title: 'CDBS: The Rich Fool (Luke 12:13-21)' }
+  { id: 'GOQ2rucwR8Y', title: 'Two Debtors (Luke 7:41-43)' },
+  { id: 'O9x_13oqbZI', title: 'The Sower Part A (Luke 8:5-10)' },
+  { id: '0hbQAFknTic', title: 'Weeds & Wheat Part B (Mat 13:37-43)' }
 ];
 
 // Lesson categories for quiz

@@ -128,6 +128,8 @@ export class Game {
     this.comboCount = 0;
     this.comboCategory = null;
     this.lastCategory = null;
+    this.brickHitOrder = 0; // tracks order of bricks hit for order bonus
+    this.totalBricksInLevel = 0;
     this.flashAlpha = 0;
     this.flashColor = '#fff';
 
@@ -417,6 +419,7 @@ export class Game {
     this.revealedPhrases = [];
     this.comboCount = 0;
     this.comboCategory = null;
+    this.brickHitOrder = 0;
 
     // Memorization tracking
     if (this.memorization && this.currentVerse) {
@@ -472,6 +475,9 @@ export class Game {
     this.youtubeVideoIndex = Math.floor(Math.random() * C.YOUTUBE_VIDEOS.length);
 
     // Trigger intro animation
+    this.totalBricksInLevel = this.bricks.length;
+    this.brickHitOrder = 0;
+
     this.state = 'transition';
     this.stateTime = 0;
     this.introT = 0;
@@ -1041,7 +1047,36 @@ export class Game {
       }
     }
 
+    // ── Order bonus: earlier hits get bigger bonus ────
+    this.brickHitOrder++;
+    const orderBase = C.ORDER_BONUS[brick.category] || 0;
+    const orderDecay = 1 - (this.brickHitOrder - 1) / Math.max(1, this.totalBricksInLevel);
+    const orderBonus = Math.round(orderBase * Math.max(0, orderDecay));
+    points += orderBonus;
+
     this.score += points;
+
+    // ── Check if only red/bad bricks remain → auto-clear with bonus ────
+    const aliveAfter = this.bricks.filter(b => b.alive);
+    if (aliveAfter.length > 0 && aliveAfter.every(b => b.category === 'bad')) {
+      // Award bonus and clear remaining red bricks
+      this.score += C.RED_ONLY_CLEAR_BONUS;
+      this.particles.push({
+        x: C.CANVAS_W / 2, y: C.CANVAS_H / 2 - 40,
+        vx: 0, vy: -50, life: 2, maxLife: 2,
+        char: `+${C.RED_ONLY_CLEAR_BONUS} GRACE BONUS!`,
+        color: C.COLORS.god, size: 18,
+        rotation: 0, rotSpeed: 0,
+        affectsWall: false, isScore: true
+      });
+      // Destroy remaining red bricks visually
+      aliveAfter.forEach(b => {
+        b.alive = false;
+        this.revealedPhrases.push({ text: b.text, category: b.category, color: b.color });
+        this._spawnParticles(b.x, b.y, C.COLORS.god, 4, '✝');
+      });
+      this.audio.playWaveClear();
+    }
 
     // Visual feedback based on category
     if (brick.category === 'bad' && !(ball && ball.trinityType === 'jesus')) {
@@ -1099,6 +1134,20 @@ export class Game {
       affectsWall: false,
       isScore: true
     });
+
+    // Order bonus popup (if significant)
+    if (orderBonus >= 30) {
+      this.particles.push({
+        x: brick.x + 40,
+        y: brick.y - 5,
+        vx: 15, vy: -40,
+        life: 1.0, maxLife: 1.0,
+        char: `+${orderBonus} order`,
+        color: C.COLORS.god, size: 12,
+        rotation: 0, rotSpeed: 0,
+        affectsWall: false, isScore: true
+      });
+    }
 
     this.audio.playBrickBreak(brick.category);
 

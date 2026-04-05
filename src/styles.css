@@ -70,11 +70,12 @@ body {
   text-align: center;
 }
 
-.sidebar-logo {
-  font-size: 24px;
-  color: #F5A623;
-  text-shadow: 0 0 12px rgba(245, 166, 35, 0.5);
-  line-height: 1;
+.sidebar-logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(245, 166, 35, 0.4));
 }
 
 .sidebar-title {
