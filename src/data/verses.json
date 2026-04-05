@@ -15,13 +15,18 @@
         },
         {
           "t": "the heavens",
-          "c": "good"
+          "c": "earth"
         },
         {
           "t": "and the earth.",
-          "c": "good"
+          "c": "earth"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is the all-powerful Creator who existed before everything else",
+        "good": "Everything in creation — heavens and earth — was made with purpose by God",
+        "bad": "Denying God as Creator leads to a meaningless view of life and existence"
+      }
     },
     {
       "ref": "Genesis 1:27",
@@ -52,7 +57,12 @@
           "t": "he created them.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God personally and intentionally created every human being in His own image",
+        "good": "Every person has immense value and dignity because they bear God's image",
+        "bad": "Treating others as less than image-bearers of God dishonors the Creator"
+      }
     },
     {
       "ref": "Genesis 12:2",
@@ -83,7 +93,12 @@
           "t": "a blessing.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God initiates blessings and makes great promises to those He calls",
+        "good": "When God blesses us, we are meant to become a blessing to others",
+        "bad": "Hoarding God's blessings instead of sharing them misses His purpose for us"
+      }
     },
     {
       "ref": "Genesis 50:20",
@@ -110,7 +125,12 @@
           "t": "the saving of many lives.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has the power to turn even evil intentions into good outcomes",
+        "good": "We can trust that God is working for good even in painful situations",
+        "bad": "Harboring bitterness over past harm blinds us to God's redemptive plan"
+      }
     },
     {
       "ref": "Exodus 14:14",
@@ -133,7 +153,12 @@
           "t": "to be still.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is a mighty warrior who fights on behalf of His people",
+        "good": "We can find peace by being still and trusting God to handle our battles",
+        "bad": "Trying to fight every battle in our own strength leads to exhaustion and failure"
+      }
     },
     {
       "ref": "Deuteronomy 6:5",
@@ -156,7 +181,12 @@
           "t": "and with all your strength.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God desires a wholehearted, complete love relationship with each of us",
+        "good": "Loving God with all our heart, soul, and strength brings true fulfillment",
+        "bad": "A half-hearted or divided devotion to God leaves us spiritually empty"
+      }
     },
     {
       "ref": "Deuteronomy 31:6",
@@ -191,7 +221,12 @@
           "t": "nor forsake you.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God promises His constant presence and will never abandon His people",
+        "good": "We can be strong and courageous because God walks with us everywhere",
+        "bad": "Living in fear and terror shows we have forgotten God's faithful presence"
+      }
     },
     {
       "ref": "Deuteronomy 31:8",
@@ -222,7 +257,12 @@
           "t": "do not be discouraged.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The LORD Himself goes ahead of us and stays with us through everything",
+        "good": "We do not need to be afraid or discouraged because God leads the way",
+        "bad": "Discouragement and fear take root when we lose sight of God going before us"
+      }
     },
     {
       "ref": "Joshua 1:9",
@@ -257,7 +297,12 @@
           "t": "wherever you go.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God commands courage because He guarantees His presence wherever we go",
+        "good": "Strength and courage come from knowing God is always with us",
+        "bad": "Fear and discouragement reveal that we are not trusting God's promise to be with us"
+      }
     },
     {
       "ref": "1 Samuel 16:7",
@@ -288,7 +333,12 @@
           "t": "the heart.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God sees past all outward appearances and looks directly at the heart",
+        "good": "Developing inner character matters far more than outward looks",
+        "bad": "Judging people by their outward appearance misses what truly matters to God"
+      }
     },
     {
       "ref": "2 Samuel 22:31",
@@ -315,7 +365,12 @@
           "t": "who take refuge in him.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's way is perfect and His word is completely trustworthy and flawless",
+        "good": "Taking refuge in God provides true protection and security",
+        "bad": "Relying on imperfect human plans instead of God's perfect way leads to failure"
+      }
     },
     {
       "ref": "Psalm 1:1",
@@ -350,7 +405,12 @@
           "t": "of mockers,",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God blesses those who carefully choose to avoid the influence of the wicked",
+        "good": "Happiness comes from refusing to follow the crowd into sinful behavior",
+        "bad": "Walking with the wicked, standing with sinners, and sitting with mockers corrupts us"
+      }
     },
     {
       "ref": "Psalm 18:2",
@@ -385,7 +445,12 @@
           "t": "my stronghold.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is an unshakeable rock, fortress, deliverer, shield, and stronghold for us",
+        "good": "Taking refuge in God gives us complete safety and security",
+        "bad": "Without God as our refuge, we are defenseless against life's dangers"
+      }
     },
     {
       "ref": "Psalm 19:1",
@@ -394,7 +459,7 @@
       "phrases": [
         {
           "t": "The heavens declare",
-          "c": "other"
+          "c": "earth"
         },
         {
           "t": "the glory of God;",
@@ -402,13 +467,18 @@
         },
         {
           "t": "the skies proclaim",
-          "c": "other"
+          "c": "earth"
         },
         {
           "t": "the work of his hands.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's glory is so great that all of creation constantly displays it",
+        "good": "We can see evidence of God's existence and power in the natural world around us",
+        "bad": "Ignoring the testimony of creation means missing the clearest evidence of God"
+      }
     },
     {
       "ref": "Psalm 19:14",
@@ -435,7 +505,12 @@
           "t": "and my Redeemer.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is our Rock and Redeemer who cares about our words and thoughts",
+        "good": "We should strive to make our words and thoughts pleasing to God",
+        "bad": "Careless words and impure thoughts are displeasing to our Lord"
+      }
     },
     {
       "ref": "Psalm 23:1",
@@ -454,7 +529,12 @@
           "t": "I lack nothing.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The LORD is a caring shepherd who provides everything His people need",
+        "good": "Under God's shepherding care, we lack nothing that we truly need",
+        "bad": "Constant wanting and dissatisfaction come from not recognizing God as our shepherd"
+      }
     },
     {
       "ref": "Psalm 23:4",
@@ -485,7 +565,12 @@
           "t": "they comfort me.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God walks with us through life's darkest and most dangerous moments",
+        "good": "We can fear no evil because God's presence and guidance comfort us",
+        "bad": "The darkest valleys of life become unbearable when we try to walk through them alone"
+      }
     },
     {
       "ref": "Psalm 27:1",
@@ -516,7 +601,12 @@
           "t": "of whom shall I be afraid?",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The LORD is our light, salvation, and the stronghold that protects our life",
+        "good": "When God is our defender, we have no reason to fear any person or situation",
+        "bad": "Living in fear of others shows we have not grasped that God is our stronghold"
+      }
     },
     {
       "ref": "Psalm 27:4",
@@ -551,7 +641,12 @@
           "t": "and to seek him in his temple.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God invites us to dwell in His presence and gaze on His beauty",
+        "good": "Making time with God our top priority brings the deepest satisfaction",
+        "bad": "Seeking many things instead of the one thing — God's presence — leads to distraction"
+      }
     },
     {
       "ref": "Psalm 32:8",
@@ -578,7 +673,12 @@
           "t": "with my loving eye on you.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God personally instructs, teaches, counsels, and watches over us",
+        "good": "Following God's guidance leads us on the right path in life",
+        "bad": "Ignoring God's instruction and counsel leads us down wrong paths"
+      }
     },
     {
       "ref": "Psalm 34:8",
@@ -601,7 +701,12 @@
           "t": "who takes refuge in him.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The LORD is genuinely good, and He invites everyone to experience His goodness",
+        "good": "Tasting and seeing God's goodness through personal experience brings true blessing",
+        "bad": "Refusing to try trusting God means missing out on His proven goodness"
+      }
     },
     {
       "ref": "Psalm 34:18",
@@ -624,7 +729,12 @@
           "t": "who are crushed in spirit.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God draws especially close to those who are hurting and brokenhearted",
+        "good": "Even in our deepest pain, God is near and ready to save us",
+        "bad": "Being crushed in spirit without turning to God leaves us without His comfort"
+      }
     },
     {
       "ref": "Psalm 37:4",
@@ -647,7 +757,12 @@
           "t": "the desires of your heart.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God generously gives good desires to those who find their joy in Him",
+        "good": "Delighting in the LORD aligns our desires with His good plans for us",
+        "bad": "Seeking delight in things apart from God leaves our deepest desires unfulfilled"
+      }
     },
     {
       "ref": "Psalm 37:5",
@@ -670,7 +785,12 @@
           "t": "and he will do this:",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God responds faithfully when we commit our plans and trust to Him",
+        "good": "Trusting God with our plans and future allows Him to work on our behalf",
+        "bad": "Holding tightly to our own plans instead of trusting God limits what He can do"
+      }
     },
     {
       "ref": "Psalm 46:1",
@@ -693,7 +813,12 @@
           "t": "in trouble.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is a reliable refuge, source of strength, and ever-present helper",
+        "good": "In times of trouble, God is immediately available to help us",
+        "bad": "Facing trouble without turning to God as our refuge leaves us vulnerable"
+      }
     },
     {
       "ref": "Psalm 46:10",
@@ -714,7 +839,7 @@
         },
         {
           "t": "among the nations,",
-          "c": "other"
+          "c": "earth"
         },
         {
           "t": "I will be exalted",
@@ -722,9 +847,14 @@
         },
         {
           "t": "in the earth.”",
-          "c": "other"
+          "c": "earth"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God commands us to be still and recognize His supreme authority over all nations",
+        "good": "Being still before God and knowing who He is brings peace and perspective",
+        "bad": "Constant striving and restlessness reveal a failure to acknowledge God's sovereignty"
+      }
     },
     {
       "ref": "Psalm 51:10",
@@ -751,7 +881,12 @@
           "t": "within me.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has the power to create purity and renew steadfastness within us",
+        "good": "Asking God to purify our hearts and renew our spirits transforms us from the inside",
+        "bad": "An impure heart and an unstable spirit keep us distant from God"
+      }
     },
     {
       "ref": "Psalm 56:3",
@@ -770,7 +905,12 @@
           "t": "in you.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is completely trustworthy and worthy of our confidence even in scary times",
+        "good": "Choosing to trust God when we are afraid is an act of powerful faith",
+        "bad": "Letting fear control us instead of turning to God keeps us trapped in anxiety"
+      }
     },
     {
       "ref": "Psalm 90:12",
@@ -793,7 +933,12 @@
           "t": "a heart of wisdom.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God teaches us to value each day and live with eternal perspective",
+        "good": "Numbering our days wisely leads to a heart filled with true wisdom",
+        "bad": "Wasting our limited days on earth by ignoring God's perspective is foolish"
+      }
     },
     {
       "ref": "Psalm 91:1",
@@ -816,7 +961,12 @@
           "t": "of the Almighty.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The Most High and Almighty God offers shelter and rest to those who dwell with Him",
+        "good": "Dwelling close to God provides safety and rest for our souls",
+        "bad": "Living outside God's shelter leaves us exposed and without true rest"
+      }
     },
     {
       "ref": "Psalm 91:11",
@@ -839,7 +989,12 @@
           "t": "in all your ways;",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God commands His angels to guard and protect His children",
+        "good": "God provides supernatural protection over all our ways",
+        "bad": "We are never truly unguarded because God's angelic protection surrounds us"
+      }
     },
     {
       "ref": "Psalm 103:12",
@@ -862,7 +1017,12 @@
           "t": "our transgressions from us.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God removes our sins completely — as far as east is from west",
+        "good": "Our transgressions are fully removed and we can live free from guilt",
+        "bad": "Holding onto guilt for sins God has already removed wastes His gracious forgiveness"
+      }
     },
     {
       "ref": "Psalm 107:1",
@@ -881,7 +1041,12 @@
           "t": "his love endures forever.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The LORD is good and His love never ends — it endures forever",
+        "good": "Giving thanks to God recognizes His eternal goodness and love toward us",
+        "bad": "Ingratitude blinds us to the reality of God's unending love"
+      }
     },
     {
       "ref": "Psalm 118:24",
@@ -904,7 +1069,12 @@
           "t": "and be glad.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The LORD actively works and accomplishes great things in our days",
+        "good": "Each day is an opportunity to rejoice and be glad in what God has done",
+        "bad": "Failing to recognize God's daily work leads to joylessness and ingratitude"
+      }
     },
     {
       "ref": "Psalm 119:9",
@@ -927,7 +1097,12 @@
           "t": "to your word.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's Word provides the standard for living a pure and holy life",
+        "good": "Living according to God's Word keeps us on the path of purity",
+        "bad": "Ignoring God's Word leaves young people without direction for pure living"
+      }
     },
     {
       "ref": "Psalm 119:105",
@@ -946,7 +1121,12 @@
           "t": "a light on my path.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's Word is a reliable guide that illuminates the way forward",
+        "good": "Following the light of Scripture keeps us on the right path",
+        "bad": "Walking without the guidance of God's Word is like stumbling in darkness"
+      }
     },
     {
       "ref": "Psalm 119:11",
@@ -969,7 +1149,12 @@
           "t": "against you.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God gives us His Word as a powerful weapon against temptation and sin",
+        "good": "Memorizing Scripture protects our hearts and helps us avoid sin",
+        "bad": "Neglecting to store God's Word in our hearts leaves us vulnerable to sin"
+      }
     },
     {
       "ref": "Psalm 121:1-2",
@@ -982,7 +1167,7 @@
         },
         {
           "t": "to the mountains —",
-          "c": "other"
+          "c": "earth"
         },
         {
           "t": "where does my help come from?",
@@ -996,7 +1181,12 @@
           "t": "the Maker of heaven and earth.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The LORD, Maker of heaven and earth, is the source of all our help",
+        "good": "Looking to God for help connects us to the most powerful source in the universe",
+        "bad": "Seeking help from anything other than God ultimately disappoints us"
+      }
     },
     {
       "ref": "Psalm 139:14",
@@ -1019,7 +1209,12 @@
           "t": "I know that full well.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God made each person fearfully and wonderfully with incredible care",
+        "good": "Praising God for how He made us builds healthy confidence and gratitude",
+        "bad": "Despising how God made us insults the Creator and damages our self-worth"
+      }
     },
     {
       "ref": "Psalm 145:9",
@@ -1038,7 +1233,12 @@
           "t": "on all he has made.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The LORD is good to every single creature He has made and shows compassion to all",
+        "good": "God's goodness and compassion extend to everyone without exception",
+        "bad": "Doubting God's goodness ignores the evidence of His care for all creation"
+      }
     },
     {
       "ref": "Psalm 147:3",
@@ -1057,7 +1257,12 @@
           "t": "their wounds.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is a healer who mends broken hearts and bandages wounds",
+        "good": "Bringing our brokenness to God leads to genuine healing and restoration",
+        "bad": "Carrying wounds and heartbreak alone when God offers healing prolongs our pain"
+      }
     },
     {
       "ref": "Proverbs 1:7",
@@ -1080,7 +1285,12 @@
           "t": "wisdom and instruction.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is the foundation of all true knowledge and wisdom",
+        "good": "Respecting God is the essential starting point for gaining real knowledge",
+        "bad": "Despising wisdom and instruction like a fool leads to a ruined life"
+      }
     },
     {
       "ref": "Proverbs 3:5-6",
@@ -1115,7 +1325,12 @@
           "t": "your paths straight.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God promises to make our paths straight when we fully trust Him",
+        "good": "Trusting God wholeheartedly and submitting our ways to Him leads to clear direction",
+        "bad": "Leaning on our own limited understanding instead of trusting God leads us astray"
+      }
     },
     {
       "ref": "Proverbs 3:9",
@@ -1138,7 +1353,12 @@
           "t": "of all your crops;",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is worthy of being honored with the very best of what we have",
+        "good": "Giving God the first and best of our resources honors Him and blesses us",
+        "bad": "Keeping everything for ourselves and giving God leftovers dishonors Him"
+      }
     },
     {
       "ref": "Proverbs 4:23",
@@ -1161,7 +1381,12 @@
           "t": "flows from it.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God cares deeply about the condition of our hearts because everything flows from them",
+        "good": "Guarding our hearts protects every area of our lives",
+        "bad": "An unguarded heart allows destructive influences to corrupt everything we do"
+      }
     },
     {
       "ref": "Proverbs 10:9",
@@ -1184,7 +1409,12 @@
           "t": "will be found out.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has designed life so that integrity leads to security and dishonesty to exposure",
+        "good": "Walking with integrity gives us lasting security and a clear conscience",
+        "bad": "Taking crooked, dishonest paths will eventually result in being found out"
+      }
     },
     {
       "ref": "Proverbs 11:25",
@@ -1207,7 +1437,12 @@
           "t": "will be refreshed.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God designed a principle where generosity creates a cycle of blessing",
+        "good": "Being generous and refreshing others leads to personal prosperity and refreshment",
+        "bad": "Selfishness and stinginess cut us off from the blessings of generosity"
+      }
     },
     {
       "ref": "Proverbs 12:25",
@@ -1230,7 +1465,12 @@
           "t": "cheers it up.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God understands the weight of anxiety and provides encouragement through kind words",
+        "good": "A kind word has the power to lift someone out of heaviness and despair",
+        "bad": "Anxiety weighs down the heart and steals our joy if left unchecked"
+      }
     },
     {
       "ref": "Proverbs 14:12",
@@ -1253,7 +1493,12 @@
           "t": "it leads to death.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God sees the true end of every path, even those that look right to us",
+        "good": "Seeking God's guidance protects us from paths that seem right but lead to destruction",
+        "bad": "Following a path just because it appears right, without seeking God, can lead to death"
+      }
     },
     {
       "ref": "Proverbs 16:3",
@@ -1276,7 +1521,12 @@
           "t": "your plans.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God establishes and brings success to the plans of those who commit to Him",
+        "good": "Committing our work to the LORD gives our plans a solid foundation",
+        "bad": "Making plans without committing them to God leaves them on shaky ground"
+      }
     },
     {
       "ref": "Proverbs 16:9",
@@ -1299,7 +1549,12 @@
           "t": "their steps.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The LORD has ultimate authority to direct and establish our steps",
+        "good": "We can plan wisely while trusting that God is guiding our steps",
+        "bad": "Believing we have total control over our future ignores God's sovereign direction"
+      }
     },
     {
       "ref": "Proverbs 17:17",
@@ -1322,7 +1577,12 @@
           "t": "of adversity.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God designed friendship and brotherhood to support us through all of life",
+        "good": "True friendship means loving at all times, not just when it is easy",
+        "bad": "Fair-weather friendships that disappear in hard times fail God's design for relationships"
+      }
     },
     {
       "ref": "Proverbs 18:10",
@@ -1345,7 +1605,12 @@
           "t": "and are safe.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The name of the LORD is powerful — a fortified tower of protection",
+        "good": "Running to God in times of danger provides true safety and security",
+        "bad": "Failing to run to God for safety leaves us exposed to life's threats"
+      }
     },
     {
       "ref": "Proverbs 22:6",
@@ -1368,7 +1633,12 @@
           "t": "they will not turn from it.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God honors the investment of training children in His ways",
+        "good": "Starting children on the right path creates a lifelong foundation of faith",
+        "bad": "Neglecting to train children in godly ways leaves them without spiritual direction"
+      }
     },
     {
       "ref": "Proverbs 27:17",
@@ -1387,7 +1657,12 @@
           "t": "sharpens another.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God designed relationships so that people sharpen and improve each other",
+        "good": "Godly friendships challenge us to grow and become better people",
+        "bad": "Isolating ourselves from good friendships means missing out on needed growth"
+      }
     },
     {
       "ref": "Proverbs 31:30",
@@ -1410,7 +1685,12 @@
           "t": "is to be praised.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God values reverence for Him above all external qualities like charm and beauty",
+        "good": "A person who fears the LORD deserves genuine praise and admiration",
+        "bad": "Charm is deceptive and beauty is fleeting — trusting in them leads to disappointment"
+      }
     },
     {
       "ref": "Ecclesiastes 3:1",
@@ -1433,7 +1713,12 @@
           "t": "under the heavens:",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has ordained appropriate times and seasons for every activity in life",
+        "good": "Recognizing God's timing helps us respond wisely to each season of life",
+        "bad": "Fighting against God's timing leads to frustration and missed opportunities"
+      }
     },
     {
       "ref": "Ecclesiastes 12:13",
@@ -1464,7 +1749,12 @@
           "t": "of all mankind.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God deserves our reverent fear and full obedience to His commandments",
+        "good": "Fearing God and keeping His commandments fulfills our whole duty as humans",
+        "bad": "Ignoring God and His commands means missing the entire purpose of our existence"
+      }
     },
     {
       "ref": "Isaiah 1:18",
@@ -1495,7 +1785,12 @@
           "t": "they shall be like wool.\"",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God offers to completely cleanse even the worst sins, making them white as snow",
+        "good": "No matter how deep our sin, God's forgiveness can make us completely clean",
+        "bad": "Sins like scarlet and crimson stain our lives until we accept God's cleansing"
+      }
     },
     {
       "ref": "Isaiah 9:6",
@@ -1512,11 +1807,11 @@
         },
         {
           "t": "and the government will be on his shoulders.",
-          "c": "god"
+          "c": "royal"
         },
         {
           "t": "And he will be called",
-          "c": "connector"
+          "c": "royal"
         },
         {
           "t": "Wonderful Counselor, Mighty God,",
@@ -1524,9 +1819,14 @@
         },
         {
           "t": "Everlasting Father, Prince of Peace.",
-          "c": "god"
+          "c": "royal"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God sent His Son as Wonderful Counselor, Mighty God, Everlasting Father, and Prince of Peace",
+        "good": "Jesus came to bring us divine wisdom, power, fatherly care, and lasting peace",
+        "bad": "Rejecting the authority and kingship of Jesus means missing all He came to provide"
+      }
     },
     {
       "ref": "Isaiah 26:3",
@@ -1549,7 +1849,12 @@
           "t": "in you.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God keeps in perfect peace those who trust in Him with steadfast minds",
+        "good": "Keeping our minds fixed on God and trusting Him produces perfect peace",
+        "bad": "An unsteady, wandering mind that does not trust God cannot experience His peace"
+      }
     },
     {
       "ref": "Isaiah 40:8",
@@ -1558,11 +1863,11 @@
       "phrases": [
         {
           "t": "The grass withers",
-          "c": "other"
+          "c": "earth"
         },
         {
           "t": "and the flowers fall,",
-          "c": "other"
+          "c": "earth"
         },
         {
           "t": "but the word of our God",
@@ -1572,7 +1877,12 @@
           "t": "endures forever.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's Word endures forever — unlike anything else in the natural world",
+        "good": "Building our lives on God's eternal Word gives us a foundation that never fades",
+        "bad": "Investing only in temporary things that wither and fall leaves us with nothing lasting"
+      }
     },
     {
       "ref": "Isaiah 40:31",
@@ -1599,7 +1909,12 @@
           "t": "they will walk and not be faint.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The LORD renews the strength of those who place their hope in Him",
+        "good": "Hoping in God enables us to soar, run, and walk without growing weary or faint",
+        "bad": "Trying to live on our own strength without hope in God leads to weariness and burnout"
+      }
     },
     {
       "ref": "Isaiah 41:10",
@@ -1638,7 +1953,12 @@
           "t": "with my righteous right hand.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God declares He is with us, He is our God, and He will strengthen, help, and uphold us",
+        "good": "We can face life without fear or dismay because God personally supports us",
+        "bad": "Fear and dismay take hold when we forget that God is right beside us"
+      }
     },
     {
       "ref": "Isaiah 43:2",
@@ -1665,7 +1985,12 @@
           "t": "they will not sweep over you.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God promises to be with us through the most overwhelming trials — waters and rivers",
+        "good": "No trial can overwhelm us because God walks through it with us",
+        "bad": "Facing floods and rivers of hardship without God's presence can sweep us away"
+      }
     },
     {
       "ref": "Isaiah 53:5",
@@ -1700,7 +2025,12 @@
           "t": "we are healed.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God allowed His Son to be pierced and crushed to bring us peace and healing",
+        "good": "Through Christ's suffering, we receive peace with God and healing for our souls",
+        "bad": "Our transgressions and iniquities required a terrible price that only Christ could pay"
+      }
     },
     {
       "ref": "Isaiah 53:6",
@@ -1731,7 +2061,12 @@
           "t": "the iniquity of us all.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The LORD placed all our sin on Jesus so that we could be forgiven",
+        "good": "God provided a way back from our wandering by laying our sin on Christ",
+        "bad": "Going astray and turning to our own way separates us from God's flock"
+      }
     },
     {
       "ref": "Isaiah 55:8",
@@ -1754,7 +2089,12 @@
           "t": "declares the LORD.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's thoughts and ways are infinitely higher and different from ours",
+        "good": "Trusting God's higher perspective frees us from needing to understand everything",
+        "bad": "Assuming our ways and thoughts are equal to God's leads to pride and confusion"
+      }
     },
     {
       "ref": "Isaiah 55:11",
@@ -1785,7 +2125,12 @@
           "t": "and achieve the purpose for which I sent it.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's Word always accomplishes exactly what He sends it to do",
+        "good": "We can trust that God's promises will never return empty or unfulfilled",
+        "bad": "Doubting the effectiveness of God's Word underestimates His sovereign power"
+      }
     },
     {
       "ref": "Jeremiah 17:7",
@@ -1808,7 +2153,12 @@
           "t": "in him.\"",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God blesses and sustains those who place their full trust and confidence in Him",
+        "good": "Trusting in the LORD and placing our confidence in Him leads to blessing",
+        "bad": "Placing our confidence in anything other than God leads to insecurity"
+      }
     },
     {
       "ref": "Jeremiah 29:11",
@@ -1843,7 +2193,12 @@
           "t": "and a future.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has specific, good plans for each of us — plans for hope and a future",
+        "good": "We can face the future with hope because God's plans for us are good",
+        "bad": "God does not plan to harm us, but our own choices to reject His plans can hurt us"
+      }
     },
     {
       "ref": "Jeremiah 33:3",
@@ -1870,7 +2225,12 @@
           "t": "you do not know.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God invites us to call on Him and promises to reveal great unsearchable things",
+        "good": "Calling out to God opens the door to discovering amazing things we never knew",
+        "bad": "Failing to call on God means missing out on the great things He wants to show us"
+      }
     },
     {
       "ref": "Lamentations 3:22-23",
@@ -1897,7 +2257,12 @@
           "t": "great is your faithfulness.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's love and compassion are unfailing — they are fresh and new every morning",
+        "good": "Each morning brings renewed compassion and another chance to experience God's faithfulness",
+        "bad": "Despair takes over when we forget that God's mercies are new every single morning"
+      }
     },
     {
       "ref": "Daniel 3:17",
@@ -1926,9 +2291,14 @@
         },
         {
           "t": "from Your Majesty’s hand.",
-          "c": "other"
+          "c": "royal"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is able to deliver His people from any danger, no matter how extreme",
+        "good": "Trusting God's ability to deliver gives us boldness even in the face of death",
+        "bad": "The blazing furnace of trial is terrifying without faith in God's power to save"
+      }
     },
     {
       "ref": "Micah 6:8",
@@ -1963,7 +2333,12 @@
           "t": "with your God.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has clearly shown us what He requires — justice, mercy, and humble walking with Him",
+        "good": "Acting justly, loving mercy, and walking humbly with God is the essence of faithful living",
+        "bad": "Neglecting justice, mercy, and humility means failing to meet God's basic requirements"
+      }
     },
     {
       "ref": "Nahum 1:7",
@@ -1986,7 +2361,12 @@
           "t": "who trust in him,",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The LORD is good and provides refuge in trouble while caring for those who trust Him",
+        "good": "Trusting in God during trouble brings His caring protection into our lives",
+        "bad": "Facing times of trouble without trusting God means missing His refuge and care"
+      }
     },
     {
       "ref": "Habakkuk 2:14",
@@ -1995,7 +2375,7 @@
       "phrases": [
         {
           "t": "For the earth will be filled",
-          "c": "other"
+          "c": "earth"
         },
         {
           "t": "with the knowledge of the glory",
@@ -2007,9 +2387,14 @@
         },
         {
           "t": "as the waters cover the sea.",
-          "c": "other"
+          "c": "earth"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's plan is for the entire earth to be filled with knowledge of His glory",
+        "good": "We get to participate in spreading the knowledge of God's glory everywhere",
+        "bad": "A world that rejects God's glory is a world that misses its true purpose"
+      }
     },
     {
       "ref": "Matthew 4:4",
@@ -2036,7 +2421,12 @@
           "t": "that comes from the mouth of God.’”",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's Word is essential spiritual nourishment that we cannot live without",
+        "good": "Feeding on every word from God satisfies our deepest spiritual hunger",
+        "bad": "Living on physical bread alone while neglecting God's Word starves our souls"
+      }
     },
     {
       "ref": "Matthew 5:6",
@@ -2059,7 +2449,12 @@
           "t": "for they will be filled.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God promises to fill those who deeply desire righteousness",
+        "good": "Hungering and thirsting for righteousness leads to being completely satisfied by God",
+        "bad": "Having no appetite for righteousness leaves us spiritually malnourished"
+      }
     },
     {
       "ref": "Matthew 5:14",
@@ -2076,13 +2471,18 @@
         },
         {
           "t": "A town built on a hill",
-          "c": "other"
+          "c": "earth"
         },
         {
           "t": "cannot be hidden.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has made His followers to be the light of the entire world",
+        "good": "We are called to shine visibly like a city on a hill that cannot be hidden",
+        "bad": "Hiding our light defeats God's purpose for placing us in the world"
+      }
     },
     {
       "ref": "Matthew 5:16",
@@ -2113,7 +2513,12 @@
           "t": "in heaven.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God the Father receives glory when people see the good deeds of His children",
+        "good": "Letting our light shine through good deeds points others to God",
+        "bad": "Hiding our good deeds or doing them for selfish recognition fails to glorify God"
+      }
     },
     {
       "ref": "Matthew 5:44",
@@ -2136,7 +2541,12 @@
           "t": "who persecute you,",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God commands and empowers us to love even our enemies and pray for persecutors",
+        "good": "Loving enemies and praying for persecutors reflects God's own character",
+        "bad": "Persecution and mistreatment from others is real, but hatred in return damages our souls"
+      }
     },
     {
       "ref": "Matthew 6:26",
@@ -2167,7 +2577,12 @@
           "t": "than they?",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God the heavenly Father faithfully feeds even the birds, and we are far more valuable",
+        "good": "We are deeply valuable to God — worth much more than the birds He already cares for",
+        "bad": "Worrying about basic needs insults God by suggesting He cares for birds more than us"
+      }
     },
     {
       "ref": "Matthew 6:33",
@@ -2180,7 +2595,7 @@
         },
         {
           "t": "his kingdom and his righteousness,",
-          "c": "god"
+          "c": "royal"
         },
         {
           "t": "and all these things",
@@ -2190,7 +2605,12 @@
           "t": "will be given to you as well.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God promises to provide everything we need when we prioritize His kingdom",
+        "good": "Seeking God's kingdom and righteousness first puts everything else in proper order",
+        "bad": "Chasing material things first while neglecting God's kingdom leads to anxiety"
+      }
     },
     {
       "ref": "Matthew 6:34",
@@ -2217,7 +2637,12 @@
           "t": "of its own.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has designed each day with enough grace for that day's challenges",
+        "good": "Living one day at a time and not worrying about tomorrow brings freedom",
+        "bad": "Worrying about tomorrow adds unnecessary trouble to today"
+      }
     },
     {
       "ref": "Matthew 7:7",
@@ -2240,7 +2665,12 @@
           "t": "will be opened to you.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God generously responds to those who ask, seek, and knock with persistence",
+        "good": "Asking, seeking, and knocking in prayer opens doors we never thought possible",
+        "bad": "Failing to ask God means missing out on what He is eager to give"
+      }
     },
     {
       "ref": "Matthew 11:28",
@@ -2263,7 +2693,12 @@
           "t": "and I will give you rest.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus personally invites all who are weary and burdened to come to Him for rest",
+        "good": "Coming to Jesus with our weariness and burdens results in genuine rest",
+        "bad": "Carrying weariness and heavy burdens alone when Jesus offers rest is unnecessary suffering"
+      }
     },
     {
       "ref": "Matthew 11:29",
@@ -2290,7 +2725,12 @@
           "t": "for your souls.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus is gentle and humble in heart and offers rest for our souls",
+        "good": "Learning from Jesus and taking His yoke leads to deep rest for our souls",
+        "bad": "Refusing Jesus' gentle teaching means carrying a heavier yoke on our own"
+      }
     },
     {
       "ref": "Matthew 16:26",
@@ -2317,7 +2757,12 @@
           "t": "in exchange for their soul?",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God values the human soul more than all the wealth and possessions in the world",
+        "good": "Nothing in the entire world is worth trading for the well-being of our soul",
+        "bad": "Gaining the whole world but forfeiting your soul is the worst trade anyone can make"
+      }
     },
     {
       "ref": "Matthew 19:26",
@@ -2340,7 +2785,12 @@
           "t": "all things are possible.”",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God can do all things — nothing is impossible for Him",
+        "good": "With God, even situations that seem completely impossible become possible",
+        "bad": "Viewing things only through human ability leads to a sense of hopelessness"
+      }
     },
     {
       "ref": "Matthew 22:37-39",
@@ -2371,7 +2821,12 @@
           "t": "‘Love your neighbor as yourself.’”",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God commands us to love Him with everything we have and to love others as ourselves",
+        "good": "Loving God completely and loving our neighbor fulfills God's greatest commands",
+        "bad": "Failing to love God wholeheartedly or neglecting our neighbor breaks the greatest commands"
+      }
     },
     {
       "ref": "Matthew 28:18-20",
@@ -2384,7 +2839,7 @@
         },
         {
           "t": "“All authority in heaven and on earth has been given to me.",
-          "c": "god"
+          "c": "royal"
         },
         {
           "t": "Therefore go and make disciples of all nations,",
@@ -2402,7 +2857,12 @@
           "t": "And surely I am with you always, to the very end of the age.”",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus has been given all authority in heaven and on earth and promises to be with us always",
+        "good": "We are called to make disciples of all nations, baptizing and teaching them",
+        "bad": "Keeping the gospel to ourselves disobeys Jesus' direct command to make disciples"
+      }
     },
     {
       "ref": "Mark 8:36",
@@ -2425,7 +2885,12 @@
           "t": "their soul?",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God created our souls with infinite value that no worldly gain can match",
+        "good": "Protecting and nurturing our soul is more important than any worldly achievement",
+        "bad": "Gaining the whole world means nothing if we forfeit our eternal soul in the process"
+      }
     },
     {
       "ref": "Mark 11:24",
@@ -2448,7 +2913,12 @@
           "t": "and it will be yours.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God honors faith-filled prayer and responds to those who believe",
+        "good": "Praying with genuine belief opens us to receive what God has for us",
+        "bad": "Praying without faith or expectation limits our experience of God's provision"
+      }
     },
     {
       "ref": "Luke 1:37",
@@ -2463,7 +2933,12 @@
           "t": "will ever fail.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "No word from God will ever fail — His promises are always fulfilled",
+        "good": "We can rely completely on every word and promise that God has spoken",
+        "bad": "Doubting God's word causes us to miss the certainty and comfort it provides"
+      }
     },
     {
       "ref": "Luke 6:31",
@@ -2482,7 +2957,12 @@
           "t": "do to you.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God established the golden rule as the foundation for all human relationships",
+        "good": "Treating others the way we want to be treated creates healthy, loving relationships",
+        "bad": "Treating others poorly invites the same treatment back into our own lives"
+      }
     },
     {
       "ref": "Luke 6:37",
@@ -2513,7 +2993,12 @@
           "t": "and you will be forgiven.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God promises forgiveness to those who forgive and warns judges that they will be judged",
+        "good": "Choosing not to judge or condemn and instead forgiving others releases us to be forgiven",
+        "bad": "Judging and condemning others sets us up to be judged and condemned ourselves"
+      }
     },
     {
       "ref": "John 1:1",
@@ -2536,7 +3021,12 @@
           "t": "and the Word was God.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus (the Word) has existed from the very beginning and is Himself God",
+        "good": "The Word of God is eternal and divine, giving us an unshakeable foundation",
+        "bad": "Denying the deity of Christ misunderstands the most fundamental truth about who God is"
+      }
     },
     {
       "ref": "John 1:12",
@@ -2559,7 +3049,12 @@
           "t": "to become children of God —",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God gives the right to become His children to all who receive and believe in Jesus",
+        "good": "Receiving Jesus and believing in His name makes us children of God",
+        "bad": "Refusing to receive Jesus means missing the gift of becoming part of God's family"
+      }
     },
     {
       "ref": "John 3:16",
@@ -2598,7 +3093,12 @@
           "t": "eternal life.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God loves the world so much that He gave His one and only Son for us",
+        "good": "Believing in Jesus gives us eternal life instead of perishing",
+        "bad": "Perishing is the consequence of rejecting God's love and His Son"
+      }
     },
     {
       "ref": "John 3:17",
@@ -2625,7 +3125,12 @@
           "t": "through him.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God sent His Son not to condemn the world but to save it",
+        "good": "Through Jesus, the whole world has the opportunity to be saved",
+        "bad": "Without Christ, the world remains in the condemnation God sent His Son to rescue us from"
+      }
     },
     {
       "ref": "John 3:36",
@@ -2656,7 +3161,12 @@
           "t": "on them.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God offers eternal life through His Son and warns of wrath for those who reject Him",
+        "good": "Believing in the Son gives us eternal life right now",
+        "bad": "Rejecting the Son means not seeing life and remaining under God's wrath"
+      }
     },
     {
       "ref": "John 8:12",
@@ -2687,7 +3197,12 @@
           "t": "the light of life.”",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus is the light of the world who dispels all spiritual darkness",
+        "good": "Following Jesus means we will never walk in darkness but have the light of life",
+        "bad": "Walking in darkness — living without Jesus' guidance — leads to stumbling and loss"
+      }
     },
     {
       "ref": "John 8:32",
@@ -2706,7 +3221,12 @@
           "t": "and the truth will set you free.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's truth has the power to set us completely free from bondage",
+        "good": "Knowing the truth through Christ brings genuine freedom into our lives",
+        "bad": "Living without the truth leaves us in bondage and deception"
+      }
     },
     {
       "ref": "John 10:10",
@@ -2729,7 +3249,12 @@
           "t": "and have it to the full.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus came to give us life to the full — abundant, overflowing life",
+        "good": "The full, abundant life Jesus offers is available to all who follow Him",
+        "bad": "The enemy comes only to steal, kill, and destroy everything good in our lives"
+      }
     },
     {
       "ref": "John 10:28",
@@ -2752,7 +3277,12 @@
           "t": "out of my hand.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus gives eternal life and holds His followers securely in His hand",
+        "good": "Those who belong to Jesus will never perish and no one can snatch them away",
+        "bad": "Without Jesus, we have no security and no promise of eternal life"
+      }
     },
     {
       "ref": "John 11:25-26",
@@ -2787,7 +3317,12 @@
           "t": "Do you believe this?”",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus is the resurrection and the life — the source of life beyond death",
+        "good": "Believing in Jesus means we will live even though we die, and truly never die",
+        "bad": "Physical death is real, but spiritual death — being separated from Jesus — is far worse"
+      }
     },
     {
       "ref": "John 13:34",
@@ -2810,7 +3345,12 @@
           "t": "so you must love one another.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus commands us to love one another with the same love He showed us",
+        "good": "Loving each other as Jesus loved us is the mark of true discipleship",
+        "bad": "Failing to love other believers contradicts the command Jesus gave us"
+      }
     },
     {
       "ref": "John 14:6",
@@ -2833,7 +3373,12 @@
           "t": "except through me.”",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus is the exclusive way, truth, and life — the only path to the Father",
+        "good": "Through Jesus we have direct access to God the Father",
+        "bad": "Trying to reach God by any other way besides Jesus is a dead end"
+      }
     },
     {
       "ref": "John 14:27",
@@ -2864,7 +3409,12 @@
           "t": "and do not be afraid.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus gives us His own peace — a peace completely different from what the world offers",
+        "good": "Receiving Jesus' peace means our hearts do not need to be troubled or afraid",
+        "bad": "A troubled, fearful heart has not yet fully received the peace Jesus offers"
+      }
     },
     {
       "ref": "John 15:5",
@@ -2895,7 +3445,12 @@
           "t": "apart from me you can do nothing.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus is the vine — the source of all spiritual life and fruitfulness",
+        "good": "Remaining connected to Jesus produces much fruit in our lives",
+        "bad": "Apart from Jesus, we can do nothing of lasting spiritual value"
+      }
     },
     {
       "ref": "John 15:13",
@@ -2918,7 +3473,12 @@
           "t": "for one’s friends.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God defines the greatest love as laying down one's life for friends — which Jesus did",
+        "good": "Sacrificial love for others is the highest form of love we can show",
+        "bad": "Selfish, self-preserving love falls far short of the love God calls us to"
+      }
     },
     {
       "ref": "John 16:33",
@@ -2945,7 +3505,12 @@
           "t": "I have overcome the world.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus has overcome the world and offers His peace in the midst of trouble",
+        "good": "We can take heart and have peace in Jesus even when the world brings trouble",
+        "bad": "Trouble in this world is guaranteed, but it does not have to overcome us"
+      }
     },
     {
       "ref": "Acts 1:8",
@@ -2974,9 +3539,14 @@
         },
         {
           "t": "and to the ends of the earth.",
-          "c": "other"
+          "c": "earth"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God sends the Holy Spirit to empower believers as witnesses to the entire world",
+        "good": "Receiving the Holy Spirit's power equips us to be effective witnesses everywhere",
+        "bad": "Trying to witness for Christ without the Holy Spirit's power is ineffective"
+      }
     },
     {
       "ref": "Acts 2:38",
@@ -3011,7 +3581,12 @@
           "t": "of the Holy Spirit.”",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God offers forgiveness of sins and the gift of the Holy Spirit through repentance",
+        "good": "Repenting and being baptized in Jesus' name brings forgiveness and the Holy Spirit",
+        "bad": "Unrepented sin blocks us from receiving the forgiveness and gifts God offers"
+      }
     },
     {
       "ref": "Acts 4:12",
@@ -3038,7 +3613,12 @@
           "t": "by which we must be saved.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has provided salvation through no other name but Jesus Christ alone",
+        "good": "Being saved through Jesus is available to all people everywhere",
+        "bad": "Seeking salvation through any other name or method will not succeed"
+      }
     },
     {
       "ref": "Romans 1:16",
@@ -3073,7 +3653,12 @@
           "t": "then to the Gentile.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The gospel is the power of God that brings salvation to everyone who believes",
+        "good": "We should never be ashamed of the gospel because it is God's saving power",
+        "bad": "Being ashamed of the gospel hides the very power that saves people"
+      }
     },
     {
       "ref": "Romans 3:23",
@@ -3092,7 +3677,12 @@
           "t": "of the glory of God,",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's standard of glory reveals that every single person has sinned and falls short",
+        "good": "Recognizing our sinfulness is the first step toward receiving God's grace",
+        "bad": "All have sinned and fall short — no one can earn their way to God's glory"
+      }
     },
     {
       "ref": "Romans 5:1",
@@ -3115,7 +3705,12 @@
           "t": "through our Lord Jesus Christ,",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God provides peace with Himself through faith in our Lord Jesus Christ",
+        "good": "Being justified through faith gives us peace with God right now",
+        "bad": "Without faith in Christ, we remain at odds with God instead of at peace"
+      }
     },
     {
       "ref": "Romans 5:8",
@@ -3142,7 +3737,12 @@
           "t": "Christ died for us.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God demonstrated His love by sending Christ to die for us while we were still sinners",
+        "good": "God's love is not based on our goodness — He loved us at our worst",
+        "bad": "We were still sinners when Christ died for us, proving how lost we were without Him"
+      }
     },
     {
       "ref": "Romans 6:23",
@@ -3169,7 +3769,12 @@
           "t": "in Christ Jesus our Lord.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God offers the free gift of eternal life through Christ Jesus our Lord",
+        "good": "Eternal life in Christ Jesus is a free gift, not something we can earn",
+        "bad": "The wages of sin is death — sin always pays out destruction"
+      }
     },
     {
       "ref": "Romans 8:1",
@@ -3192,7 +3797,12 @@
           "t": "in Christ Jesus,",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God declares there is no condemnation for anyone who is in Christ Jesus",
+        "good": "Being in Christ means we are completely free from condemnation",
+        "bad": "Living under a sense of condemnation when Christ has freed us wastes His sacrifice"
+      }
     },
     {
       "ref": "Romans 8:18",
@@ -3215,7 +3825,12 @@
           "t": "that will be revealed in us.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has a glory so magnificent that our present sufferings cannot compare to it",
+        "good": "The glory that will be revealed in us far outweighs any present suffering",
+        "bad": "Present sufferings are real and painful, but they are temporary and incomparable to coming glory"
+      }
     },
     {
       "ref": "Romans 8:28",
@@ -3246,7 +3861,12 @@
           "t": "according to his purpose.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God works all things together for the good of those who love Him",
+        "good": "Everything in our lives — even hard things — is being used by God for good",
+        "bad": "Questioning whether God can use our painful circumstances limits our trust in His purpose"
+      }
     },
     {
       "ref": "Romans 8:31",
@@ -3269,7 +3889,12 @@
           "t": "who can be against us?",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is for us, and nothing can successfully stand against Him",
+        "good": "If God is on our side, no opposition can ultimately defeat us",
+        "bad": "Fearing those who are against us forgets the far greater truth that God is for us"
+      }
     },
     {
       "ref": "Romans 8:38-39",
@@ -3308,7 +3933,12 @@
           "t": "that is in Christ Jesus our Lord.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's love in Christ Jesus is absolutely inseparable from us — nothing can break it",
+        "good": "Nothing in all creation can separate us from the love of God in Christ Jesus",
+        "bad": "Death, demons, powers, and every force combined cannot cut us off from God's love"
+      }
     },
     {
       "ref": "Romans 10:9",
@@ -3335,7 +3965,12 @@
           "t": "you will be saved.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God saves those who confess Jesus as Lord and believe He was raised from the dead",
+        "good": "Declaring Jesus as Lord and believing in His resurrection brings salvation",
+        "bad": "Refusing to confess Jesus as Lord closes the door to salvation"
+      }
     },
     {
       "ref": "Romans 10:17",
@@ -3358,7 +3993,12 @@
           "t": "through the word about Christ.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God builds faith in people through the hearing of His Word about Christ",
+        "good": "Listening to the message about Christ grows and strengthens our faith",
+        "bad": "Without hearing God's Word, faith cannot take root and grow in our hearts"
+      }
     },
     {
       "ref": "Romans 12:1",
@@ -3389,7 +4029,12 @@
           "t": "this is your true and proper worship.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's mercy motivates us to offer our whole lives as living sacrifices to Him",
+        "good": "Offering ourselves as living sacrifices to God is our true and proper worship",
+        "bad": "Withholding our lives from God after receiving His mercy is ungrateful worship"
+      }
     },
     {
       "ref": "Romans 12:2",
@@ -3424,7 +4069,12 @@
           "t": "his good, pleasing and perfect will.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's will is good, pleasing, and perfect, and He reveals it to renewed minds",
+        "good": "Being transformed by renewing our minds enables us to know God's perfect will",
+        "bad": "Conforming to the pattern of this world prevents us from experiencing God's best"
+      }
     },
     {
       "ref": "Romans 12:12",
@@ -3443,7 +4093,12 @@
           "t": "faithful in prayer.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God sustains us through hope, affliction, and prayer in every season",
+        "good": "Joyful hope, patient endurance, and faithful prayer carry us through all of life",
+        "bad": "Giving up joy, patience, or prayer during affliction leaves us spiritually depleted"
+      }
     },
     {
       "ref": "Romans 15:13",
@@ -3470,7 +4125,12 @@
           "t": "by the power of the Holy Spirit.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is the God of hope who fills us with joy and peace through the Holy Spirit",
+        "good": "Trusting God fills us with joy, peace, and overflowing hope",
+        "bad": "A life without hope, joy, and peace comes from not trusting in the God of hope"
+      }
     },
     {
       "ref": "1 Corinthians 2:9",
@@ -3501,7 +4161,12 @@
           "t": "for those who love him —",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has prepared things beyond human imagination for those who love Him",
+        "good": "The blessings God has prepared for us exceed anything we could see, hear, or conceive",
+        "bad": "Our limited human imagination cannot even begin to grasp what we would miss without God"
+      }
     },
     {
       "ref": "1 Corinthians 10:13",
@@ -3540,7 +4205,12 @@
           "t": "so that you can endure it.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is faithful and always provides a way out when we face temptation",
+        "good": "No temptation is too strong for us to bear because God limits it and provides escape",
+        "bad": "Giving in to temptation as if we have no choice ignores God's promised way out"
+      }
     },
     {
       "ref": "1 Corinthians 13:4-5",
@@ -3575,7 +4245,12 @@
           "t": "it keeps no record of wrongs.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God defines true love through patience, kindness, and selflessness",
+        "good": "Real love is patient, kind, humble, and keeps no record of wrongs",
+        "bad": "Envy, boasting, pride, dishonoring others, and anger are the opposite of true love"
+      }
     },
     {
       "ref": "1 Corinthians 13:13",
@@ -3598,7 +4273,12 @@
           "t": "is love.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has established faith, hope, and love as the three things that endure, with love being greatest",
+        "good": "Pursuing faith, hope, and especially love gives our lives eternal significance",
+        "bad": "A life without love, even with great faith and hope, misses the greatest virtue"
+      }
     },
     {
       "ref": "1 Corinthians 15:58",
@@ -3633,7 +4313,12 @@
           "t": "in the Lord is not in vain.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God ensures that our labor for Him is never in vain or wasted",
+        "good": "Standing firm and giving ourselves fully to God's work has guaranteed results",
+        "bad": "Being shaken or giving up on God's work wastes the effort that was never in vain"
+      }
     },
     {
       "ref": "2 Corinthians 4:18",
@@ -3660,7 +4345,12 @@
           "t": "but what is unseen is eternal.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has made the unseen things eternal while the seen things are only temporary",
+        "good": "Fixing our eyes on eternal, unseen realities gives us lasting perspective",
+        "bad": "Focusing only on visible, temporary things leads to misplaced priorities"
+      }
     },
     {
       "ref": "2 Corinthians 5:17",
@@ -3683,7 +4373,12 @@
           "t": "the new is here!",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God makes anyone who is in Christ a completely new creation",
+        "good": "In Christ, the old has gone and the new has come — we get a fresh start",
+        "bad": "Clinging to the old life after Christ has made us new prevents us from fully living"
+      }
     },
     {
       "ref": "2 Corinthians 5:21",
@@ -3710,7 +4405,12 @@
           "t": "the righteousness of God.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God made the sinless Christ to be sin for us so we could become His righteousness",
+        "good": "In Christ, we become the righteousness of God — completely right with Him",
+        "bad": "Our sin was so serious that it required the sinless Son of God to bear it for us"
+      }
     },
     {
       "ref": "2 Corinthians 12:9",
@@ -3745,7 +4445,12 @@
           "t": "may rest on me.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's grace is sufficient and His power is made perfect in our weakness",
+        "good": "Our weaknesses become opportunities for Christ's power to be displayed in us",
+        "bad": "Hiding our weaknesses instead of bringing them to God prevents His power from shining through"
+      }
     },
     {
       "ref": "Galatians 2:20",
@@ -3780,7 +4485,12 @@
           "t": "who loved me and gave himself for me.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Christ lives in every believer, having loved us and given Himself for us",
+        "good": "Living by faith in the Son of God transforms our entire life purpose",
+        "bad": "Living for ourselves instead of for Christ who died for us wastes our new life"
+      }
     },
     {
       "ref": "Galatians 5:22-23",
@@ -3811,7 +4521,12 @@
           "t": "there is no law.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's Spirit produces beautiful fruit in us — love, joy, peace, and much more",
+        "good": "The Spirit's fruit transforms our character into love, joy, peace, and self-control",
+        "bad": "A life without the Spirit's fruit reveals a disconnect from God's transforming power"
+      }
     },
     {
       "ref": "Galatians 6:9",
@@ -3838,7 +4553,12 @@
           "t": "if we do not give up.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God promises a harvest for those who persist in doing good",
+        "good": "Not giving up in doing good guarantees a harvest at the proper time",
+        "bad": "Growing weary and giving up on doing good means missing the harvest God promised"
+      }
     },
     {
       "ref": "Ephesians 2:8-9",
@@ -3873,7 +4593,12 @@
           "t": "so that no one can boast.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God saves us by His grace as a free gift, not because of anything we have done",
+        "good": "Salvation through faith is a gift from God that gives us security and humility",
+        "bad": "Trying to earn salvation by works misunderstands God's grace and leads to boasting"
+      }
     },
     {
       "ref": "Ephesians 2:10",
@@ -3900,7 +4625,12 @@
           "t": "for us to do.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God created us in Christ Jesus as His handiwork for good works He planned in advance",
+        "good": "We are God's masterpiece, created with purpose and good works already prepared for us",
+        "bad": "Ignoring the good works God prepared for us means missing our created purpose"
+      }
     },
     {
       "ref": "Ephesians 3:20",
@@ -3927,7 +4657,12 @@
           "t": "that is at work within us,",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is able to do immeasurably more than all we ask or imagine through His power in us",
+        "good": "God's power at work within us can accomplish more than we ever dreamed possible",
+        "bad": "Limiting our expectations of God underestimates His immeasurable power"
+      }
     },
     {
       "ref": "Ephesians 4:32",
@@ -3954,7 +4689,12 @@
           "t": "God forgave you.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God forgave us in Christ and calls us to extend that same forgiveness to others",
+        "good": "Being kind, compassionate, and forgiving reflects the character of Christ",
+        "bad": "Refusing to forgive others after God has forgiven us contradicts the grace we received"
+      }
     },
     {
       "ref": "Ephesians 6:10",
@@ -3973,7 +4713,12 @@
           "t": "and in his mighty power.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The Lord provides His mighty power for us to be strong in every situation",
+        "good": "Being strong in the Lord means drawing on His mighty power, not our own",
+        "bad": "Trying to be strong on our own instead of in the Lord leads to defeat"
+      }
     },
     {
       "ref": "Ephesians 6:11",
@@ -3996,7 +4741,12 @@
           "t": "against the devil’s schemes.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God provides full spiritual armor sufficient to withstand every attack",
+        "good": "Putting on God's full armor equips us to stand firm against the enemy",
+        "bad": "The devil's schemes are real and dangerous when we fail to put on God's armor"
+      }
     },
     {
       "ref": "Philippians 1:6",
@@ -4023,7 +4773,12 @@
           "t": "until the day of Christ Jesus.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God who began a good work in us will faithfully complete it",
+        "good": "We can be confident that God will finish the transformation He started in us",
+        "bad": "Doubting God's ability to complete His work in us leads to unnecessary discouragement"
+      }
     },
     {
       "ref": "Philippians 2:3",
@@ -4046,7 +4801,12 @@
           "t": "value others above yourselves,",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God calls us to humility and valuing others above ourselves",
+        "good": "Humility and valuing others above ourselves reflects the character of Christ",
+        "bad": "Selfish ambition and vain conceit destroy relationships and displease God"
+      }
     },
     {
       "ref": "Philippians 2:10-11",
@@ -4063,11 +4823,11 @@
         },
         {
           "t": "in heaven and on earth",
-          "c": "other"
+          "c": "earth"
         },
         {
           "t": "and under the earth,",
-          "c": "other"
+          "c": "earth"
         },
         {
           "t": "and every tongue acknowledge",
@@ -4081,7 +4841,12 @@
           "t": "to the glory of God the Father.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has exalted Jesus so that every knee will bow and every tongue confess He is Lord",
+        "good": "Acknowledging Jesus Christ as Lord brings glory to God the Father",
+        "bad": "Every knee will eventually bow — those who refuse now will still have to acknowledge Him"
+      }
     },
     {
       "ref": "Philippians 4:6",
@@ -4108,7 +4873,12 @@
           "t": "present your requests to God.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God invites us to bring every concern to Him through prayer with thanksgiving",
+        "good": "Prayer and petition with thanksgiving replaces anxiety with God's peace",
+        "bad": "Being anxious about anything is unnecessary when we have access to God through prayer"
+      }
     },
     {
       "ref": "Philippians 4:7",
@@ -4135,7 +4905,12 @@
           "t": "in Christ Jesus.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's peace transcends all human understanding and guards our hearts and minds",
+        "good": "Christ Jesus provides a peace that protects our hearts and minds beyond our comprehension",
+        "bad": "An unguarded heart and mind are vulnerable to worry and confusion"
+      }
     },
     {
       "ref": "Philippians 4:8",
@@ -4166,7 +4941,12 @@
           "t": "think about such things.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God calls us to focus our thinking on what is true, noble, right, pure, and praiseworthy",
+        "good": "Thinking about excellent and praiseworthy things shapes us into better people",
+        "bad": "Filling our minds with impure, dishonest, or worthless things corrupts our character"
+      }
     },
     {
       "ref": "Philippians 4:13",
@@ -4185,7 +4965,12 @@
           "t": "who gives me strength.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God through Christ gives us the strength to face every situation",
+        "good": "We can do all things through Christ who strengthens us",
+        "bad": "Attempting life's challenges without Christ's strength leads to unnecessary defeat"
+      }
     },
     {
       "ref": "Philippians 4:19",
@@ -4212,7 +4997,12 @@
           "t": "in Christ Jesus.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God supplies all our needs from the glorious riches found in Christ Jesus",
+        "good": "Every need we have will be met according to God's abundant riches in glory",
+        "bad": "Worrying about our needs shows a lack of trust in God's rich provision"
+      }
     },
     {
       "ref": "Colossians 3:2",
@@ -4227,7 +5017,12 @@
           "t": "not on earthly things.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God calls us to set our focus on heavenly things where Christ is seated",
+        "good": "Setting our minds on things above gives us eternal perspective and priorities",
+        "bad": "Fixing our minds on earthly things pulls us away from God's eternal purposes"
+      }
     },
     {
       "ref": "Colossians 3:12",
@@ -4254,7 +5049,12 @@
           "t": "gentleness and patience.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has chosen us, made us holy, and dearly loves us",
+        "good": "Clothing ourselves in compassion, kindness, humility, gentleness, and patience reflects God's character",
+        "bad": "Lacking compassion, kindness, and patience contradicts our identity as God's chosen people"
+      }
     },
     {
       "ref": "Colossians 3:23",
@@ -4277,7 +5077,12 @@
           "t": "not for human masters,",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is the ultimate master we work for in everything we do",
+        "good": "Working wholeheartedly as for the Lord brings meaning to every task",
+        "bad": "Working halfheartedly or only to please people misses the point of serving God"
+      }
     },
     {
       "ref": "1 Thessalonians 5:16-18",
@@ -4304,7 +5109,12 @@
           "t": "in Christ Jesus.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's will for us in Christ Jesus is to rejoice, pray, and give thanks always",
+        "good": "Rejoicing always, praying continually, and being thankful fulfills God's will",
+        "bad": "Complaining, prayerlessness, and ingratitude go against God's will for our lives"
+      }
     },
     {
       "ref": "2 Thessalonians 3:3",
@@ -4327,7 +5137,12 @@
           "t": "from the evil one.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The Lord is faithful and will strengthen and protect us from the evil one",
+        "good": "God's faithfulness means we can count on His strength and protection daily",
+        "bad": "The evil one seeks to harm us, but God's faithful protection is stronger"
+      }
     },
     {
       "ref": "1 Timothy 4:12",
@@ -4358,7 +5173,12 @@
           "t": "in faith and in purity.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God values young believers and calls them to be examples in every area of life",
+        "good": "Setting an example in speech, conduct, love, faith, and purity proves our maturity",
+        "bad": "Using youth as an excuse for poor conduct wastes an opportunity to influence others"
+      }
     },
     {
       "ref": "1 Timothy 6:12",
@@ -4385,7 +5205,12 @@
           "t": "in the presence of many witnesses.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has called us to eternal life and expects us to fight the good fight of faith",
+        "good": "Fighting the good fight and holding onto eternal life gives purpose to our daily struggles",
+        "bad": "Giving up the fight of faith means letting go of the eternal life we were called to"
+      }
     },
     {
       "ref": "2 Timothy 1:7",
@@ -4408,7 +5233,12 @@
           "t": "love and self-discipline.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's Spirit gives us power, love, and self-discipline — not timidity or fear",
+        "good": "The Spirit within us empowers us with strength, love, and sound judgment",
+        "bad": "Living in timidity and fear does not come from God and is not what He intends for us"
+      }
     },
     {
       "ref": "2 Timothy 3:16",
@@ -4431,7 +5261,12 @@
           "t": "and training in righteousness,",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God breathed out all Scripture, making it fully authoritative and useful",
+        "good": "Scripture is useful for teaching, rebuking, correcting, and training in righteousness",
+        "bad": "Ignoring Scripture means rejecting the God-breathed tool designed to shape our lives"
+      }
     },
     {
       "ref": "Titus 3:5",
@@ -4462,7 +5297,12 @@
           "t": "by the Holy Spirit,",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God saved us because of His mercy, not because of any righteous things we did",
+        "good": "Salvation through rebirth and renewal by the Holy Spirit gives us a completely new start",
+        "bad": "Thinking our own righteous deeds can save us misunderstands God's mercy completely"
+      }
     },
     {
       "ref": "Hebrews 4:12",
@@ -4493,7 +5333,12 @@
           "t": "of the heart.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's Word is alive, active, and sharper than any sword — it discerns our innermost thoughts",
+        "good": "Engaging with God's living Word exposes and transforms our deepest thoughts and attitudes",
+        "bad": "Nothing can be hidden from God's Word — it penetrates and judges even what we try to conceal"
+      }
     },
     {
       "ref": "Hebrews 4:16",
@@ -4506,7 +5351,7 @@
         },
         {
           "t": "God’s throne of grace",
-          "c": "god"
+          "c": "royal"
         },
         {
           "t": "with confidence,",
@@ -4524,7 +5369,12 @@
           "t": "in our time of need.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God invites us to approach His throne of grace with boldness to receive mercy and help",
+        "good": "Approaching God with confidence gives us access to mercy and grace in our time of need",
+        "bad": "Staying away from God's throne of grace in our time of need leaves us without help"
+      }
     },
     {
       "ref": "Hebrews 10:25",
@@ -4551,7 +5401,12 @@
           "t": "as you see the Day approaching.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has established community and meeting together as essential for spiritual growth",
+        "good": "Encouraging one another and meeting together strengthens our faith",
+        "bad": "Giving up meeting together, as some habitually do, weakens our faith and community"
+      }
     },
     {
       "ref": "Hebrews 11:1",
@@ -4574,7 +5429,12 @@
           "t": "what we do not see.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God defines faith as confident trust in what we cannot yet see",
+        "good": "Having confidence in what we hope for gives us assurance about unseen realities",
+        "bad": "Demanding to see everything before believing prevents genuine faith from developing"
+      }
     },
     {
       "ref": "Hebrews 11:6",
@@ -4605,7 +5465,12 @@
           "t": "who earnestly seek him.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God rewards those who earnestly seek Him and requires faith to please Him",
+        "good": "Coming to God with faith that He exists and rewards seekers pleases Him deeply",
+        "bad": "Without faith, it is impossible to please God — unbelief keeps us distant from Him"
+      }
     },
     {
       "ref": "Hebrews 12:2",
@@ -4638,9 +5503,14 @@
         },
         {
           "t": "of the throne of God.",
-          "c": "god"
+          "c": "royal"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus pioneered and perfected our faith by enduring the cross and is now enthroned in glory",
+        "good": "Fixing our eyes on Jesus and His example gives us strength to endure",
+        "bad": "Taking our eyes off Jesus causes us to lose sight of the joy and purpose set before us"
+      }
     },
     {
       "ref": "Hebrews 13:5",
@@ -4671,7 +5541,12 @@
           "t": "never will I forsake you.”",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God promises He will never leave us and never forsake us",
+        "good": "Being content with what we have becomes natural when we trust God's constant presence",
+        "bad": "The love of money and discontentment reveal a lack of trust in God's provision"
+      }
     },
     {
       "ref": "Hebrews 13:8",
@@ -4690,7 +5565,12 @@
           "t": "and forever.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus Christ never changes — He is the same yesterday, today, and forever",
+        "good": "We can rely on Jesus' unchanging character as our anchor in every season",
+        "bad": "A changing, unreliable savior would leave us without hope — but Jesus never changes"
+      }
     },
     {
       "ref": "James 1:2-3",
@@ -4721,7 +5601,12 @@
           "t": "produces perseverance.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God uses trials to test and strengthen our faith, producing valuable perseverance",
+        "good": "Considering trials as joy transforms our perspective on suffering and builds endurance",
+        "bad": "Resenting trials instead of learning from them wastes the perseverance God is building"
+      }
     },
     {
       "ref": "James 1:5",
@@ -4748,7 +5633,12 @@
           "t": "and it will be given to you.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God gives wisdom generously and without finding fault to all who ask",
+        "good": "Asking God for wisdom opens the door to His generous, gracious guidance",
+        "bad": "Trying to figure everything out without asking God leaves us lacking wisdom"
+      }
     },
     {
       "ref": "James 1:12",
@@ -4773,7 +5663,7 @@
         },
         {
           "t": "the crown of life",
-          "c": "good"
+          "c": "royal"
         },
         {
           "t": "that the Lord has promised",
@@ -4783,7 +5673,12 @@
           "t": "to those who love him.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The Lord promises the crown of life to those who love Him and persevere under trial",
+        "good": "Persevering under trial and standing the test leads to the reward of eternal life",
+        "bad": "Giving up during trials means missing the crown of life God promises to those who endure"
+      }
     },
     {
       "ref": "James 1:17",
@@ -4814,7 +5709,12 @@
           "t": "like shifting shadows.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God the Father of lights is the source of every good and perfect gift and He never changes",
+        "good": "Every good and perfect gift in our lives comes down from our generous heavenly Father",
+        "bad": "Failing to recognize God as the giver of every good gift leads to misplaced gratitude"
+      }
     },
     {
       "ref": "James 4:7",
@@ -4837,7 +5737,12 @@
           "t": "from you.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God promises that the devil will flee when we resist him while submitted to God",
+        "good": "Submitting to God and resisting the devil is a powerful combination for spiritual victory",
+        "bad": "The devil attacks, but he must flee when we submit to God and stand against him"
+      }
     },
     {
       "ref": "James 4:8",
@@ -4864,7 +5769,12 @@
           "t": "you double-minded.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God draws near to everyone who draws near to Him",
+        "good": "Coming near to God and purifying our hearts brings us into close relationship with Him",
+        "bad": "Double-mindedness and unclean hands create distance between us and God"
+      }
     },
     {
       "ref": "1 Peter 2:9",
@@ -4877,7 +5787,7 @@
         },
         {
           "t": "a royal priesthood, a holy nation,",
-          "c": "good"
+          "c": "royal"
         },
         {
           "t": "God’s special possession,",
@@ -4899,7 +5809,12 @@
           "t": "into his wonderful light.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God has chosen us and called us out of darkness into His wonderful light",
+        "good": "We are a royal priesthood and holy nation — chosen to declare God's praises",
+        "bad": "Living in spiritual darkness when God has called us into light wastes our royal identity"
+      }
     },
     {
       "ref": "1 Peter 2:24",
@@ -4930,7 +5845,12 @@
           "t": "you have been healed.”",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus bore our sins in His own body on the cross so we could be healed",
+        "good": "Christ's sacrifice enables us to die to sin and live for righteousness",
+        "bad": "Continuing to live in sin after Christ bore it on the cross wastes His painful sacrifice"
+      }
     },
     {
       "ref": "1 Peter 3:15",
@@ -4961,7 +5881,12 @@
           "t": "But do this with gentleness and respect,",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Christ is Lord and deserves to be reverently honored in our hearts above all else",
+        "good": "Being prepared to explain our hope with gentleness and respect honors God",
+        "bad": "Being unable to explain why we have hope means we have not thought deeply about our faith"
+      }
     },
     {
       "ref": "1 Peter 5:7",
@@ -4980,7 +5905,12 @@
           "t": "because he cares for you.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God cares for us so deeply that He wants us to cast every anxiety onto Him",
+        "good": "Casting all our anxieties on God brings relief because He truly cares for us",
+        "bad": "Carrying anxiety instead of giving it to God burdens us with weight He wants to bear"
+      }
     },
     {
       "ref": "1 Peter 5:8",
@@ -5003,7 +5933,12 @@
           "t": "looking for someone to devour.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God warns us about the devil's attacks so we can be prepared and alert",
+        "good": "Being alert and sober-minded protects us from the enemy's attacks",
+        "bad": "The devil prowls like a roaring lion seeking to devour those who are not watchful"
+      }
     },
     {
       "ref": "2 Peter 1:3",
@@ -5034,7 +5969,12 @@
           "t": "and goodness.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's divine power has already given us everything we need for a godly life",
+        "good": "Through knowing God, we have access to everything needed for life and godliness",
+        "bad": "Claiming we lack what we need for godly living ignores what God has already provided"
+      }
     },
     {
       "ref": "2 Peter 3:9",
@@ -5065,7 +6005,12 @@
           "t": "but everyone to come to repentance.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The Lord is patient, not wanting anyone to perish but everyone to come to repentance",
+        "good": "God's patience gives everyone time and opportunity to repent and be saved",
+        "bad": "Perishing because we delayed repentance wastes the patience God extended to us"
+      }
     },
     {
       "ref": "1 John 1:9",
@@ -5092,7 +6037,12 @@
           "t": "from all unrighteousness.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is faithful and just — He will always forgive and purify us when we confess our sins",
+        "good": "Confessing our sins leads to complete forgiveness and purification from all unrighteousness",
+        "bad": "Hiding our sins instead of confessing them blocks God's cleansing work in our lives"
+      }
     },
     {
       "ref": "1 John 3:1",
@@ -5119,7 +6069,12 @@
           "t": "And that is what we are!",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "The Father has lavished such great love on us that He calls us His own children",
+        "good": "Being called children of God is our true identity — and that is what we really are",
+        "bad": "Failing to see ourselves as God's beloved children robs us of the identity He gave us"
+      }
     },
     {
       "ref": "1 John 4:4",
@@ -5146,7 +6101,12 @@
           "t": "the one who is in the world.",
           "c": "bad"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God who lives in us is greater than any spiritual force in the world",
+        "good": "We have already overcome because the one in us is greater than the one in the world",
+        "bad": "The spirit of the world is real and powerful, but it is no match for God within us"
+      }
     },
     {
       "ref": "1 John 4:7",
@@ -5173,7 +6133,12 @@
           "t": "and knows God.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God is the source of all genuine love — everyone who loves has been born of God",
+        "good": "Loving one another is proof that we know God and have been born of Him",
+        "bad": "A loveless life reveals that someone has not truly experienced God's transforming love"
+      }
     },
     {
       "ref": "1 John 4:8",
@@ -5192,7 +6157,12 @@
           "t": "because God is love.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's very nature is love — love is not just something He does, it is who He is",
+        "good": "Knowing that God is love gives us confidence in His character and actions",
+        "bad": "Not loving others reveals that we do not truly know the God who is love"
+      }
     },
     {
       "ref": "1 John 4:18",
@@ -5223,7 +6193,12 @@
           "t": "is not made perfect in love.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God's perfect love is so powerful that it completely drives out fear",
+        "good": "Growing in God's perfect love frees us from the torment of fear",
+        "bad": "Fear is connected to punishment and reveals that love has not been perfected in us"
+      }
     },
     {
       "ref": "1 John 4:19",
@@ -5238,7 +6213,12 @@
           "t": "because he first loved us.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God loved us first — His love is the origin and motivation for all our love",
+        "good": "Our ability to love comes from first being loved by God",
+        "bad": "Trying to love without first receiving God's love leaves us running on empty"
+      }
     },
     {
       "ref": "1 John 5:14",
@@ -5265,7 +6245,12 @@
           "t": "he hears us.",
           "c": "god"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God hears us whenever we ask anything according to His will",
+        "good": "Approaching God with confidence and praying according to His will guarantees He hears us",
+        "bad": "Praying without regard for God's will may mean asking for things that would harm us"
+      }
     },
     {
       "ref": "Revelation 3:20",
@@ -5300,7 +6285,12 @@
           "t": "and they with me.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus stands at the door of our hearts and personally knocks, seeking fellowship with us",
+        "good": "Opening the door to Jesus leads to intimate fellowship and communion with Him",
+        "bad": "Ignoring Jesus' knock and keeping the door closed shuts out the best relationship possible"
+      }
     },
     {
       "ref": "Revelation 21:4",
@@ -5331,7 +6321,12 @@
           "t": "has passed away.",
           "c": "good"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "God promises to personally wipe every tear and end all death, mourning, crying, and pain",
+        "good": "A day is coming when suffering will end and God will make everything new",
+        "bad": "Death, mourning, crying, and pain belong to the old order that is passing away"
+      }
     },
     {
       "ref": "Revelation 22:13",
@@ -5350,7 +6345,12 @@
           "t": "the Beginning and the End.",
           "c": "other"
         }
-      ]
+      ],
+      "lessons": {
+        "god": "Jesus is the Alpha and Omega — the eternal beginning and end of all things",
+        "good": "Knowing Jesus is the First and Last gives us confidence that He holds all of history",
+        "bad": "A life without the Alpha and Omega has no real beginning, purpose, or meaningful end"
+      }
     }
   ]
 }

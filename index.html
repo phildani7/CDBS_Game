@@ -10,8 +10,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div id="game-container">
-    <canvas id="game-canvas"></canvas>
+  <div id="game-wrapper">
+    <div id="game-container">
+      <canvas id="game-canvas"></canvas>
+    </div>
+    <aside id="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo">✝</div>
+        <div class="sidebar-title">CDBS</div>
+        <div class="sidebar-subtitle">Color & Draw<br/>Bible Study</div>
+      </div>
+      <div class="sidebar-divider"></div>
+      <a id="yt-link" class="sidebar-video" href="https://www.youtube.com/playlist?list=PL_zwO2E6LyLJUq9r68bF-zXd8lw_phslx" target="_blank" rel="noopener">
+        <div class="yt-icon">▶</div>
+        <div class="yt-label">Watch CDBS<br/>on YouTube</div>
+        <div id="yt-title" class="yt-title">Bible Parables for Kids</div>
+      </a>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-stats">
+        <div class="stat-label">Memorized</div>
+        <div id="memorized-count" class="stat-value">0</div>
+      </div>
+    </aside>
   </div>
   <script type="module" src="/src/main.js"></script>
 </body>

@@ -7,6 +7,14 @@ import * as C from './config.js';
 import { AudioManager } from './audio.js';
 import versesData from './data/verses.json';
 
+// ── Optional module imports (loaded asynchronously) ──────────
+
+let shareModule = null;
+let MemorizationTracker = null;
+
+import('./share.js').then(m => { shareModule = m; }).catch(() => {});
+import('./memorization.js').then(m => { MemorizationTracker = m.MemorizationTracker; }).catch(() => {});
+
 // ── Utility helpers ───────────────────────────────────────────
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -17,6 +25,15 @@ const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 const easeOutBack = t => { const c1 = 1.70158; const c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
 const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
 const easeInOutQuad = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 // ── roundRect polyfill ────────────────────────────────────────
 
@@ -75,8 +92,18 @@ export class Game {
     // Persistent stats (localStorage)
     this.stats = this._loadStats();
 
+    // Memorization tracker
+    this.memorization = null;
+    try {
+      if (MemorizationTracker) {
+        this.memorization = new MemorizationTracker();
+      }
+    } catch (_) { /* tracker not available */ }
+
     // Game state
-    this.state = 'opening'; // opening | menu | serve | playing | transition | clearing | gameover
+    // States: opening | menu | serve | playing | transition | clearing
+    //         | lesson_quiz | mini_game | gameover | share_screen
+    this.state = 'opening';
     this.stateTime = 0;
     this.level = 1;
     this.score = 0;
@@ -104,9 +131,15 @@ export class Game {
     this.flashAlpha = 0;
     this.flashColor = '#fff';
 
+    // Heaven surface shimmer
+    this.heavenShimmerT = 0;
+
     // Timed power-ups
     this.expandTimer = 0;
     this.slowTimer = 0;
+
+    // Trinity ball reveal timer (spirit ball effect)
+    this.trinityRevealTimer = 0;
 
     // Input
     this.pointerX = C.CANVAS_W / 2;
@@ -118,12 +151,41 @@ export class Game {
     this.verseDisplayY = 0;
 
     // Launch direction
-    this.launchAngle = -Math.PI / 2; // straight up by default
-    this.launchAngleSpeed = 1.8; // radians per second
+    this.launchAngle = -Math.PI / 2;
+    this.launchAngleSpeed = 1.8;
 
     // Intro animation
     this.introT = 0;
     this.brickFlyIn = [];
+
+    // Lesson Quiz state (Feature #5)
+    this.quizLessons = [];
+    this.quizCurrent = 0;
+    this.quizScore = 0;
+    this.quizTimer = 0;
+    this.quizFeedback = null;    // { text, color, timer }
+    this.quizAnswered = false;
+
+    // Mini-game state (Feature #8)
+    this.miniGameType = '';
+    this.miniPhrases = [];
+    this.miniSelected = [];
+    this.miniComplete = false;
+    this.miniTimer = 0;
+    this.miniScore = 0;
+    this.miniCorrectOrder = [];
+    this.miniFeedback = null;
+    // missing_word sub-state
+    this.miniBlankIndices = [];
+    this.miniWordBank = [];
+    this.miniFilledBlanks = [];
+
+    // Share screen state (Feature #14)
+    this.shareClipboardFeedback = 0;
+
+    // YouTube sidebar (Feature #13)
+    this.youtubeVideoIndex = Math.floor(Math.random() * C.YOUTUBE_VIDEOS.length);
+    this.youtubeSidebarRect = { x: C.CANVAS_W - 45, y: C.HUD_HEIGHT + 5, w: 40, h: C.PLAY_RECT.h - 10 };
 
     // Bind
     this._onPointerMove = this._onPointerMove.bind(this);
@@ -137,6 +199,20 @@ export class Game {
     this._lastTime = performance.now();
 
     requestAnimationFrame(this._loop);
+  }
+
+  // ── Canvas position helpers ─────────────────────────────────
+
+  _getCanvasPos(e) {
+    const rect = this.canvas.getBoundingClientRect();
+    return {
+      x: (e.clientX - rect.left) / rect.width * C.CANVAS_W,
+      y: (e.clientY - rect.top) / rect.height * C.CANVAS_H
+    };
+  }
+
+  _isInRect(pos, x, y, w, h) {
+    return pos.x >= x && pos.x <= x + w && pos.y >= y && pos.y <= y + h;
   }
 
   // ── Persistent Stats ───────────────────────────────────────
@@ -205,12 +281,33 @@ export class Game {
     this.audio.resume();
     this._onPointerMove(e);
 
+    const pos = this._getCanvasPos(e);
+
+    // ── YouTube sidebar click ───────────────────
+    if (this.state === 'serve' || this.state === 'playing') {
+      const yt = this.youtubeSidebarRect;
+      if (this._isInRect(pos, yt.x, yt.y, yt.w, yt.h)) {
+        const video = C.YOUTUBE_VIDEOS[this.youtubeVideoIndex];
+        if (video) {
+          window.open(`https://www.youtube.com/watch?v=${video.id}`, '_blank');
+        }
+        return;
+      }
+    }
+
+    // ── State-specific click handling ───────────
     if (this.state === 'opening' || this.state === 'menu') {
       this._startGame();
     } else if (this.state === 'serve') {
       this._launchBall();
     } else if (this.state === 'gameover') {
-      this._restart();
+      this._onGameOverClick(pos);
+    } else if (this.state === 'share_screen') {
+      this._onShareScreenClick(pos);
+    } else if (this.state === 'lesson_quiz') {
+      this._onQuizClick(pos);
+    } else if (this.state === 'mini_game') {
+      this._onMiniGameClick(pos);
     }
   }
 
@@ -220,12 +317,34 @@ export class Game {
     this.audio.resume();
 
     if (e.code === 'KeyM') this.audio.toggleMute();
+
     if (e.code === 'Enter' || e.code === 'ArrowUp' || e.code === 'Space') {
       if (this.state === 'opening' || this.state === 'menu') this._startGame();
       else if (this.state === 'serve') this._launchBall();
       else if (this.state === 'gameover') this._restart();
+      else if (this.state === 'share_screen') this._restart();
     }
-    if (e.code === 'KeyR' && this.state === 'gameover') this._restart();
+
+    if (e.code === 'KeyR' && (this.state === 'gameover' || this.state === 'share_screen')) {
+      this._restart();
+    }
+
+    // Keyboard controls for quiz (1, 2, 3 keys)
+    if (this.state === 'lesson_quiz' && !this.quizAnswered) {
+      if (e.code === 'Digit1' || e.code === 'Numpad1') this._answerQuiz(0);
+      if (e.code === 'Digit2' || e.code === 'Numpad2') this._answerQuiz(1);
+      if (e.code === 'Digit3' || e.code === 'Numpad3') this._answerQuiz(2);
+    }
+
+    // Keyboard controls for mini-game (number keys select phrases)
+    if (this.state === 'mini_game' && !this.miniComplete) {
+      if (this.miniGameType === 'reassemble') {
+        const num = parseInt(e.key);
+        if (!isNaN(num) && num >= 1 && num <= this.miniPhrases.length) {
+          this._selectMiniPhrase(num - 1);
+        }
+      }
+    }
   }
 
   _onKeyUp(e) {
@@ -299,6 +418,27 @@ export class Game {
     this.comboCount = 0;
     this.comboCategory = null;
 
+    // Memorization tracking
+    if (this.memorization && this.currentVerse) {
+      try {
+        this.memorization.recordVersePlayed(
+          this.currentVerse.ref,
+          this.currentVerse.text,
+          this.currentVerse.phrases
+        );
+      } catch (_) { /* memorization not available */ }
+    }
+
+    // Check if we should run a memory test (blanked bricks)
+    this._memoryTestData = null;
+    if (this.memorization && this.currentVerse) {
+      try {
+        if (this.memorization.shouldTestMemory(this.currentVerse.ref)) {
+          this._memoryTestData = this.memorization.generateMemoryTest(this.currentVerse.ref);
+        }
+      } catch (_) { /* memorization not available */ }
+    }
+
     // Create paddle
     this.paddle = {
       x: C.CANVAS_W / 2,
@@ -323,9 +463,13 @@ export class Game {
     this.wakeHoles = [];
     this.expandTimer = 0;
     this.slowTimer = 0;
+    this.trinityRevealTimer = 0;
 
     // Track verse played
     this._recordVersePlayed();
+
+    // Pick a new YouTube video for this level
+    this.youtubeVideoIndex = Math.floor(Math.random() * C.YOUTUBE_VIDEOS.length);
 
     // Trigger intro animation
     this.state = 'transition';
@@ -340,7 +484,8 @@ export class Game {
     this.paddle.height = m.height;
   }
 
-  _createBall(attached = false) {
+  _createBall(attached = false, trinityType = null) {
+    const trinityInfo = trinityType ? C.TRINITY_BALLS[trinityType] : null;
     const ball = {
       x: this.paddle ? this.paddle.x : C.CANVAS_W / 2,
       y: this.paddle ? this.paddle.y - 20 : C.CANVAS_H - 120,
@@ -349,9 +494,11 @@ export class Game {
       speed: C.BALL_BASE_SPEED + (this.level - 1) * C.BALL_SPEED_PER_LEVEL,
       radius: 10,
       attached,
-      char: C.BALL_CHAR
+      char: trinityInfo ? trinityInfo.char : C.BALL_CHAR,
+      trinityType: trinityType || null
     };
-    const m = measureText(this.ctx, C.BALL_CHAR, C.FONT.ball);
+    const charToMeasure = trinityInfo ? trinityInfo.char : C.BALL_CHAR;
+    const m = measureText(this.ctx, charToMeasure, C.FONT.ball);
     ball.radius = clamp(m.width * 0.45, C.BALL_RADIUS_MIN, C.BALL_RADIUS_MAX);
     this.balls.push(ball);
     return ball;
@@ -366,6 +513,14 @@ export class Game {
     const regionWidth = regionRight - regionLeft;
     const regionTop = C.BRICK_REGION_TOP;
 
+    // Check for memory test blanking
+    const blankedSet = new Set();
+    if (this._memoryTestData && this._memoryTestData.phrases) {
+      this._memoryTestData.phrases.forEach((p, i) => {
+        if (p.blanked) blankedSet.add(i);
+      });
+    }
+
     // Find best font size that fits all bricks
     let fontSize = 0;
     let brickData = [];
@@ -375,11 +530,15 @@ export class Game {
       const padX = size * C.BRICK_PADDING_X_RATIO;
       const padY = size * C.BRICK_PADDING_Y_RATIO;
 
-      const measured = phrases.map(p => {
-        const m = measureText(this.ctx, p.t, font);
+      const measured = phrases.map((p, idx) => {
+        const displayText = blankedSet.has(idx) ? '????' : p.t;
+        const m = measureText(this.ctx, displayText, font);
         return {
           text: p.t,
+          displayText,
           category: p.c,
+          blanked: blankedSet.has(idx),
+          phraseIndex: idx,
           mWidth: m.width + padX * 2,
           mHeight: m.height + padY * 2,
           textWidth: m.width,
@@ -445,6 +604,8 @@ export class Game {
           w: brick.mWidth,
           h: brick.mHeight,
           text: brick.text,
+          displayText: brick.displayText,
+          blanked: brick.blanked,
           font,
           category: brick.category,
           color,
@@ -521,6 +682,9 @@ export class Game {
     // Flash decay
     this.flashAlpha = Math.max(0, this.flashAlpha - dt * 4);
 
+    // Heaven shimmer always ticks
+    this.heavenShimmerT += dt;
+
     switch (this.state) {
       case 'opening':
         if (this.stateTime > C.OPENING_DURATION) {
@@ -588,17 +752,33 @@ export class Game {
       case 'clearing':
         this._updateParticles(dt);
         if (this.stateTime >= C.CLEAR_DURATION) {
-          if (this.level >= C.TOTAL_LEVELS) {
-            this._onGameComplete();
-          } else {
-            this.level++;
-            this._buildLevel();
-          }
+          // Transition to lesson quiz instead of directly to next level
+          this._startLessonQuiz();
         }
+        break;
+
+      case 'lesson_quiz':
+        this._updateLessonQuiz(dt);
+        break;
+
+      case 'mini_game':
+        this._updateMiniGame(dt);
         break;
 
       case 'gameover':
         this._updateParticles(dt);
+        // After a brief delay, auto-transition to share screen
+        if (this.stateTime >= 3.0) {
+          this.state = 'share_screen';
+          this.stateTime = 0;
+        }
+        break;
+
+      case 'share_screen':
+        this._updateParticles(dt);
+        if (this.shareClipboardFeedback > 0) {
+          this.shareClipboardFeedback -= dt;
+        }
         break;
     }
 
@@ -664,6 +844,8 @@ export class Game {
       if (ball.y - ball.radius < top) {
         ball.y = top + ball.radius;
         ball.vy = Math.abs(ball.vy);
+        // Heaven surface sparkle on top wall hit
+        this._spawnHeavenSparkles(ball.x, top);
       }
 
       // Guard collision
@@ -723,13 +905,30 @@ export class Game {
 
       // Ball trail particle
       if (Math.random() < C.BALL_TRAIL_CHANCE) {
+        const trailColor = ball.trinityType
+          ? C.TRINITY_BALLS[ball.trinityType].color
+          : C.COLORS.ball;
+        const trailChar = ball.trinityType ? pick(['✦', '·', '†']) : pick(['.', '·']);
         this.particles.push({
           x: ball.x, y: ball.y,
           vx: rand(-10, 10), vy: rand(5, 15),
           life: C.BALL_TRAIL_LIFE, maxLife: C.BALL_TRAIL_LIFE,
-          char: pick(['.', '·']),
-          color: C.COLORS.ball,
+          char: trailChar,
+          color: trailColor,
           size: 12, rotation: 0, rotSpeed: 0,
+          affectsWall: false
+        });
+      }
+
+      // Golden aura trail for trinity balls
+      if (ball.trinityType && Math.random() < 0.6) {
+        this.particles.push({
+          x: ball.x + rand(-6, 6), y: ball.y + rand(-6, 6),
+          vx: rand(-15, 15), vy: rand(-15, 15),
+          life: 0.35, maxLife: 0.35,
+          char: '·',
+          color: C.COLORS.heavenGold,
+          size: 8, rotation: 0, rotSpeed: 0,
           affectsWall: false
         });
       }
@@ -782,14 +981,20 @@ export class Game {
         else if (minOverlap === overlapTop) ball.vy = -Math.abs(ball.vy);
         else ball.vy = Math.abs(ball.vy);
 
-        this._destroyBrick(brick);
+        this._destroyBrick(brick, ball);
         return; // One brick per frame
       }
     }
   }
 
-  _destroyBrick(brick) {
+  _destroyBrick(brick, ball) {
     brick.alive = false;
+
+    // If brick was blanked (memory test), reveal the text
+    if (brick.blanked) {
+      brick.displayText = brick.text;
+      brick.blanked = false;
+    }
 
     // Score with combo multiplier
     let comboMult = 1;
@@ -801,11 +1006,45 @@ export class Game {
     }
     this.lastCategory = brick.category;
 
-    const points = Math.round(brick.score * comboMult);
+    let points = Math.round(brick.score * comboMult);
+
+    // ── Trinity ball effects ────────────────────
+    if (ball && ball.trinityType) {
+      switch (ball.trinityType) {
+        case 'jesus':
+          // GRACE: negate penalty on bad bricks
+          if (brick.category === 'bad') {
+            // Instead of losing points, gain +50
+            points = 50;
+            // Grace feedback particles
+            this._spawnParticles(brick.x, brick.y, C.TRINITY_BALLS.jesus.color, 8, '✝');
+            this.flashAlpha = 0.2;
+            this.flashColor = C.TRINITY_BALLS.jesus.color;
+          }
+          break;
+
+        case 'spirit':
+          // REVEALS TRUTH: show full verse for 3 seconds
+          this.trinityRevealTimer = 3;
+          this._spawnParticles(brick.x, brick.y, C.TRINITY_BALLS.spirit.color, 8, '🕊');
+          break;
+
+        case 'father':
+          // DOUBLE BLESSING: double points on gold/god bricks
+          if (brick.category === 'god') {
+            points *= 2;
+            this._spawnParticles(brick.x, brick.y, C.TRINITY_BALLS.father.color, 10, '✦');
+            this.flashAlpha = 0.2;
+            this.flashColor = C.TRINITY_BALLS.father.color;
+          }
+          break;
+      }
+    }
+
     this.score += points;
 
     // Visual feedback based on category
-    if (brick.category === 'bad') {
+    if (brick.category === 'bad' && !(ball && ball.trinityType === 'jesus')) {
       this.shake = C.SHAKE.badBrick;
       this.flashAlpha = 0.3;
       this.flashColor = C.COLORS.bad;
@@ -953,6 +1192,7 @@ export class Game {
       if (t.kind === 'multi' && this.balls.length >= C.MAX_BALLS) return 0.1;
       if (t.kind === 'expand' && this.expandTimer > 5) return 0.3;
       if (t.kind === 'slow' && this.slowTimer > 5) return 0.3;
+      if (t.kind === 'trinity' && this.balls.some(b => b.trinityType)) return 0.2;
       return 1;
     });
 
@@ -969,6 +1209,7 @@ export class Game {
       x, y,
       kind: chosen.kind,
       label: chosen.label,
+      symbol: chosen.symbol || '',
       color: chosen.color,
       width: m.width + 16,
       height: m.height + 8,
@@ -1033,7 +1274,37 @@ export class Game {
       case 'reveal':
         this.revealTimer = C.POWERUP_TYPES.find(t => t.kind === 'reveal').duration;
         break;
+      case 'trinity':
+        this._spawnTrinityBall();
+        break;
     }
+  }
+
+  // ── Trinity Ball Spawning ─────────────────────────────────
+
+  _spawnTrinityBall() {
+    const trinityTypes = ['jesus', 'spirit', 'father'];
+    const type = pick(trinityTypes);
+
+    // Create a trinity ball at the paddle position
+    const ball = this._createBall(false, type);
+    const existing = this.balls.find(b => !b.attached && !b.trinityType);
+    if (existing) {
+      ball.x = existing.x;
+      ball.y = existing.y;
+    } else if (this.paddle) {
+      ball.x = this.paddle.x;
+      ball.y = this.paddle.y - 30;
+    }
+
+    // Launch in a random upward direction
+    const angle = rand(-Math.PI * 0.8, -Math.PI * 0.2);
+    ball.vx = Math.cos(angle) * ball.speed;
+    ball.vy = Math.sin(angle) * ball.speed;
+
+    // Spawn celebration particles
+    const info = C.TRINITY_BALLS[type];
+    this._spawnParticles(ball.x, ball.y, info.color, 12, info.char);
   }
 
   _updateParticles(dt) {
@@ -1060,6 +1331,7 @@ export class Game {
     }
     if (this.slowTimer > 0) this.slowTimer -= dt;
     if (this.revealTimer > 0) this.revealTimer -= dt;
+    if (this.trinityRevealTimer > 0) this.trinityRevealTimer -= dt;
   }
 
   _updateWakeHoles(dt) {
@@ -1102,6 +1374,26 @@ export class Game {
         affectsWall: false
       });
     });
+  }
+
+  // ── Heaven Surface Sparkles ───────────────────────────────
+
+  _spawnHeavenSparkles(x, y) {
+    const chars = ['✦', '†', '·'];
+    for (let i = 0; i < 6; i++) {
+      this.particles.push({
+        x: x + rand(-30, 30),
+        y: y + rand(0, 10),
+        vx: rand(-40, 40),
+        vy: rand(10, 50),
+        life: rand(0.5, 1.0), maxLife: 1.0,
+        char: pick(chars),
+        color: C.COLORS.heavenGold,
+        size: rand(10, 18),
+        rotation: rand(0, Math.PI * 2), rotSpeed: rand(-3, 3),
+        affectsWall: false
+      });
+    }
   }
 
   _onBallLost() {
@@ -1162,7 +1454,7 @@ export class Game {
   }
 
   _onGameComplete() {
-    // All 5 levels done - show special ending
+    // All levels done - show special ending
     this.state = 'gameover';
     this.stateTime = 0;
     this._gameComplete = true;
@@ -1195,6 +1487,463 @@ export class Game {
     this.shake = C.SHAKE.lifeLoss;
     this.audio.playGameOver();
     this.audio.startMusic('gameover');
+  }
+
+  // ── Game Over Click Handling ──────────────────────────────
+
+  _onGameOverClick(pos) {
+    // In game over state, any click can restart or go to share
+    // The auto-transition to share_screen handles it after 3 seconds
+    // But clicking early will restart
+    this._restart();
+  }
+
+  // ── Share Screen ──────────────────────────────────────────
+
+  _getShareData() {
+    return {
+      score: this.score,
+      level: this.level,
+      versesPlayed: this.stats.playerVersesPlayed,
+      bestScore: this.bestScore,
+      lastVerse: this.currentVerse ? {
+        ref: this.currentVerse.ref,
+        text: this.currentVerse.text
+      } : null
+    };
+  }
+
+  _onShareScreenClick(pos) {
+    const cx = C.CANVAS_W / 2;
+    const btnW = 140;
+    const btnH = 44;
+    const btnY = C.CANVAS_H * 0.62;
+    const gap = 20;
+    const totalW = btnW * 3 + gap * 2;
+    const startX = cx - totalW / 2;
+
+    // Email button
+    if (this._isInRect(pos, startX, btnY, btnW, btnH)) {
+      if (shareModule) {
+        try { shareModule.shareViaEmail(this._getShareData()); } catch (_) {}
+      }
+      return;
+    }
+
+    // WhatsApp button
+    if (this._isInRect(pos, startX + btnW + gap, btnY, btnW, btnH)) {
+      if (shareModule) {
+        try { shareModule.shareViaWhatsApp(this._getShareData()); } catch (_) {}
+      }
+      return;
+    }
+
+    // Copy button
+    if (this._isInRect(pos, startX + (btnW + gap) * 2, btnY, btnW, btnH)) {
+      if (shareModule) {
+        try {
+          shareModule.shareToClipboard(this._getShareData());
+          this.shareClipboardFeedback = 2.0;
+        } catch (_) {}
+      }
+      return;
+    }
+
+    // Play Again button
+    const playAgainY = C.CANVAS_H * 0.78;
+    const playAgainW = 200;
+    const playAgainH = 48;
+    if (this._isInRect(pos, cx - playAgainW / 2, playAgainY, playAgainW, playAgainH)) {
+      this._restart();
+      return;
+    }
+  }
+
+  // ── Lesson Quiz (Feature #5) ──────────────────────────────
+
+  _startLessonQuiz() {
+    // Extract lessons from current verse
+    const lessons = this._extractLessons();
+
+    this.quizLessons = shuffle(lessons).map(l => ({
+      text: l.text,
+      correctKey: l.key,
+      answered: false,
+      correct: false
+    }));
+    this.quizCurrent = 0;
+    this.quizScore = 0;
+    this.quizTimer = C.QUIZ_DURATION;
+    this.quizFeedback = null;
+    this.quizAnswered = false;
+    this.state = 'lesson_quiz';
+    this.stateTime = 0;
+  }
+
+  _extractLessons() {
+    const verse = this.currentVerse;
+    const lessons = [];
+
+    // If the verse has a lessons field, use it
+    if (verse && verse.lessons) {
+      if (verse.lessons.god) {
+        lessons.push({ key: 'god', text: verse.lessons.god });
+      }
+      if (verse.lessons.good) {
+        lessons.push({ key: 'good', text: verse.lessons.good });
+      }
+      if (verse.lessons.bad) {
+        lessons.push({ key: 'bad', text: verse.lessons.bad });
+      }
+    }
+
+    // If we don't have 3 lessons, generate placeholders from phrases
+    if (lessons.length < 3 && verse && verse.phrases) {
+      const phrases = verse.phrases;
+      const categories = ['god', 'good', 'bad'];
+      const existingKeys = new Set(lessons.map(l => l.key));
+
+      for (const cat of categories) {
+        if (existingKeys.has(cat)) continue;
+        if (lessons.length >= 3) break;
+
+        // Find a phrase that matches this category, or use a generic one
+        const catPhrases = phrases.filter(p => p.c === cat);
+        if (catPhrases.length > 0) {
+          lessons.push({
+            key: cat,
+            text: catPhrases.map(p => p.t).join(' ')
+          });
+        } else {
+          // Generate a placeholder based on category
+          const placeholders = {
+            god: `This verse teaches us about God's character`,
+            good: `This verse shows us what is good to follow`,
+            bad: `This verse warns us about what to avoid`
+          };
+          lessons.push({
+            key: cat,
+            text: placeholders[cat]
+          });
+        }
+        existingKeys.add(cat);
+      }
+    }
+
+    // Ensure we have exactly 3
+    while (lessons.length < 3) {
+      lessons.push({
+        key: pick(['god', 'good', 'bad']),
+        text: 'Consider what this verse means for your life'
+      });
+    }
+
+    return lessons.slice(0, 3);
+  }
+
+  _updateLessonQuiz(dt) {
+    this.quizTimer -= dt;
+
+    // Feedback timer
+    if (this.quizFeedback) {
+      this.quizFeedback.timer -= dt;
+      if (this.quizFeedback.timer <= 0) {
+        this.quizFeedback = null;
+        this.quizAnswered = false;
+        this.quizCurrent++;
+
+        // Check if quiz is done
+        if (this.quizCurrent >= this.quizLessons.length) {
+          this._endLessonQuiz();
+          return;
+        }
+      }
+    }
+
+    // Time's up
+    if (this.quizTimer <= 0) {
+      this._endLessonQuiz();
+    }
+  }
+
+  _answerQuiz(categoryIndex) {
+    if (this.quizAnswered) return;
+    if (this.quizCurrent >= this.quizLessons.length) return;
+
+    this.quizAnswered = true;
+    const lesson = this.quizLessons[this.quizCurrent];
+    const categories = C.LESSON_CATEGORIES;
+    const selected = categories[categoryIndex];
+
+    if (!selected) return;
+
+    const correct = selected.key === lesson.correctKey;
+    lesson.answered = true;
+    lesson.correct = correct;
+
+    if (correct) {
+      this.quizScore += 100;
+      this.score += 100;
+      this.quizFeedback = { text: 'Correct! +100', color: C.COLORS.good, timer: 1.0 };
+    } else {
+      this.quizFeedback = {
+        text: `Not quite. It's "${categories.find(c => c.key === lesson.correctKey)?.label || 'unknown'}"`,
+        color: C.COLORS.bad,
+        timer: 1.5
+      };
+    }
+  }
+
+  _onQuizClick(pos) {
+    if (this.quizAnswered) return;
+
+    const cx = C.CANVAS_W / 2;
+    const btnW = 180;
+    const btnH = 42;
+    const btnY = C.CANVAS_H * 0.58;
+    const gap = 15;
+    const totalW = btnW * 3 + gap * 2;
+    const startX = cx - totalW / 2;
+
+    for (let i = 0; i < 3; i++) {
+      const bx = startX + i * (btnW + gap);
+      if (this._isInRect(pos, bx, btnY, btnW, btnH)) {
+        this._answerQuiz(i);
+        return;
+      }
+    }
+  }
+
+  _endLessonQuiz() {
+    // Transition to mini-game
+    this._startMiniGame();
+  }
+
+  // ── Mini-Game (Feature #8) ────────────────────────────────
+
+  _startMiniGame() {
+    const types = C.MINIGAME_TYPES;
+    this.miniGameType = pick(types);
+    this.miniTimer = C.MINIGAME_DURATION;
+    this.miniComplete = false;
+    this.miniScore = 0;
+    this.miniFeedback = null;
+
+    if (this.miniGameType === 'reassemble') {
+      this._setupReassemble();
+    } else if (this.miniGameType === 'missing_word') {
+      this._setupMissingWord();
+    } else {
+      // category_sort: simplified version
+      this._setupCategorySort();
+    }
+
+    this.state = 'mini_game';
+    this.stateTime = 0;
+  }
+
+  _setupReassemble() {
+    // Get phrase texts in correct order
+    const phrases = this.currentVerse.phrases.map(p => p.t);
+    this.miniCorrectOrder = [...phrases];
+    this.miniPhrases = shuffle(phrases.map((text, i) => ({
+      text,
+      originalIndex: i,
+      selected: false,
+      selectOrder: -1
+    })));
+    this.miniSelected = [];
+  }
+
+  _setupMissingWord() {
+    // Show verse with some words blanked
+    const text = this.currentVerse.text;
+    const words = text.split(' ');
+    const blankCount = Math.min(3, Math.max(2, Math.floor(words.length * 0.15)));
+
+    // Pick random word indices to blank (avoid very short words)
+    const candidates = words
+      .map((w, i) => ({ w, i }))
+      .filter(({ w }) => w.length >= 3);
+
+    const blanked = shuffle(candidates).slice(0, blankCount);
+    this.miniBlankIndices = blanked.map(b => b.i).sort((a, b) => a - b);
+
+    // Word bank (correct words + a few distractors)
+    const correctWords = this.miniBlankIndices.map(i => words[i]);
+    // Generate distractors from the verse's other words
+    const otherWords = words.filter((w, i) => !this.miniBlankIndices.includes(i) && w.length >= 3);
+    const distractors = shuffle(otherWords).slice(0, 2);
+    this.miniWordBank = shuffle([...correctWords, ...distractors]).map((w, i) => ({
+      text: w,
+      used: false,
+      index: i
+    }));
+
+    this.miniFilledBlanks = new Array(this.miniBlankIndices.length).fill(null);
+    this.miniSelected = [];
+    this.miniPhrases = words; // Store original words for display
+  }
+
+  _setupCategorySort() {
+    // Simplified: show phrases with their categories, auto-reveal after a few seconds
+    const phrases = this.currentVerse.phrases.slice(0, 5).map(p => ({
+      text: p.t,
+      category: p.c,
+      revealed: false
+    }));
+    this.miniPhrases = shuffle(phrases);
+    this.miniSelected = [];
+    // Auto-complete after a shorter timer for this simplified version
+    this.miniTimer = Math.min(C.MINIGAME_DURATION, 10);
+  }
+
+  _updateMiniGame(dt) {
+    this.miniTimer -= dt;
+
+    // Feedback timer
+    if (this.miniFeedback) {
+      this.miniFeedback.timer -= dt;
+      if (this.miniFeedback.timer <= 0) {
+        this.miniFeedback = null;
+      }
+    }
+
+    // Category sort: auto-reveal phrases over time
+    if (this.miniGameType === 'category_sort' && !this.miniComplete) {
+      const elapsed = C.MINIGAME_DURATION - this.miniTimer;
+      const revealInterval = 2; // reveal one every 2 seconds
+      const toReveal = Math.floor(elapsed / revealInterval);
+      for (let i = 0; i < Math.min(toReveal, this.miniPhrases.length); i++) {
+        this.miniPhrases[i].revealed = true;
+      }
+      if (this.miniPhrases.every(p => p.revealed)) {
+        this.miniComplete = true;
+        this.miniScore += 50;
+        this.score += 50;
+      }
+    }
+
+    // Timer expired
+    if (this.miniTimer <= 0 || this.miniComplete) {
+      if (this.miniTimer <= 0 && !this.miniComplete) {
+        this.miniComplete = true;
+      }
+      // Brief pause then advance
+      if (this.miniTimer <= -1.5 || (this.miniComplete && this.stateTime > 1.5)) {
+        this._endMiniGame();
+      }
+    }
+  }
+
+  _selectMiniPhrase(index) {
+    if (this.miniComplete) return;
+
+    if (this.miniGameType === 'reassemble') {
+      const phrase = this.miniPhrases[index];
+      if (!phrase || phrase.selected) return;
+
+      phrase.selected = true;
+      phrase.selectOrder = this.miniSelected.length;
+      this.miniSelected.push(index);
+
+      // Check if the selected phrase is in the correct position
+      const correctIndex = this.miniSelected.length - 1;
+      if (phrase.text === this.miniCorrectOrder[correctIndex]) {
+        this.miniScore += 30;
+        this.score += 30;
+        this.miniFeedback = { text: '+30', color: C.COLORS.good, timer: 0.5 };
+      } else {
+        this.miniFeedback = { text: 'Wrong order', color: C.COLORS.bad, timer: 0.5 };
+      }
+
+      // Check completion
+      if (this.miniSelected.length === this.miniPhrases.length) {
+        this.miniComplete = true;
+      }
+    } else if (this.miniGameType === 'missing_word') {
+      // For missing_word, index is the word bank index
+      const word = this.miniWordBank[index];
+      if (!word || word.used) return;
+
+      // Find first unfilled blank
+      const blankIdx = this.miniFilledBlanks.findIndex(b => b === null);
+      if (blankIdx === -1) return;
+
+      word.used = true;
+      this.miniFilledBlanks[blankIdx] = word.text;
+      this.miniSelected.push(index);
+
+      // Check if correct
+      const originalWords = this.currentVerse.text.split(' ');
+      const correctWord = originalWords[this.miniBlankIndices[blankIdx]];
+      if (word.text === correctWord) {
+        this.miniScore += 40;
+        this.score += 40;
+        this.miniFeedback = { text: 'Correct! +40', color: C.COLORS.good, timer: 0.5 };
+      } else {
+        this.miniFeedback = { text: 'Not quite', color: C.COLORS.bad, timer: 0.5 };
+      }
+
+      // Check completion
+      if (this.miniFilledBlanks.every(b => b !== null)) {
+        this.miniComplete = true;
+      }
+    }
+  }
+
+  _onMiniGameClick(pos) {
+    if (this.miniComplete) return;
+
+    if (this.miniGameType === 'reassemble') {
+      // Calculate phrase button positions
+      const startY = C.CANVAS_H * 0.4;
+      const btnH = 36;
+      const gap = 8;
+
+      for (let i = 0; i < this.miniPhrases.length; i++) {
+        const phrase = this.miniPhrases[i];
+        if (phrase.selected) continue;
+
+        const by = startY + i * (btnH + gap);
+        const bw = Math.min(C.CANVAS_W - 100, 600);
+        const bx = C.CANVAS_W / 2 - bw / 2;
+
+        if (this._isInRect(pos, bx, by, bw, btnH)) {
+          this._selectMiniPhrase(i);
+          return;
+        }
+      }
+    } else if (this.miniGameType === 'missing_word') {
+      // Word bank buttons
+      const bankY = C.CANVAS_H * 0.68;
+      const btnW = 100;
+      const btnH = 36;
+      const gap = 10;
+      const totalW = this.miniWordBank.length * (btnW + gap) - gap;
+      const startX = C.CANVAS_W / 2 - totalW / 2;
+
+      for (let i = 0; i < this.miniWordBank.length; i++) {
+        const word = this.miniWordBank[i];
+        if (word.used) continue;
+
+        const bx = startX + i * (btnW + gap);
+        if (this._isInRect(pos, bx, bankY, btnW, btnH)) {
+          this._selectMiniPhrase(i);
+          return;
+        }
+      }
+    }
+  }
+
+  _endMiniGame() {
+    // Advance to next level
+    if (this.level >= C.TOTAL_LEVELS) {
+      this._onGameComplete();
+    } else {
+      this.level++;
+      this._buildLevel();
+    }
   }
 
   // ── Rendering ─────────────────────────────────────────────
@@ -1232,8 +1981,17 @@ export class Game {
       case 'clearing':
         this._renderClearing(ctx);
         break;
+      case 'lesson_quiz':
+        this._renderLessonQuiz(ctx);
+        break;
+      case 'mini_game':
+        this._renderMiniGame(ctx);
+        break;
       case 'gameover':
         this._renderGameOver(ctx);
+        break;
+      case 'share_screen':
+        this._renderShareScreen(ctx);
         break;
     }
 
@@ -1312,6 +2070,41 @@ export class Game {
       ctx.lineTo(cx, cy + 8 * Math.sign(cy - C.CANVAS_H / 2 || 1));
       ctx.stroke();
     });
+
+    ctx.restore();
+
+    // ── Heaven Surface Glow (Feature #10) ──────────────────
+    this._renderHeavenSurface(ctx);
+  }
+
+  // ── Heaven Surface (Feature #10) ─────────────────────────
+
+  _renderHeavenSurface(ctx) {
+    ctx.save();
+    const r = C.PLAY_RECT;
+    const topY = r.y;
+    const glowHeight = 40;
+
+    // Shimmer effect using sine wave
+    const shimmerAlpha = 0.25 + Math.sin(this.heavenShimmerT * 2.5) * 0.08;
+
+    // Golden gradient from top edge downward
+    const heavenGrad = ctx.createLinearGradient(r.x, topY, r.x, topY + glowHeight);
+    heavenGrad.addColorStop(0, `rgba(255, 215, 0, ${shimmerAlpha})`);
+    heavenGrad.addColorStop(0.4, `rgba(255, 215, 0, ${shimmerAlpha * 0.5})`);
+    heavenGrad.addColorStop(1, 'rgba(255, 215, 0, 0)');
+
+    ctx.fillStyle = heavenGrad;
+    ctx.fillRect(r.x, topY, r.w, glowHeight);
+
+    // Subtle accent line at very top
+    ctx.strokeStyle = C.COLORS.heavenGold;
+    ctx.lineWidth = 1.5;
+    ctx.globalAlpha = shimmerAlpha * 1.2;
+    ctx.beginPath();
+    ctx.moveTo(r.x + 5, topY + 1);
+    ctx.lineTo(r.x + r.w - 5, topY + 1);
+    ctx.stroke();
 
     ctx.restore();
   }
@@ -1479,31 +2272,43 @@ export class Game {
 
       // Background
       ctx.fillStyle = brick.color;
-      ctx.globalAlpha = 0.15;
+      ctx.globalAlpha = brick.blanked ? 0.25 : 0.15;
       ctx.beginPath();
       ctx.roundRect(bx - halfW, by - halfH, brick.w, brick.h, 4);
       ctx.fill();
 
       // Border
       ctx.strokeStyle = brick.color;
-      ctx.lineWidth = 1.5;
-      ctx.globalAlpha = 0.7;
+      ctx.lineWidth = brick.blanked ? 2 : 1.5;
+      ctx.globalAlpha = brick.blanked ? 0.9 : 0.7;
       ctx.beginPath();
       ctx.roundRect(bx - halfW, by - halfH, brick.w, brick.h, 4);
       ctx.stroke();
 
+      // Add dashed border for blanked bricks
+      if (brick.blanked) {
+        ctx.setLineDash([4, 3]);
+        ctx.strokeStyle = C.COLORS.god;
+        ctx.lineWidth = 1;
+        ctx.globalAlpha = 0.5;
+        ctx.beginPath();
+        ctx.roundRect(bx - halfW + 2, by - halfH + 2, brick.w - 4, brick.h - 4, 3);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
       // Text
       ctx.globalAlpha = 1;
       ctx.font = brick.font;
-      ctx.fillStyle = brick.color;
+      ctx.fillStyle = brick.blanked ? C.COLORS.god : brick.color;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(brick.text, bx, by);
+      ctx.fillText(brick.displayText || brick.text, bx, by);
 
       // Dark outline on text for readability
       ctx.strokeStyle = C.BRICK_STROKE_COLOR;
       ctx.lineWidth = 0.5;
-      ctx.strokeText(brick.text, bx, by);
+      ctx.strokeText(brick.displayText || brick.text, bx, by);
 
       ctx.restore();
 
@@ -1523,15 +2328,40 @@ export class Game {
     for (const ball of this.balls) {
       ctx.save();
 
-      // Glow
-      ctx.shadowColor = C.COLORS.ballGlow;
-      ctx.shadowBlur = 16;
+      if (ball.trinityType) {
+        // Trinity ball rendering
+        const info = C.TRINITY_BALLS[ball.trinityType];
 
-      ctx.font = C.FONT.ball;
-      ctx.fillStyle = C.COLORS.ball;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(ball.char, ball.x, ball.y);
+        // Golden aura
+        ctx.shadowColor = info.glow;
+        ctx.shadowBlur = 22;
+
+        // Outer glow ring
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.radius + 4, 0, Math.PI * 2);
+        ctx.fillStyle = info.glow;
+        ctx.globalAlpha = 0.3 + Math.sin(this.stateTime * 6) * 0.15;
+        ctx.fill();
+
+        // Ball character
+        ctx.font = C.FONT.ball;
+        ctx.fillStyle = info.color;
+        ctx.globalAlpha = 1;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(info.char, ball.x, ball.y);
+
+      } else {
+        // Normal ball rendering
+        ctx.shadowColor = C.COLORS.ballGlow;
+        ctx.shadowBlur = 16;
+
+        ctx.font = C.FONT.ball;
+        ctx.fillStyle = C.COLORS.ball;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(ball.char, ball.x, ball.y);
+      }
 
       ctx.restore();
     }
@@ -1593,7 +2423,7 @@ export class Game {
     ctx.globalAlpha = pulse * 0.7;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
-    ctx.fillText('← → AIM  |  CLICK / ENTER to LAUNCH', bx, by + 30);
+    ctx.fillText('<- -> AIM  |  CLICK / ENTER to LAUNCH', bx, by + 30);
 
     ctx.restore();
   }
@@ -1632,7 +2462,7 @@ export class Game {
     ctx.font = '10px "Share Tech Mono", monospace';
     ctx.fillStyle = C.GUARD_COLOR;
     ctx.globalAlpha = 0.6;
-    ctx.fillText(`×${this.guard.charges}`, this.guard.x + this.guard.width / 2 + 15, this.guard.y);
+    ctx.fillText(`x${this.guard.charges}`, this.guard.x + this.guard.width / 2 + 15, this.guard.y);
 
     ctx.restore();
   }
@@ -1660,6 +2490,21 @@ export class Game {
       ctx.beginPath();
       ctx.roundRect(pu.x - pu.width / 2, pu.y - pu.height / 2 + bob, pu.width, pu.height, 8);
       ctx.stroke();
+
+      // Symbol prominently in center
+      if (pu.symbol) {
+        ctx.font = "bold 18px 'Rajdhani', sans-serif";
+        ctx.fillStyle = pu.color;
+        ctx.globalAlpha = 0.9;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(pu.symbol, pu.x, pu.y + bob - 1);
+
+        // Smaller label below symbol if there's room
+        ctx.font = "11px 'Share Tech Mono', monospace";
+        ctx.globalAlpha = 0.6;
+        // (label is already visible via the pill, so symbol just adds flair)
+      }
 
       // Label
       ctx.font = C.FONT.hudSmall;
@@ -1700,6 +2545,79 @@ export class Game {
 
       ctx.restore();
     }
+    ctx.restore();
+  }
+
+  // ── YouTube Sidebar (Feature #13) ─────────────────────────
+
+  _renderYouTubeSidebar(ctx) {
+    ctx.save();
+    const yt = this.youtubeSidebarRect;
+    const video = C.YOUTUBE_VIDEOS[this.youtubeVideoIndex];
+
+    // Semi-transparent background
+    ctx.fillStyle = 'rgba(7, 13, 24, 0.75)';
+    ctx.globalAlpha = 0.8;
+    ctx.beginPath();
+    ctx.roundRect(yt.x, yt.y, yt.w, yt.h, 4);
+    ctx.fill();
+
+    // Border
+    ctx.strokeStyle = C.COLORS.god;
+    ctx.lineWidth = 1;
+    ctx.globalAlpha = 0.4;
+    ctx.beginPath();
+    ctx.roundRect(yt.x, yt.y, yt.w, yt.h, 4);
+    ctx.stroke();
+
+    // CDBS text rotated vertically
+    ctx.save();
+    ctx.translate(yt.x + yt.w / 2, yt.y + 50);
+    ctx.rotate(Math.PI / 2);
+    ctx.font = "bold 14px 'Orbitron', sans-serif";
+    ctx.fillStyle = C.COLORS.god;
+    ctx.globalAlpha = 0.9;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('CDBS', 0, 0);
+    ctx.restore();
+
+    // Play icon
+    ctx.font = "22px sans-serif";
+    ctx.fillStyle = C.COLORS.bad;
+    ctx.globalAlpha = 0.8;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const playY = yt.y + yt.h / 2;
+    ctx.fillText('\u25B6', yt.x + yt.w / 2, playY);
+
+    // "Watch" label
+    ctx.save();
+    ctx.translate(yt.x + yt.w / 2, playY + 50);
+    ctx.rotate(Math.PI / 2);
+    ctx.font = "11px 'Share Tech Mono', monospace";
+    ctx.fillStyle = C.COLORS.playFrame;
+    ctx.globalAlpha = 0.7;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Watch', 0, 0);
+    ctx.restore();
+
+    // Video title (truncated, rotated)
+    if (video) {
+      ctx.save();
+      ctx.translate(yt.x + yt.w / 2, yt.y + yt.h - 80);
+      ctx.rotate(Math.PI / 2);
+      ctx.font = "9px 'Share Tech Mono', monospace";
+      ctx.fillStyle = C.COLORS.other;
+      ctx.globalAlpha = 0.5;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const title = video.title.length > 25 ? video.title.substring(0, 22) + '...' : video.title;
+      ctx.fillText(title, 0, 0);
+      ctx.restore();
+    }
+
     ctx.restore();
   }
 
@@ -1745,7 +2663,7 @@ export class Game {
     ctx.shadowColor = C.COLORS.godGlow;
     ctx.shadowBlur = 20;
     ctx.globalAlpha = easeOutCubic(clamp(t * 2 - 0.5, 0, 1)) * 0.6;
-    ctx.fillText('✝', C.CANVAS_W / 2, titleY - 60);
+    ctx.fillText('\u271D', C.CANVAS_W / 2, titleY - 60);
 
     ctx.restore();
   }
@@ -1782,13 +2700,15 @@ export class Game {
 
     // Color legend
     ctx.globalAlpha = 0.8;
-    const legendY = C.CANVAS_H * 0.68;
+    const legendY = C.CANVAS_H * 0.66;
     const legendItems = [
       { label: 'About God (+150)', color: C.COLORS.god },
       { label: 'Good for us (+100)', color: C.COLORS.good },
       { label: 'Other (+50)', color: C.COLORS.other },
       { label: 'Connectors (+25)', color: C.COLORS.connector },
-      { label: 'Not good (-120)', color: C.COLORS.bad }
+      { label: 'Not good (-120)', color: C.COLORS.bad },
+      { label: 'Earth (+40)', color: C.COLORS.earth },
+      { label: 'Royal (+80)', color: C.COLORS.royal }
     ];
 
     ctx.font = "600 15px 'Rajdhani', sans-serif";
@@ -1812,6 +2732,24 @@ export class Game {
       ctx.textAlign = 'left';
       ctx.fillText(item.label, x + 10, y + 4);
     });
+
+    // Memorization stats (Feature #11)
+    if (this.memorization) {
+      try {
+        const mStats = this.memorization.getMasteryStats();
+        if (mStats.total > 0) {
+          ctx.font = "12px 'Share Tech Mono', monospace";
+          ctx.textAlign = 'center';
+          ctx.fillStyle = C.COLORS.god;
+          ctx.globalAlpha = 0.65;
+          const memY = C.CANVAS_H * 0.82;
+          ctx.fillText(
+            `MEMORIZATION: ${mStats.memorized} mastered | ${mStats.learning} learning | ${mStats.familiar} familiar | ${mStats.seen} seen`,
+            C.CANVAS_W / 2, memY
+          );
+        }
+      } catch (_) {}
+    }
 
     // Controls
     ctx.textAlign = 'center';
@@ -1877,7 +2815,7 @@ export class Game {
     // Text wall background
     this._renderTextWall(ctx);
 
-    // Frame
+    // Frame (includes heaven surface)
     this._renderFrame(ctx);
 
     // HUD
@@ -1912,6 +2850,9 @@ export class Game {
     // Verse reference
     this._renderVerseReference(ctx);
 
+    // YouTube sidebar (Feature #13)
+    this._renderYouTubeSidebar(ctx);
+
     // Combo display
     if (this.comboCount >= 2) {
       ctx.save();
@@ -1922,7 +2863,7 @@ export class Game {
       ctx.globalAlpha = 0.8;
       ctx.shadowColor = C.COLORS.godGlow;
       ctx.shadowBlur = 8;
-      ctx.fillText(`COMBO x${this.comboCount + 1}`, C.PLAY_RECT.x + C.PLAY_RECT.w - 15, C.HUD_HEIGHT + 10);
+      ctx.fillText(`COMBO x${this.comboCount + 1}`, C.PLAY_RECT.x + C.PLAY_RECT.w - 50, C.HUD_HEIGHT + 10);
       ctx.restore();
     }
 
@@ -1930,7 +2871,7 @@ export class Game {
     this._renderPowerTimers(ctx);
 
     // Reveal overlay (shows full verse)
-    if (this.revealTimer > 0) {
+    if (this.revealTimer > 0 || this.trinityRevealTimer > 0) {
       this._renderRevealOverlay(ctx);
     }
   }
@@ -1957,6 +2898,26 @@ export class Game {
       ctx.fillStyle = C.COLORS.god;
       ctx.globalAlpha = 0.7;
       ctx.fillText(`REVEAL ${this.revealTimer.toFixed(1)}s`, C.PLAY_RECT.x + 15, ty);
+      ty += 16;
+    }
+    if (this.trinityRevealTimer > 0) {
+      ctx.fillStyle = C.TRINITY_BALLS.spirit.color;
+      ctx.globalAlpha = 0.7;
+      ctx.fillText(`SPIRIT REVEAL ${this.trinityRevealTimer.toFixed(1)}s`, C.PLAY_RECT.x + 15, ty);
+    }
+
+    // Trinity ball active indicators
+    const trinityBalls = this.balls.filter(b => b.trinityType);
+    if (trinityBalls.length > 0) {
+      ctx.textAlign = 'right';
+      let tby = C.HUD_HEIGHT + 10;
+      for (const tb of trinityBalls) {
+        const info = C.TRINITY_BALLS[tb.trinityType];
+        ctx.fillStyle = info.color;
+        ctx.globalAlpha = 0.8;
+        ctx.fillText(`${info.char} ${info.label}`, C.PLAY_RECT.x + C.PLAY_RECT.w - 50, tby);
+        tby += 16;
+      }
     }
 
     ctx.restore();
@@ -1966,7 +2927,8 @@ export class Game {
     if (!this.currentVerse) return;
     ctx.save();
 
-    const alpha = clamp(this.revealTimer / 2, 0, 0.9);
+    const maxReveal = Math.max(this.revealTimer, this.trinityRevealTimer);
+    const alpha = clamp(maxReveal / 2, 0, 0.9);
     ctx.globalAlpha = alpha * 0.85;
 
     // Semi-transparent backdrop
@@ -1976,7 +2938,7 @@ export class Game {
 
     // Full verse text
     ctx.font = "600 22px 'Rajdhani', sans-serif";
-    ctx.fillStyle = C.COLORS.god;
+    ctx.fillStyle = this.trinityRevealTimer > 0 ? C.TRINITY_BALLS.spirit.color : C.COLORS.god;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
     ctx.globalAlpha = alpha;
@@ -2006,7 +2968,15 @@ export class Game {
     // Reference
     ctx.font = C.FONT.verseRef;
     ctx.fillStyle = C.COLORS.footerFrame;
-    ctx.fillText(`— ${this.currentVerse.ref}`, C.CANVAS_W / 2, startY + lines.length * 28 + 15);
+    ctx.fillText(`-- ${this.currentVerse.ref}`, C.CANVAS_W / 2, startY + lines.length * 28 + 15);
+
+    // Spirit reveal label
+    if (this.trinityRevealTimer > 0) {
+      ctx.font = "bold 14px 'Orbitron', sans-serif";
+      ctx.fillStyle = C.TRINITY_BALLS.spirit.color;
+      ctx.globalAlpha = alpha * 0.7;
+      ctx.fillText('SPIRIT REVEALS TRUTH', C.CANVAS_W / 2, startY - 20);
+    }
 
     ctx.restore();
   }
@@ -2096,6 +3066,576 @@ export class Game {
     ctx.restore();
   }
 
+  // ── Lesson Quiz Rendering (Feature #5) ────────────────────
+
+  _renderLessonQuiz(ctx) {
+    this._renderBackground(ctx);
+    this._renderBgGlyphs(ctx);
+
+    const cx = C.CANVAS_W / 2;
+    const fadeIn = easeOutCubic(clamp(this.stateTime * 3, 0, 1));
+
+    ctx.save();
+    ctx.globalAlpha = fadeIn;
+
+    // Dark overlay
+    ctx.fillStyle = 'rgba(2, 6, 9, 0.88)';
+    ctx.fillRect(0, 0, C.CANVAS_W, C.CANVAS_H);
+
+    // Title
+    ctx.font = C.FONT.titleSm;
+    ctx.fillStyle = C.COLORS.god;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.shadowColor = C.COLORS.godGlow;
+    ctx.shadowBlur = 15;
+    ctx.fillText('LESSON QUIZ', cx, C.CANVAS_H * 0.1);
+    ctx.shadowBlur = 0;
+
+    // Verse reference
+    if (this.currentVerse) {
+      ctx.font = C.FONT.verseRef;
+      ctx.fillStyle = C.COLORS.footerFrame;
+      ctx.globalAlpha = fadeIn * 0.7;
+      ctx.fillText(this.currentVerse.ref, cx, C.CANVAS_H * 0.16);
+      ctx.globalAlpha = fadeIn;
+    }
+
+    // Timer bar
+    const timerBarW = 400;
+    const timerBarH = 6;
+    const timerBarX = cx - timerBarW / 2;
+    const timerBarY = C.CANVAS_H * 0.20;
+    const timerProgress = clamp(this.quizTimer / C.QUIZ_DURATION, 0, 1);
+
+    // Timer background
+    ctx.fillStyle = 'rgba(255,255,255,0.1)';
+    ctx.beginPath();
+    ctx.roundRect(timerBarX, timerBarY, timerBarW, timerBarH, 3);
+    ctx.fill();
+
+    // Timer fill
+    const timerColor = timerProgress > 0.3 ? C.COLORS.good : C.COLORS.bad;
+    ctx.fillStyle = timerColor;
+    ctx.globalAlpha = fadeIn * 0.8;
+    ctx.beginPath();
+    ctx.roundRect(timerBarX, timerBarY, timerBarW * timerProgress, timerBarH, 3);
+    ctx.fill();
+    ctx.globalAlpha = fadeIn;
+
+    // Progress dots
+    const dotY = C.CANVAS_H * 0.25;
+    for (let i = 0; i < this.quizLessons.length; i++) {
+      const dotX = cx - 30 + i * 30;
+      ctx.beginPath();
+      ctx.arc(dotX, dotY, 6, 0, Math.PI * 2);
+      if (i < this.quizCurrent) {
+        const lesson = this.quizLessons[i];
+        ctx.fillStyle = lesson.correct ? C.COLORS.good : C.COLORS.bad;
+      } else if (i === this.quizCurrent) {
+        ctx.fillStyle = C.COLORS.god;
+      } else {
+        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+      }
+      ctx.fill();
+    }
+
+    // Current question
+    if (this.quizCurrent < this.quizLessons.length) {
+      const lesson = this.quizLessons[this.quizCurrent];
+
+      // Question text
+      ctx.font = C.FONT.quiz;
+      ctx.fillStyle = '#e0e0e0';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      // Word wrap the lesson text
+      const words = lesson.text.split(' ');
+      const maxW = C.CANVAS_W - 120;
+      let lines = [];
+      let currentLine = '';
+      words.forEach(word => {
+        const test = currentLine ? currentLine + ' ' + word : word;
+        if (measureText(ctx, test, C.FONT.quiz).width > maxW) {
+          lines.push(currentLine);
+          currentLine = word;
+        } else {
+          currentLine = test;
+        }
+      });
+      if (currentLine) lines.push(currentLine);
+
+      const questionY = C.CANVAS_H * 0.38;
+      lines.forEach((line, i) => {
+        ctx.fillText(line, cx, questionY + i * 28);
+      });
+
+      // Question label
+      ctx.font = "500 16px 'Rajdhani', sans-serif";
+      ctx.fillStyle = C.COLORS.playFrame;
+      ctx.globalAlpha = fadeIn * 0.7;
+      ctx.fillText('What category does this lesson fit?', cx, questionY - 35);
+      ctx.globalAlpha = fadeIn;
+
+      // Category buttons
+      const btnW = 180;
+      const btnH = 42;
+      const btnY = C.CANVAS_H * 0.58;
+      const gap = 15;
+      const totalW = btnW * 3 + gap * 2;
+      const startX = cx - totalW / 2;
+
+      C.LESSON_CATEGORIES.forEach((cat, i) => {
+        const bx = startX + i * (btnW + gap);
+        const isHovered = false; // could add hover detection
+
+        // Button background
+        ctx.fillStyle = cat.color;
+        ctx.globalAlpha = fadeIn * (this.quizAnswered ? 0.3 : 0.2);
+        ctx.beginPath();
+        ctx.roundRect(bx, btnY, btnW, btnH, 6);
+        ctx.fill();
+
+        // Button border
+        ctx.strokeStyle = cat.color;
+        ctx.lineWidth = this.quizAnswered && cat.key === this.quizLessons[this.quizCurrent].correctKey ? 3 : 1.5;
+        ctx.globalAlpha = fadeIn * (this.quizAnswered ? 0.9 : 0.7);
+        ctx.beginPath();
+        ctx.roundRect(bx, btnY, btnW, btnH, 6);
+        ctx.stroke();
+
+        // Highlight correct answer when answered
+        if (this.quizAnswered && cat.key === this.quizLessons[this.quizCurrent].correctKey) {
+          ctx.fillStyle = cat.color;
+          ctx.globalAlpha = fadeIn * 0.4;
+          ctx.beginPath();
+          ctx.roundRect(bx, btnY, btnW, btnH, 6);
+          ctx.fill();
+        }
+
+        // Button label
+        ctx.font = C.FONT.quizOption;
+        ctx.fillStyle = cat.color;
+        ctx.globalAlpha = fadeIn;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(`${cat.icon} ${cat.label}`, bx + btnW / 2, btnY + btnH / 2);
+
+        // Keyboard hint
+        ctx.font = "11px 'Share Tech Mono', monospace";
+        ctx.fillStyle = '#6b7b8d';
+        ctx.globalAlpha = fadeIn * 0.5;
+        ctx.fillText(`[${i + 1}]`, bx + btnW / 2, btnY + btnH + 14);
+      });
+    }
+
+    // Feedback
+    if (this.quizFeedback) {
+      ctx.font = "bold 20px 'Rajdhani', sans-serif";
+      ctx.fillStyle = this.quizFeedback.color;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.globalAlpha = fadeIn * clamp(this.quizFeedback.timer * 2, 0, 1);
+      ctx.fillText(this.quizFeedback.text, cx, C.CANVAS_H * 0.75);
+    }
+
+    // Quiz score
+    ctx.font = C.FONT.hud;
+    ctx.fillStyle = C.COLORS.god;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.globalAlpha = fadeIn * 0.8;
+    ctx.fillText(`Quiz Bonus: +${this.quizScore}`, cx, C.CANVAS_H * 0.9);
+
+    ctx.restore();
+  }
+
+  // ── Mini-Game Rendering (Feature #8) ──────────────────────
+
+  _renderMiniGame(ctx) {
+    this._renderBackground(ctx);
+    this._renderBgGlyphs(ctx);
+
+    const cx = C.CANVAS_W / 2;
+    const fadeIn = easeOutCubic(clamp(this.stateTime * 3, 0, 1));
+
+    ctx.save();
+    ctx.globalAlpha = fadeIn;
+
+    // Dark overlay
+    ctx.fillStyle = 'rgba(2, 6, 9, 0.88)';
+    ctx.fillRect(0, 0, C.CANVAS_W, C.CANVAS_H);
+
+    // Title
+    ctx.font = C.FONT.titleSm;
+    ctx.fillStyle = C.COLORS.playFrame;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.shadowColor = 'rgba(117, 215, 230, 0.5)';
+    ctx.shadowBlur = 15;
+
+    const titleMap = {
+      'reassemble': 'VERSE REASSEMBLY',
+      'missing_word': 'FILL THE BLANKS',
+      'category_sort': 'CATEGORY SORT'
+    };
+    ctx.fillText(titleMap[this.miniGameType] || 'MINI GAME', cx, C.CANVAS_H * 0.08);
+    ctx.shadowBlur = 0;
+
+    // Timer bar
+    const timerBarW = 400;
+    const timerBarH = 6;
+    const timerBarX = cx - timerBarW / 2;
+    const timerBarY = C.CANVAS_H * 0.13;
+    const maxTimer = this.miniGameType === 'category_sort' ? 10 : C.MINIGAME_DURATION;
+    const timerProgress = clamp(this.miniTimer / maxTimer, 0, 1);
+
+    ctx.fillStyle = 'rgba(255,255,255,0.1)';
+    ctx.beginPath();
+    ctx.roundRect(timerBarX, timerBarY, timerBarW, timerBarH, 3);
+    ctx.fill();
+
+    const timerColor = timerProgress > 0.3 ? C.COLORS.good : C.COLORS.bad;
+    ctx.fillStyle = timerColor;
+    ctx.globalAlpha = fadeIn * 0.8;
+    ctx.beginPath();
+    ctx.roundRect(timerBarX, timerBarY, timerBarW * timerProgress, timerBarH, 3);
+    ctx.fill();
+    ctx.globalAlpha = fadeIn;
+
+    // Verse reference
+    if (this.currentVerse) {
+      ctx.font = C.FONT.verseRef;
+      ctx.fillStyle = C.COLORS.footerFrame;
+      ctx.globalAlpha = fadeIn * 0.6;
+      ctx.fillText(this.currentVerse.ref, cx, C.CANVAS_H * 0.17);
+      ctx.globalAlpha = fadeIn;
+    }
+
+    // Render specific mini-game type
+    switch (this.miniGameType) {
+      case 'reassemble':
+        this._renderReassemble(ctx, fadeIn);
+        break;
+      case 'missing_word':
+        this._renderMissingWord(ctx, fadeIn);
+        break;
+      case 'category_sort':
+        this._renderCategorySort(ctx, fadeIn);
+        break;
+    }
+
+    // Feedback
+    if (this.miniFeedback) {
+      ctx.font = "bold 18px 'Rajdhani', sans-serif";
+      ctx.fillStyle = this.miniFeedback.color;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.globalAlpha = fadeIn * clamp(this.miniFeedback.timer * 3, 0, 1);
+      ctx.fillText(this.miniFeedback.text, cx, C.CANVAS_H * 0.92);
+    }
+
+    // Completion message
+    if (this.miniComplete) {
+      ctx.font = "bold 24px 'Rajdhani', sans-serif";
+      ctx.fillStyle = C.COLORS.good;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.globalAlpha = fadeIn;
+      ctx.shadowColor = C.COLORS.goodGlow;
+      ctx.shadowBlur = 10;
+      ctx.fillText(`Mini-Game Complete! +${this.miniScore}`, cx, C.CANVAS_H * 0.86);
+      ctx.shadowBlur = 0;
+    }
+
+    ctx.restore();
+  }
+
+  _renderReassemble(ctx, fadeIn) {
+    const cx = C.CANVAS_W / 2;
+
+    // Instructions
+    ctx.font = "500 16px 'Rajdhani', sans-serif";
+    ctx.fillStyle = C.COLORS.playFrame;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.globalAlpha = fadeIn * 0.7;
+    ctx.fillText('Click the phrases in the correct order to reassemble the verse', cx, C.CANVAS_H * 0.22);
+    ctx.globalAlpha = fadeIn;
+
+    // Already selected (correct order so far)
+    if (this.miniSelected.length > 0) {
+      ctx.font = C.FONT.verse;
+      ctx.fillStyle = C.COLORS.good;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.globalAlpha = fadeIn * 0.8;
+
+      const selectedTexts = this.miniSelected.map(i => this.miniPhrases[i].text);
+      const assembled = selectedTexts.join(' ');
+      const maxW = C.CANVAS_W - 100;
+      if (measureText(ctx, assembled, C.FONT.verse).width > maxW) {
+        const lastFew = selectedTexts.slice(-3).join(' ');
+        ctx.fillText('... ' + lastFew, cx, C.CANVAS_H * 0.30);
+      } else {
+        ctx.fillText(assembled, cx, C.CANVAS_H * 0.30);
+      }
+    }
+
+    // Phrase buttons
+    const startY = C.CANVAS_H * 0.4;
+    const btnH = 36;
+    const gap = 8;
+    const bw = Math.min(C.CANVAS_W - 100, 600);
+    const bx = cx - bw / 2;
+
+    for (let i = 0; i < this.miniPhrases.length; i++) {
+      const phrase = this.miniPhrases[i];
+      const by = startY + i * (btnH + gap);
+
+      if (by + btnH > C.CANVAS_H * 0.82) break; // Don't overflow
+
+      // Button background
+      ctx.fillStyle = phrase.selected ? C.COLORS.good : 'rgba(255,255,255,0.05)';
+      ctx.globalAlpha = fadeIn * (phrase.selected ? 0.3 : 0.8);
+      ctx.beginPath();
+      ctx.roundRect(bx, by, bw, btnH, 5);
+      ctx.fill();
+
+      // Button border
+      ctx.strokeStyle = phrase.selected ? C.COLORS.good : C.COLORS.playFrame;
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = fadeIn * (phrase.selected ? 0.6 : 0.4);
+      ctx.beginPath();
+      ctx.roundRect(bx, by, bw, btnH, 5);
+      ctx.stroke();
+
+      // Number label
+      ctx.font = "bold 14px 'Share Tech Mono', monospace";
+      ctx.fillStyle = phrase.selected ? C.COLORS.good : C.COLORS.playFrame;
+      ctx.globalAlpha = fadeIn * 0.6;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(`[${i + 1}]`, bx + 8, by + btnH / 2);
+
+      // Phrase text
+      ctx.font = C.FONT.miniGame;
+      ctx.fillStyle = phrase.selected ? C.COLORS.good : '#d0d0d0';
+      ctx.globalAlpha = fadeIn * (phrase.selected ? 0.5 : 1);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      // Strikethrough for selected
+      if (phrase.selected) {
+        ctx.fillText(phrase.text, cx, by + btnH / 2);
+        // Draw strikethrough line
+        const textW = measureText(ctx, phrase.text, C.FONT.miniGame).width;
+        ctx.strokeStyle = C.COLORS.good;
+        ctx.lineWidth = 1;
+        ctx.globalAlpha = fadeIn * 0.5;
+        ctx.beginPath();
+        ctx.moveTo(cx - textW / 2, by + btnH / 2);
+        ctx.lineTo(cx + textW / 2, by + btnH / 2);
+        ctx.stroke();
+      } else {
+        ctx.fillText(phrase.text, cx, by + btnH / 2);
+      }
+    }
+  }
+
+  _renderMissingWord(ctx, fadeIn) {
+    const cx = C.CANVAS_W / 2;
+
+    // Instructions
+    ctx.font = "500 16px 'Rajdhani', sans-serif";
+    ctx.fillStyle = C.COLORS.playFrame;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.globalAlpha = fadeIn * 0.7;
+    ctx.fillText('Fill in the missing words from the verse', cx, C.CANVAS_H * 0.22);
+    ctx.globalAlpha = fadeIn;
+
+    // Show verse with blanks
+    const words = this.currentVerse.text.split(' ');
+    let displayWords = [...words];
+    let blankCounter = 0;
+    for (const blankIdx of this.miniBlankIndices) {
+      if (this.miniFilledBlanks[blankCounter] !== null) {
+        displayWords[blankIdx] = this.miniFilledBlanks[blankCounter];
+      } else {
+        displayWords[blankIdx] = '____';
+      }
+      blankCounter++;
+    }
+
+    const verseDisplay = displayWords.join(' ');
+    ctx.font = C.FONT.verse;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+
+    // Word wrap
+    const maxW = C.CANVAS_W - 100;
+    let lines = [];
+    let currentLine = '';
+    displayWords.forEach((word, idx) => {
+      const test = currentLine ? currentLine + ' ' + word : word;
+      if (measureText(ctx, test, C.FONT.verse).width > maxW) {
+        lines.push(currentLine);
+        currentLine = word;
+      } else {
+        currentLine = test;
+      }
+    });
+    if (currentLine) lines.push(currentLine);
+
+    const verseY = C.CANVAS_H * 0.32;
+    lines.forEach((line, i) => {
+      // Highlight blanks in the line
+      const lineWords = line.split(' ');
+      let lineX = cx - measureText(ctx, line, C.FONT.verse).width / 2;
+      ctx.textAlign = 'left';
+
+      lineWords.forEach((word, wi) => {
+        const isBlank = word === '____';
+        const isFilled = this.miniBlankIndices.some((bi, fi) =>
+          displayWords[bi] === word && this.miniFilledBlanks[fi] !== null
+        );
+
+        ctx.fillStyle = isBlank ? C.COLORS.bad : (isFilled ? C.COLORS.good : '#d0d0d0');
+        ctx.globalAlpha = fadeIn;
+        ctx.fillText(word, lineX, verseY + i * 26);
+        lineX += measureText(ctx, word + ' ', C.FONT.verse).width;
+      });
+    });
+
+    // Word bank
+    ctx.textAlign = 'center';
+    const bankY = C.CANVAS_H * 0.68;
+    const btnW = 100;
+    const btnH = 36;
+    const gap = 10;
+    const totalW = this.miniWordBank.length * (btnW + gap) - gap;
+    const startX = cx - totalW / 2;
+
+    ctx.font = "500 14px 'Rajdhani', sans-serif";
+    ctx.fillStyle = C.COLORS.playFrame;
+    ctx.globalAlpha = fadeIn * 0.6;
+    ctx.fillText('Word Bank:', cx, bankY - 20);
+
+    for (let i = 0; i < this.miniWordBank.length; i++) {
+      const word = this.miniWordBank[i];
+      const bx = startX + i * (btnW + gap);
+
+      // Button
+      ctx.fillStyle = word.used ? 'rgba(76, 175, 80, 0.1)' : 'rgba(255,255,255,0.08)';
+      ctx.globalAlpha = fadeIn * (word.used ? 0.5 : 1);
+      ctx.beginPath();
+      ctx.roundRect(bx, bankY, btnW, btnH, 5);
+      ctx.fill();
+
+      ctx.strokeStyle = word.used ? C.COLORS.good : C.COLORS.connector;
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = fadeIn * (word.used ? 0.4 : 0.6);
+      ctx.beginPath();
+      ctx.roundRect(bx, bankY, btnW, btnH, 5);
+      ctx.stroke();
+
+      ctx.font = C.FONT.miniGame;
+      ctx.fillStyle = word.used ? C.COLORS.good : '#d0d0d0';
+      ctx.globalAlpha = fadeIn * (word.used ? 0.4 : 1);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(word.text, bx + btnW / 2, bankY + btnH / 2);
+    }
+  }
+
+  _renderCategorySort(ctx, fadeIn) {
+    const cx = C.CANVAS_W / 2;
+
+    // Instructions
+    ctx.font = "500 16px 'Rajdhani', sans-serif";
+    ctx.fillStyle = C.COLORS.playFrame;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.globalAlpha = fadeIn * 0.7;
+    ctx.fillText('Watch as the verse phrases are sorted by category', cx, C.CANVAS_H * 0.22);
+    ctx.globalAlpha = fadeIn;
+
+    // Category columns
+    const colW = 200;
+    const colGap = 20;
+    const colStartX = cx - (colW * 3 + colGap * 2) / 2;
+    const colY = C.CANVAS_H * 0.30;
+    const colH = C.CANVAS_H * 0.50;
+
+    const categories = C.LESSON_CATEGORIES;
+    categories.forEach((cat, ci) => {
+      const cx2 = colStartX + ci * (colW + colGap);
+
+      // Column header
+      ctx.fillStyle = cat.color;
+      ctx.globalAlpha = fadeIn * 0.3;
+      ctx.beginPath();
+      ctx.roundRect(cx2, colY, colW, 32, [5, 5, 0, 0]);
+      ctx.fill();
+
+      ctx.font = "bold 14px 'Rajdhani', sans-serif";
+      ctx.fillStyle = cat.color;
+      ctx.globalAlpha = fadeIn;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(`${cat.icon} ${cat.label}`, cx2 + colW / 2, colY + 16);
+
+      // Column body
+      ctx.fillStyle = 'rgba(255,255,255,0.03)';
+      ctx.globalAlpha = fadeIn * 0.5;
+      ctx.beginPath();
+      ctx.roundRect(cx2, colY + 32, colW, colH - 32, [0, 0, 5, 5]);
+      ctx.fill();
+
+      ctx.strokeStyle = cat.color;
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = fadeIn * 0.2;
+      ctx.beginPath();
+      ctx.roundRect(cx2, colY, colW, colH, 5);
+      ctx.stroke();
+    });
+
+    // Place revealed phrases in their columns
+    const categorized = { god: [], good: [], bad: [] };
+    this.miniPhrases.forEach(phrase => {
+      if (phrase.revealed) {
+        const cat = phrase.category;
+        if (categorized[cat]) {
+          categorized[cat].push(phrase.text);
+        } else {
+          // Put in 'other' items under 'good' for simplicity
+          categorized.good.push(phrase.text);
+        }
+      }
+    });
+
+    categories.forEach((cat, ci) => {
+      const cx2 = colStartX + ci * (colW + colGap);
+      const items = categorized[cat.key] || [];
+      let iy = colY + 42;
+
+      ctx.font = "500 14px 'Rajdhani', sans-serif";
+      items.forEach(text => {
+        ctx.fillStyle = cat.color;
+        ctx.globalAlpha = fadeIn * 0.85;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+
+        // Truncate if too long
+        const displayText = text.length > 22 ? text.substring(0, 19) + '...' : text;
+        ctx.fillText(displayText, cx2 + colW / 2, iy);
+        iy += 22;
+      });
+    });
+  }
+
   _renderGameOver(ctx) {
     this._renderParticles(ctx);
 
@@ -2129,7 +3669,7 @@ export class Game {
       ctx.shadowColor = C.COLORS.godGlow;
       ctx.shadowBlur = 40;
       ctx.globalAlpha = fadeIn * 0.5;
-      ctx.fillText('✝', C.CANVAS_W / 2, C.CANVAS_H * 0.55);
+      ctx.fillText('\u271D', C.CANVAS_W / 2, C.CANVAS_H * 0.55);
     } else {
       // Game over screen
       ctx.font = C.FONT.gameOver;
@@ -2165,15 +3705,164 @@ export class Game {
       ctx.fillText(`"${text}"`, C.CANVAS_W / 2, C.CANVAS_H * 0.68);
       ctx.font = C.FONT.verseRef;
       ctx.fillStyle = C.COLORS.footerFrame;
-      ctx.fillText(`— ${this.currentVerse.ref}`, C.CANVAS_W / 2, C.CANVAS_H * 0.73);
+      ctx.fillText(`-- ${this.currentVerse.ref}`, C.CANVAS_W / 2, C.CANVAS_H * 0.73);
     }
 
-    // Restart prompt
+    // Restart prompt (or hint about share screen coming)
     const pulse = 0.5 + Math.sin(this.stateTime * 3) * 0.5;
     ctx.globalAlpha = fadeIn * pulse;
     ctx.font = C.FONT.hudSmall;
     ctx.fillStyle = C.COLORS.god;
-    ctx.fillText('CLICK or PRESS R to Play Again', C.CANVAS_W / 2, C.CANVAS_H * 0.85);
+    ctx.fillText('CLICK to Play Again  |  Share screen coming...', C.CANVAS_W / 2, C.CANVAS_H * 0.85);
+
+    ctx.restore();
+  }
+
+  // ── Share Screen Rendering (Feature #14) ──────────────────
+
+  _renderShareScreen(ctx) {
+    this._renderParticles(ctx);
+
+    ctx.save();
+    const cx = C.CANVAS_W / 2;
+    const fadeIn = easeOutCubic(clamp(this.stateTime * 2, 0, 1));
+    ctx.globalAlpha = fadeIn;
+
+    // Dark overlay
+    ctx.fillStyle = 'rgba(2, 6, 9, 0.88)';
+    ctx.fillRect(0, 0, C.CANVAS_W, C.CANVAS_H);
+
+    // Title
+    ctx.font = C.FONT.titleSm;
+    ctx.fillStyle = C.COLORS.god;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.shadowColor = C.COLORS.godGlow;
+    ctx.shadowBlur = 20;
+    ctx.fillText(this._gameComplete ? 'VICTORY!' : 'GAME OVER', cx, C.CANVAS_H * 0.15);
+    ctx.shadowBlur = 0;
+
+    // Score display
+    ctx.font = C.FONT.score;
+    ctx.fillStyle = this.score >= 0 ? C.COLORS.god : C.COLORS.bad;
+    ctx.fillText(`SCORE: ${this.score}`, cx, C.CANVAS_H * 0.25);
+
+    ctx.font = C.FONT.hud;
+    ctx.fillStyle = C.COLORS.playFrame;
+    ctx.fillText(`LEVEL: ${this.level}  |  BEST: ${this.bestScore}`, cx, C.CANVAS_H * 0.32);
+
+    // Last verse
+    if (this.currentVerse) {
+      ctx.font = C.FONT.verse;
+      ctx.fillStyle = C.COLORS.god;
+      ctx.globalAlpha = fadeIn * 0.7;
+      const text = this.currentVerse.text.length > 70
+        ? this.currentVerse.text.substring(0, 67) + '...'
+        : this.currentVerse.text;
+      ctx.fillText(`"${text}"`, cx, C.CANVAS_H * 0.42);
+      ctx.font = C.FONT.verseRef;
+      ctx.fillStyle = C.COLORS.footerFrame;
+      ctx.fillText(`-- ${this.currentVerse.ref}`, cx, C.CANVAS_H * 0.47);
+      ctx.globalAlpha = fadeIn;
+    }
+
+    // Share label
+    ctx.font = "600 18px 'Rajdhani', sans-serif";
+    ctx.fillStyle = C.COLORS.playFrame;
+    ctx.fillText('Share your score:', cx, C.CANVAS_H * 0.55);
+
+    // Share buttons
+    const btnW = 140;
+    const btnH = 44;
+    const btnY = C.CANVAS_H * 0.62;
+    const gap = 20;
+    const totalW = btnW * 3 + gap * 2;
+    const startX = cx - totalW / 2;
+
+    const shareButtons = [
+      { label: 'Email', icon: '\uD83D\uDCE7', color: '#64B5F6' },
+      { label: 'WhatsApp', icon: '\uD83D\uDCF1', color: '#66BB6A' },
+      { label: 'Copy', icon: '\uD83D\uDCCB', color: '#FFD54F' }
+    ];
+
+    shareButtons.forEach((btn, i) => {
+      const bx = startX + i * (btnW + gap);
+
+      // Button background
+      ctx.fillStyle = btn.color;
+      ctx.globalAlpha = fadeIn * 0.15;
+      ctx.beginPath();
+      ctx.roundRect(bx, btnY, btnW, btnH, 8);
+      ctx.fill();
+
+      // Button border
+      ctx.strokeStyle = btn.color;
+      ctx.lineWidth = 1.5;
+      ctx.globalAlpha = fadeIn * 0.7;
+      ctx.beginPath();
+      ctx.roundRect(bx, btnY, btnW, btnH, 8);
+      ctx.stroke();
+
+      // Button label
+      ctx.font = "600 16px 'Rajdhani', sans-serif";
+      ctx.fillStyle = btn.color;
+      ctx.globalAlpha = fadeIn;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(`${btn.icon} ${btn.label}`, bx + btnW / 2, btnY + btnH / 2);
+    });
+
+    // "Copied!" feedback
+    if (this.shareClipboardFeedback > 0) {
+      ctx.font = "bold 16px 'Rajdhani', sans-serif";
+      ctx.fillStyle = C.COLORS.good;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.globalAlpha = fadeIn * clamp(this.shareClipboardFeedback, 0, 1);
+      ctx.fillText('Copied to clipboard!', cx, btnY + btnH + 25);
+    }
+
+    // Share not available notice
+    if (!shareModule) {
+      ctx.font = "12px 'Share Tech Mono', monospace";
+      ctx.fillStyle = '#6b7b8d';
+      ctx.globalAlpha = fadeIn * 0.4;
+      ctx.fillText('(Share module loading...)', cx, btnY + btnH + 25);
+    }
+
+    // Play Again button
+    const playAgainY = C.CANVAS_H * 0.78;
+    const playAgainW = 200;
+    const playAgainH = 48;
+    const playAgainX = cx - playAgainW / 2;
+
+    const playPulse = 0.7 + Math.sin(this.stateTime * 3) * 0.3;
+
+    ctx.fillStyle = C.COLORS.god;
+    ctx.globalAlpha = fadeIn * 0.2;
+    ctx.beginPath();
+    ctx.roundRect(playAgainX, playAgainY, playAgainW, playAgainH, 8);
+    ctx.fill();
+
+    ctx.strokeStyle = C.COLORS.god;
+    ctx.lineWidth = 2;
+    ctx.globalAlpha = fadeIn * playPulse;
+    ctx.beginPath();
+    ctx.roundRect(playAgainX, playAgainY, playAgainW, playAgainH, 8);
+    ctx.stroke();
+
+    ctx.font = "bold 18px 'Rajdhani', sans-serif";
+    ctx.fillStyle = C.COLORS.god;
+    ctx.globalAlpha = fadeIn * playPulse;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('PLAY AGAIN', cx, playAgainY + playAgainH / 2);
+
+    // Keyboard hint
+    ctx.font = "12px 'Share Tech Mono', monospace";
+    ctx.fillStyle = '#6b7b8d';
+    ctx.globalAlpha = fadeIn * 0.5;
+    ctx.fillText('Press ENTER or R to play again', cx, C.CANVAS_H * 0.92);
 
     ctx.restore();
   }
