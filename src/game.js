@@ -134,12 +134,21 @@ export class Game {
     this.flashAlpha = 0;
     this.flashColor = '#fff';
 
+    // Text wall character grid (PreText-style displacement)
+    this.wallChars = [];
+
     // Heaven surface shimmer
     this.heavenShimmerT = 0;
 
     // Timed power-ups
     this.expandTimer = 0;
     this.slowTimer = 0;
+
+    // Hazards (negative drops)
+    this.hazards = [];
+    this.shrinkTimer = 0;
+    this.speedUpTimer = 0;
+    this.blindTimer = 0;
 
     // Trinity ball reveal timer (spirit ball effect)
     this.trinityRevealTimer = 0;
@@ -417,6 +426,7 @@ export class Game {
     }
 
     this.currentVerse = chosen;
+    this._buildWallChars();
     this.revealedPhrases = [];
     this.comboCount = 0;
     this.comboCategory = null;
@@ -462,12 +472,16 @@ export class Game {
 
     // Clear entities
     this.powerups = [];
+    this.hazards = [];
     this.particles = [];
     this.guard = null;
     this.wakeHoles = [];
     this.expandTimer = 0;
     this.slowTimer = 0;
     this.trinityRevealTimer = 0;
+    this.shrinkTimer = 0;
+    this.speedUpTimer = 0;
+    this.blindTimer = 0;
 
     // Track verse played
     this._recordVersePlayed();
@@ -740,15 +754,18 @@ export class Game {
             ball.y = this.paddle.y - 20;
           }
         });
+        this._updateWallChars(dt);
         break;
 
       case 'playing':
         this._updatePaddle(dt);
         this._updateBalls(dt);
         this._updatePowerups(dt);
+        this._updateHazards(dt);
         this._updateParticles(dt);
         this._updateTimers(dt);
         this._updateWakeHoles(dt);
+        this._updateWallChars(dt);
 
         // Check win
         if (this.bricks.every(b => !b.alive)) {
@@ -758,6 +775,7 @@ export class Game {
 
       case 'clearing':
         this._updateParticles(dt);
+        this._updateWallChars(dt);
         if (this.stateTime >= C.CLEAR_DURATION) {
           // Transition to lesson quiz instead of directly to next level
           this._startLessonQuiz();
@@ -765,7 +783,15 @@ export class Game {
         break;
 
       case 'lesson_quiz':
-        this._updateLessonQuiz(dt);
+        if (this._quizEndPause > 0) {
+          this._quizEndPause -= dt;
+          if (this._quizEndPause <= 0) {
+            this._quizEndPause = 0;
+            this._startMiniGame();
+          }
+        } else {
+          this._updateLessonQuiz(dt);
+        }
         break;
 
       case 'mini_game':
@@ -826,7 +852,7 @@ export class Game {
   }
 
   _updateBalls(dt) {
-    const speed = this.slowTimer > 0 ? 0.74 : 1;
+    const speed = this.slowTimer > 0 ? 0.74 : (this.speedUpTimer > 0 ? 1.35 : 1);
 
     for (let i = this.balls.length - 1; i >= 0; i--) {
       const ball = this.balls[i];
@@ -1136,6 +1162,21 @@ export class Game {
       isScore: true
     });
 
+    // Category label popup (helps kids understand WHY)
+    const catLabel = C.CATEGORY_LABELS[brick.category];
+    if (catLabel) {
+      this.particles.push({
+        x: brick.x,
+        y: brick.y + 10,
+        vx: 0, vy: -18,
+        life: 2.0, maxLife: 2.0,
+        char: catLabel,
+        color: brick.color, size: 13,
+        rotation: 0, rotSpeed: 0,
+        affectsWall: false, isScore: true
+      });
+    }
+
     // Order bonus popup (if significant)
     if (orderBonus >= 30) {
       this.particles.push({
@@ -1155,6 +1196,25 @@ export class Game {
     // Maybe spawn power-up
     if (Math.random() < C.POWERUP_CHANCE) {
       this._spawnPowerup(brick.x, brick.y);
+    }
+
+    // Drop hazard from red/bad bricks
+    if (brick.category === 'bad' && Math.random() < C.HAZARD_CHANCE) {
+      this._spawnHazard(brick.x, brick.y);
+    }
+
+    // Multi-ball chance on god/gold bricks
+    if (brick.category === 'god' && this.balls.length < C.MAX_BALLS && Math.random() < 0.3) {
+      const existing = this.balls.find(b => !b.attached);
+      if (existing) {
+        const newBall = this._createBall(false);
+        newBall.x = existing.x;
+        newBall.y = existing.y;
+        const angle = rand(0.3, Math.PI - 0.3);
+        newBall.vx = Math.cos(angle) * newBall.speed * (Math.random() > 0.5 ? 1 : -1);
+        newBall.vy = -Math.abs(Math.sin(angle) * newBall.speed);
+        this._spawnParticles(brick.x, brick.y, C.COLORS.god, 6, '◉');
+      }
     }
 
     // Relayout surviving bricks (smooth animation)
@@ -1368,6 +1428,115 @@ export class Game {
     this._spawnParticles(ball.x, ball.y, info.color, 12, info.char);
   }
 
+  // ── Hazard System (negative drops from red bricks) ────────
+
+  _spawnHazard(x, y) {
+    const chosen = pick(C.HAZARD_TYPES);
+    const m = measureText(this.ctx, chosen.label, C.FONT.hudSmall);
+    this.hazards.push({
+      x, y,
+      kind: chosen.kind,
+      label: chosen.label,
+      symbol: chosen.symbol || '⚠',
+      color: chosen.color,
+      width: m.width + 16,
+      height: m.height + 8,
+      drift: rand(-40, 40),
+      spin: 0
+    });
+    this.audio.playHazardDrop();
+  }
+
+  _updateHazards(dt) {
+    for (let i = this.hazards.length - 1; i >= 0; i--) {
+      const hz = this.hazards[i];
+      hz.y += C.HAZARD_FALL_SPEED * dt;
+      hz.x += hz.drift * dt;
+      hz.spin += dt * 3;
+
+      // Bounce off walls
+      if (hz.x < C.PLAY_RECT.x + 20) hz.drift = Math.abs(hz.drift);
+      if (hz.x > C.PLAY_RECT.x + C.PLAY_RECT.w - 20) hz.drift = -Math.abs(hz.drift);
+
+      // Paddle collision
+      const px = this.paddle.x;
+      const py = this.paddle.y;
+      const pw = this.paddle.width / 2;
+
+      if (hz.y >= py - 15 && hz.y <= py + 15 &&
+          hz.x >= px - pw - 10 && hz.x <= px + pw + 10) {
+        this._activateHazard(hz);
+        this.hazards.splice(i, 1);
+        continue;
+      }
+
+      // Off screen (hazards falling off is GOOD - player dodged it)
+      if (hz.y > C.CANVAS_H + 30) {
+        this.hazards.splice(i, 1);
+      }
+    }
+  }
+
+  _activateHazard(hz) {
+    this.shake = C.SHAKE.badBrick;
+    this.flashAlpha = 0.25;
+    this.flashColor = C.COLORS.bad;
+    this.audio.playWrongAnswer();
+
+    // Warning popup
+    this.particles.push({
+      x: hz.x, y: hz.y - 20,
+      vx: 0, vy: -C.SCORE_POPUP_SPEED,
+      life: C.SCORE_POPUP_LIFE, maxLife: C.SCORE_POPUP_LIFE,
+      char: hz.label,
+      color: C.COLORS.bad, size: 18,
+      rotation: 0, rotSpeed: 0,
+      affectsWall: false, isScore: true
+    });
+
+    // Red burst
+    for (let i = 0; i < 6; i++) {
+      const angle = rand(0, Math.PI * 2);
+      this.particles.push({
+        x: hz.x, y: hz.y,
+        vx: Math.cos(angle) * rand(40, 80),
+        vy: Math.sin(angle) * rand(40, 80) - 30,
+        life: 0.5, maxLife: 0.5,
+        char: pick(['⚠', '!', '✗']),
+        color: C.COLORS.bad, size: 14,
+        rotation: rand(0, Math.PI * 2), rotSpeed: rand(-4, 4),
+        affectsWall: false
+      });
+    }
+
+    switch (hz.kind) {
+      case 'shrink':
+        this.shrinkTimer = 8;
+        this.expandTimer = 0; // cancel any active widen
+        this.paddle.text = '⟦====⟧';
+        this._measurePaddle();
+        break;
+      case 'speed':
+        this.speedUpTimer = 8;
+        break;
+      case 'blind':
+        this.blindTimer = 5;
+        break;
+      case 'drain':
+        this.score = Math.max(0, this.score - 100);
+        this.particles.push({
+          x: hz.x, y: hz.y - 40,
+          vx: 0, vy: -30,
+          life: 2.5, maxLife: 2.5,
+          char: '-100',
+          color: '#8B0000', size: 24,
+          rotation: 0, rotSpeed: 0,
+          affectsWall: false, isScore: true
+        });
+        break;
+    }
+  }
+
   _updateParticles(dt) {
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
@@ -1393,6 +1562,17 @@ export class Game {
     if (this.slowTimer > 0) this.slowTimer -= dt;
     if (this.revealTimer > 0) this.revealTimer -= dt;
     if (this.trinityRevealTimer > 0) this.trinityRevealTimer -= dt;
+
+    // Hazard timers
+    if (this.shrinkTimer > 0) {
+      this.shrinkTimer -= dt;
+      if (this.shrinkTimer <= 0 && this.expandTimer <= 0) {
+        this.paddle.text = C.PADDLE_TEXT;
+        this._measurePaddle();
+      }
+    }
+    if (this.speedUpTimer > 0) this.speedUpTimer -= dt;
+    if (this.blindTimer > 0) this.blindTimer -= dt;
   }
 
   _updateWakeHoles(dt) {
@@ -1637,6 +1817,7 @@ export class Game {
     this.quizTimer = C.QUIZ_DURATION;
     this.quizFeedback = null;
     this.quizAnswered = false;
+    this._quizEndPause = 0;
     this.state = 'lesson_quiz';
     this.stateTime = 0;
   }
@@ -1745,13 +1926,16 @@ export class Game {
     if (correct) {
       this.quizScore += C.QUIZ_CORRECT_POINTS;
       this.score += C.QUIZ_CORRECT_POINTS;
-      this.quizFeedback = { text: `Correct! +${C.QUIZ_CORRECT_POINTS}`, color: C.COLORS.good, timer: 1.2 };
+      this.quizFeedback = { text: `\u2713 Correct! +${C.QUIZ_CORRECT_POINTS}`, color: C.COLORS.good, timer: 2.8 };
+      this.audio.playCorrectAnswer();
     } else {
       this.quizFeedback = {
-        text: `Not quite. It's "${categories.find(c => c.key === lesson.correctKey)?.label || 'unknown'}"`,
+        text: `\u2717 Wrong! It's "${categories.find(c => c.key === lesson.correctKey)?.label || 'unknown'}"`,
         color: C.COLORS.bad,
-        timer: 1.8
+        timer: 3.2
       };
+      this.shake = C.SHAKE.wrongAnswer;
+      this.audio.playWrongAnswer();
     }
   }
 
@@ -1791,9 +1975,10 @@ export class Game {
       });
       this.flashAlpha = 0.3;
       this.flashColor = C.COLORS.god;
+      this.audio.playWaveClear();
     }
-    // Transition to mini-game
-    this._startMiniGame();
+    // Brief pause before mini-game so kids see quiz results
+    this._quizEndPause = 3.0;
   }
 
   // ── Mini-Game (Feature #8) ────────────────────────────────
@@ -1805,6 +1990,7 @@ export class Game {
     this.miniComplete = false;
     this.miniScore = 0;
     this.miniFeedback = null;
+    this._miniCompletedAt = null;
 
     if (this.miniGameType === 'reassemble') {
       this._setupReassemble();
@@ -1863,16 +2049,18 @@ export class Game {
   }
 
   _setupCategorySort() {
-    // Simplified: show phrases with their categories, auto-reveal after a few seconds
-    const phrases = this.currentVerse.phrases.slice(0, 5).map(p => ({
+    // Interactive: player drags/clicks phrases into the correct category box
+    const phrases = this.currentVerse.phrases.slice(0, 6).map(p => ({
       text: p.t,
-      category: p.c,
-      revealed: false
+      category: p.c,           // correct category
+      placed: false,            // has been placed in a box
+      placedCategory: null,     // which box it was placed in
+      correct: false            // was it placed correctly
     }));
     this.miniPhrases = shuffle(phrases);
     this.miniSelected = [];
-    // Auto-complete after a shorter timer for this simplified version
-    this.miniTimer = Math.min(C.MINIGAME_DURATION, 10);
+    this._sortSelectedPhrase = -1; // index of phrase currently "picked up"
+    this.miniTimer = C.CATEGORY_SORT_DURATION;
   }
 
   _updateMiniGame(dt) {
@@ -1886,18 +2074,10 @@ export class Game {
       }
     }
 
-    // Category sort: auto-reveal phrases over time
+    // Category sort: check if all phrases placed
     if (this.miniGameType === 'category_sort' && !this.miniComplete) {
-      const elapsed = C.MINIGAME_DURATION - this.miniTimer;
-      const revealInterval = 2; // reveal one every 2 seconds
-      const toReveal = Math.floor(elapsed / revealInterval);
-      for (let i = 0; i < Math.min(toReveal, this.miniPhrases.length); i++) {
-        this.miniPhrases[i].revealed = true;
-      }
-      if (this.miniPhrases.every(p => p.revealed)) {
+      if (this.miniPhrases.every(p => p.placed)) {
         this.miniComplete = true;
-        this.miniScore += 50;
-        this.score += 50;
       }
     }
 
@@ -1906,8 +2086,10 @@ export class Game {
       if (this.miniTimer <= 0 && !this.miniComplete) {
         this.miniComplete = true;
       }
-      // Brief pause then advance
-      if (this.miniTimer <= -1.5 || (this.miniComplete && this.stateTime > 1.5)) {
+      // Longer pause so kids can see their score before advancing
+      const completedAt = this._miniCompletedAt || (this._miniCompletedAt = this.stateTime);
+      if (this.stateTime - completedAt > 3.5) {
+        this._miniCompletedAt = null;
         this._endMiniGame();
       }
     }
@@ -1929,9 +2111,12 @@ export class Game {
       if (phrase.text === this.miniCorrectOrder[correctIndex]) {
         this.miniScore += 30;
         this.score += 30;
-        this.miniFeedback = { text: '+30', color: C.COLORS.good, timer: 0.5 };
+        this.miniFeedback = { text: '\u2713 Correct! +30', color: C.COLORS.good, timer: 2.0 };
+        this.audio.playCorrectAnswer();
       } else {
-        this.miniFeedback = { text: 'Wrong order', color: C.COLORS.bad, timer: 0.5 };
+        this.miniFeedback = { text: '\u2717 Wrong order!', color: C.COLORS.bad, timer: 2.5 };
+        this.shake = C.SHAKE.wrongAnswer;
+        this.audio.playWrongAnswer();
       }
 
       // Check completion
@@ -1957,9 +2142,12 @@ export class Game {
       if (word.text === correctWord) {
         this.miniScore += 40;
         this.score += 40;
-        this.miniFeedback = { text: 'Correct! +40', color: C.COLORS.good, timer: 0.5 };
+        this.miniFeedback = { text: '\u2713 Correct! +40', color: C.COLORS.good, timer: 2.0 };
+        this.audio.playCorrectAnswer();
       } else {
-        this.miniFeedback = { text: 'Not quite', color: C.COLORS.bad, timer: 0.5 };
+        this.miniFeedback = { text: '\u2717 Wrong word!', color: C.COLORS.bad, timer: 2.5 };
+        this.shake = C.SHAKE.wrongAnswer;
+        this.audio.playWrongAnswer();
       }
 
       // Check completion
@@ -2010,6 +2198,78 @@ export class Game {
           return;
         }
       }
+    } else if (this.miniGameType === 'category_sort') {
+      this._onCategorySortClick(pos);
+    }
+  }
+
+  _onCategorySortClick(pos) {
+    const cx = C.CANVAS_W / 2;
+    const categories = C.LESSON_CATEGORIES; // god, good, bad
+
+    // Phrase buttons at top — unsorted phrases
+    const phraseY = C.CANVAS_H * 0.22;
+    const btnH = 34;
+    const btnGap = 6;
+    const btnW = Math.min(C.CANVAS_W - 80, 580);
+    const btnX = cx - btnW / 2;
+
+    // Check if clicking an unsorted phrase to pick it up
+    let visIdx = 0;
+    for (let i = 0; i < this.miniPhrases.length; i++) {
+      const phrase = this.miniPhrases[i];
+      if (phrase.placed) continue;
+      const by = phraseY + visIdx * (btnH + btnGap);
+      if (by + btnH > C.CANVAS_H * 0.55) break;
+      if (this._isInRect(pos, btnX, by, btnW, btnH)) {
+        this._sortSelectedPhrase = i;
+        this.audio.playMenuSelect();
+        return;
+      }
+      visIdx++;
+    }
+
+    // Check if clicking a category box to place the selected phrase
+    if (this._sortSelectedPhrase >= 0) {
+      const colW = 200;
+      const colGap = 20;
+      const colStartX = cx - (colW * 3 + colGap * 2) / 2;
+      const colY = C.CANVAS_H * 0.58;
+      const colH = C.CANVAS_H * 0.30;
+
+      for (let ci = 0; ci < categories.length; ci++) {
+        const bx = colStartX + ci * (colW + colGap);
+        if (this._isInRect(pos, bx, colY, colW, colH)) {
+          const phrase = this.miniPhrases[this._sortSelectedPhrase];
+          const targetCat = categories[ci].key;
+
+          phrase.placed = true;
+          phrase.placedCategory = targetCat;
+
+          // Check correctness — map non-standard categories to closest match
+          const correctCat = phrase.category;
+          const isCorrect = correctCat === targetCat
+            || (targetCat === 'good' && !['god', 'bad'].includes(correctCat));
+          phrase.correct = isCorrect;
+
+          if (isCorrect) {
+            this.miniScore += C.MINI_CORRECT_POINTS;
+            this.score += C.MINI_CORRECT_POINTS;
+            this.miniFeedback = { text: `\u2713 Correct! +${C.MINI_CORRECT_POINTS}`, color: C.COLORS.good, timer: 2.0 };
+            this.audio.playCorrectAnswer();
+          } else {
+            this.miniFeedback = {
+              text: `\u2717 Wrong! It's "${categories.find(c => c.key === correctCat)?.label || correctCat}"`,
+              color: C.COLORS.bad, timer: 2.5
+            };
+            this.shake = C.SHAKE.wrongAnswer;
+            this.audio.playWrongAnswer();
+          }
+
+          this._sortSelectedPhrase = -1;
+          return;
+        }
+      }
     }
   }
 
@@ -2022,6 +2282,8 @@ export class Game {
         perfect = this.miniSelected.length === this.miniCorrectOrder.length;
       } else if (this.miniGameType === 'missing_word') {
         perfect = this.miniBlanksFilled && this.miniBlanksFilled.every(b => b);
+      } else if (this.miniGameType === 'category_sort') {
+        perfect = this.miniPhrases.every(p => p.correct);
       }
       if (perfect) {
         this.score += C.MINI_PERFECT_BONUS;
@@ -2174,6 +2436,8 @@ export class Game {
 
     // ── Heaven Surface Glow (Feature #10) ──────────────────
     this._renderHeavenSurface(ctx);
+    // ── Earth Surface Grass (bottom) ─────────────────────
+    this._renderEarthSurface(ctx);
   }
 
   // ── Heaven Surface (Feature #10) ─────────────────────────
@@ -2204,6 +2468,59 @@ export class Game {
     ctx.moveTo(r.x + 5, topY + 1);
     ctx.lineTo(r.x + r.w - 5, topY + 1);
     ctx.stroke();
+
+    ctx.restore();
+  }
+
+  // ── Earth Surface — grass blades at bottom ───────────────
+
+  _renderEarthSurface(ctx) {
+    ctx.save();
+    const r = C.PLAY_RECT;
+    const bottomY = r.y + r.h;
+    const grassHeight = 35;
+    const t = this.heavenShimmerT; // reuse same timer
+
+    // Green-brown gradient from bottom edge upward
+    const earthGrad = ctx.createLinearGradient(r.x, bottomY, r.x, bottomY - grassHeight);
+    earthGrad.addColorStop(0, 'rgba(46, 125, 50, 0.22)');
+    earthGrad.addColorStop(0.3, 'rgba(76, 175, 80, 0.15)');
+    earthGrad.addColorStop(0.7, 'rgba(93, 64, 55, 0.06)');
+    earthGrad.addColorStop(1, 'rgba(93, 64, 55, 0)');
+    ctx.fillStyle = earthGrad;
+    ctx.fillRect(r.x, bottomY - grassHeight, r.w, grassHeight);
+
+    // Brown soil line at very bottom
+    ctx.strokeStyle = C.COLORS.earthBrown;
+    ctx.lineWidth = 1.5;
+    ctx.globalAlpha = 0.3;
+    ctx.beginPath();
+    ctx.moveTo(r.x + 5, bottomY - 1);
+    ctx.lineTo(r.x + r.w - 5, bottomY - 1);
+    ctx.stroke();
+
+    // Grass blades — small triangles that sway
+    ctx.globalAlpha = 0.35;
+    const bladeCount = 80;
+    const bladeSpacing = r.w / bladeCount;
+
+    for (let i = 0; i < bladeCount; i++) {
+      const baseX = r.x + i * bladeSpacing + bladeSpacing * 0.5;
+      const height = 8 + Math.sin(i * 1.7) * 5 + Math.sin(i * 0.3) * 3;
+      const sway = Math.sin(t * 1.5 + i * 0.4) * 3;
+      const tipX = baseX + sway;
+      const tipY = bottomY - height;
+
+      // Alternate between two greens
+      ctx.fillStyle = i % 3 === 0 ? C.COLORS.earthDarkGreen : C.COLORS.earthGreen;
+      ctx.globalAlpha = 0.25 + Math.sin(i * 0.8 + t) * 0.08;
+
+      ctx.beginPath();
+      ctx.moveTo(baseX - 2, bottomY);
+      ctx.quadraticCurveTo(baseX - 1 + sway * 0.5, tipY + height * 0.4, tipX, tipY);
+      ctx.quadraticCurveTo(baseX + 1 + sway * 0.5, tipY + height * 0.4, baseX + 2, bottomY);
+      ctx.fill();
+    }
 
     ctx.restore();
   }
@@ -2252,6 +2569,52 @@ export class Game {
     ctx.textAlign = 'right';
     ctx.fillStyle = C.COLORS.god;
     ctx.fillText(`BEST: ${this.stats.playerHighScore}`, C.PLAY_RECT.x + C.PLAY_RECT.w - 15, sy);
+
+    ctx.restore();
+  }
+
+  _renderCornerTimer(ctx, fadeIn, seconds, progress, color, urgent) {
+    ctx.save();
+    // Position: top-right corner with some padding
+    const tx = C.CANVAS_W - 70;
+    const ty = 50;
+
+    // Circular progress arc behind the number
+    const radius = 32;
+    ctx.lineWidth = 4;
+
+    // Background ring
+    ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+    ctx.globalAlpha = fadeIn;
+    ctx.beginPath();
+    ctx.arc(tx, ty, radius, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Progress arc (fills clockwise from top)
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = fadeIn * 0.7;
+    ctx.beginPath();
+    ctx.arc(tx, ty, radius, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * progress);
+    ctx.stroke();
+
+    // Digital number
+    ctx.font = "900 28px 'Orbitron', sans-serif";
+    ctx.fillStyle = color;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.globalAlpha = fadeIn * (urgent ? 0.6 + Math.sin(this.stateTime * 8) * 0.4 : 0.95);
+    if (urgent) {
+      ctx.shadowColor = C.COLORS.bad;
+      ctx.shadowBlur = 12;
+    }
+    ctx.fillText(String(seconds), tx, ty);
+    ctx.shadowBlur = 0;
+
+    // Small label
+    ctx.font = "500 10px 'Rajdhani', sans-serif";
+    ctx.fillStyle = 'rgba(255,255,255,0.4)';
+    ctx.globalAlpha = fadeIn * 0.6;
+    ctx.fillText('SEC', tx, ty + radius + 12);
 
     ctx.restore();
   }
@@ -2305,46 +2668,188 @@ export class Game {
     ctx.restore();
   }
 
-  _renderTextWall(ctx) {
-    // Fill ENTIRE play area with the current verse text, flowing and wavy
+  _buildWallChars() {
+    // Build grid of individual characters that can be displaced by balls
+    this.wallChars = [];
     if (!this.currentVerse) return;
-    ctx.save();
-    ctx.font = C.WALL_FONT;
 
-    const verseText = this.currentVerse.text + '  ✝  ' + this.currentVerse.ref + '  ·  ';
+    const verseText = this.currentVerse.text + '  \u271D  ' + this.currentVerse.ref + '  \u00B7  ';
+    const charW = C.WALL_CHAR_W;
     const lineH = C.WALL_LINE_HEIGHT;
-    const startY = C.PLAY_RECT.y + 5;
+    const startY = C.PLAY_RECT.y + 8;
     const endY = C.PLAY_RECT.y + C.PLAY_RECT.h;
     const startX = C.PLAY_RECT.x + 5;
-    const t = this.stateTime || 0;
-
+    const endX = C.PLAY_RECT.x + C.PLAY_RECT.w - 5;
     const wallColors = ['#ff9c5b', '#f0c35f', '#84d96c', '#55c6d9', '#8ba7ff'];
 
-    let charIdx = 0;
+    let txtIdx = 0;
     let lineIdx = 0;
     for (let y = startY; y < endY; y += lineH) {
-      // Wavy horizontal offset per line (PreText-style flowing effect)
-      const wave = Math.sin((y * 0.02) + t * 0.8) * 12;
-      const wave2 = Math.cos((y * 0.015) + t * 0.5) * 6;
-      const xOffset = wave + wave2;
-
-      // Bold, strong alpha like PreText Breaker
-      const alphaWave = 0.42 + Math.sin((y * 0.03) + t * 0.6) * 0.1;
-
-      ctx.fillStyle = wallColors[lineIdx % wallColors.length];
-      ctx.globalAlpha = alphaWave;
-
-      // Build line from repeating verse text
-      let line = '';
-      const charsPerLine = 90;
-      for (let c = 0; c < charsPerLine; c++) {
-        line += verseText[(charIdx + c) % verseText.length];
+      const cols = Math.floor((endX - startX) / charW);
+      const color = wallColors[lineIdx % wallColors.length];
+      for (let col = 0; col < cols; col++) {
+        const ch = verseText[txtIdx % verseText.length];
+        txtIdx++;
+        this.wallChars.push({
+          ch,
+          homeX: startX + col * charW,
+          homeY: y,
+          dx: 0, dy: 0,     // displacement from home
+          vx: 0, vy: 0,     // velocity
+          color,
+          lineIdx
+        });
       }
-
-      ctx.fillText(line, startX + xOffset, y);
-      charIdx += charsPerLine;
       lineIdx++;
     }
+  }
+
+  _updateWallChars(dt) {
+    if (this.wallChars.length === 0) return;
+
+    const repelR = C.WALL_REPEL_RADIUS;
+    const repelR2 = repelR * repelR;
+    const strength = C.WALL_REPEL_STRENGTH;
+    const spring = C.WALL_SPRING;
+    const damping = C.WALL_DAMPING;
+    const pRepelR = C.WALL_PARTICLE_REPEL;
+    const pRepelR2 = pRepelR * pRepelR;
+    const pStrength = C.WALL_PARTICLE_STRENGTH;
+
+    // Collect all repulsors: balls + wall-affecting particles + paddle
+    const repulsors = [];
+    for (const ball of this.balls) {
+      if (!ball.attached) {
+        repulsors.push({ x: ball.x, y: ball.y, r2: repelR2, str: strength });
+      }
+    }
+    for (const p of this.particles) {
+      if (p.affectsWall) {
+        repulsors.push({ x: p.x, y: p.y, r2: pRepelR2, str: pStrength });
+      }
+    }
+    if (this.paddle) {
+      repulsors.push({ x: this.paddle.x, y: this.paddle.y, r2: repelR2 * 0.5, str: strength * 0.4 });
+    }
+
+    const settleThresh = 0.3; // below this displacement + velocity, char is "at rest"
+
+    for (const c of this.wallChars) {
+      // Quick check: if char is settled and no repulsor is nearby, skip
+      const atRest = Math.abs(c.dx) < settleThresh && Math.abs(c.dy) < settleThresh
+                  && Math.abs(c.vx) < settleThresh && Math.abs(c.vy) < settleThresh;
+      if (atRest) {
+        let nearRepulsor = false;
+        for (const rep of repulsors) {
+          const ddx = c.homeX - rep.x;
+          const ddy = c.homeY - rep.y;
+          if (ddx * ddx + ddy * ddy < rep.r2) { nearRepulsor = true; break; }
+        }
+        if (!nearRepulsor) {
+          c.dx = 0; c.dy = 0; c.vx = 0; c.vy = 0;
+          continue;
+        }
+      }
+
+      // Current world position
+      const wx = c.homeX + c.dx;
+      const wy = c.homeY + c.dy;
+
+      // Accumulate repulsion forces
+      let fx = 0, fy = 0;
+      for (const rep of repulsors) {
+        const ddx = wx - rep.x;
+        const ddy = wy - rep.y;
+        const dist2 = ddx * ddx + ddy * ddy;
+        if (dist2 < rep.r2 && dist2 > 1) {
+          const dist = Math.sqrt(dist2);
+          const falloff = 1 - dist / Math.sqrt(rep.r2);
+          const force = rep.str * falloff * falloff;
+          fx += (ddx / dist) * force;
+          fy += (ddy / dist) * force;
+        }
+      }
+
+      // Spring back to home position
+      fx -= c.dx * spring;
+      fy -= c.dy * spring;
+
+      // Integrate
+      c.vx = (c.vx + fx * dt) * damping;
+      c.vy = (c.vy + fy * dt) * damping;
+      c.dx += c.vx * dt;
+      c.dy += c.vy * dt;
+
+      // Clamp max displacement
+      const maxDisp = 80;
+      const disp2 = c.dx * c.dx + c.dy * c.dy;
+      if (disp2 > maxDisp * maxDisp) {
+        const s = maxDisp / Math.sqrt(disp2);
+        c.dx *= s;
+        c.dy *= s;
+      }
+    }
+  }
+
+  _renderTextWall(ctx) {
+    if (!this.currentVerse || this.wallChars.length === 0) return;
+    ctx.save();
+    ctx.font = C.WALL_FONT;
+    ctx.textBaseline = 'middle';
+
+    const t = this.stateTime || 0;
+    const dispThresh = 0.5; // below this, char is considered undisplaced
+
+    // Group chars by line for batch rendering of undisplaced chars
+    let currentLine = -1;
+    let batchStr = '';
+    let batchX = 0;
+    let batchY = 0;
+    let batchColor = '';
+
+    const flushBatch = () => {
+      if (batchStr.length > 0) {
+        ctx.fillStyle = batchColor;
+        const baseAlpha = 0.38 + Math.sin((batchY * 0.03) + t * 0.6) * 0.08;
+        ctx.globalAlpha = baseAlpha;
+        const wave = Math.sin((batchY * 0.02) + t * 0.8) * 3;
+        ctx.fillText(batchStr, batchX + wave, batchY);
+        batchStr = '';
+      }
+    };
+
+    for (const c of this.wallChars) {
+      const displaced = (c.dx * c.dx + c.dy * c.dy) > dispThresh * dispThresh;
+
+      if (displaced) {
+        // Flush any pending batch before drawing displaced char
+        flushBatch();
+        currentLine = -1;
+
+        const wave = Math.sin((c.homeY * 0.02) + t * 0.8) * 3;
+        const x = c.homeX + c.dx + wave;
+        const y = c.homeY + c.dy;
+
+        // Brighter when displaced — chars glow as they're pushed
+        const disp = Math.sqrt(c.dx * c.dx + c.dy * c.dy);
+        const baseAlpha = 0.38 + Math.sin((c.homeY * 0.03) + t * 0.6) * 0.08;
+        const dispBoost = Math.min(disp / 30, 1) * 0.45;
+        ctx.globalAlpha = Math.min(baseAlpha + dispBoost, 0.95);
+        ctx.fillStyle = c.color;
+        ctx.fillText(c.ch, x, y);
+      } else {
+        // Batch undisplaced chars on same line into a single string
+        if (c.lineIdx !== currentLine) {
+          flushBatch();
+          currentLine = c.lineIdx;
+          batchX = c.homeX;
+          batchY = c.homeY;
+          batchColor = c.color;
+        }
+        batchStr += c.ch;
+      }
+    }
+    flushBatch();
 
     ctx.restore();
   }
@@ -2619,6 +3124,54 @@ export class Game {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(pu.label, pu.x, pu.y + bob);
+
+      ctx.restore();
+    }
+  }
+
+  _renderHazards(ctx) {
+    for (const hz of this.hazards) {
+      ctx.save();
+
+      const bob = Math.sin(hz.spin) * 4;
+      const pulse = 0.6 + Math.sin(hz.spin * 3) * 0.4;
+
+      // Red glow
+      ctx.shadowColor = C.COLORS.bad;
+      ctx.shadowBlur = 14;
+
+      // Dark pill background
+      ctx.fillStyle = '#1a0000';
+      ctx.globalAlpha = 0.7;
+      ctx.beginPath();
+      ctx.roundRect(hz.x - hz.width / 2, hz.y - hz.height / 2 + bob, hz.width, hz.height, 8);
+      ctx.fill();
+
+      // Red pulsing border
+      ctx.strokeStyle = C.COLORS.bad;
+      ctx.lineWidth = 2;
+      ctx.globalAlpha = pulse;
+      ctx.beginPath();
+      ctx.roundRect(hz.x - hz.width / 2, hz.y - hz.height / 2 + bob, hz.width, hz.height, 8);
+      ctx.stroke();
+
+      // Symbol
+      if (hz.symbol) {
+        ctx.font = "bold 18px 'Rajdhani', sans-serif";
+        ctx.fillStyle = hz.color;
+        ctx.globalAlpha = 0.9;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(hz.symbol, hz.x, hz.y + bob - 1);
+      }
+
+      // Label
+      ctx.font = C.FONT.hudSmall;
+      ctx.fillStyle = hz.color;
+      ctx.globalAlpha = 1;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(hz.label, hz.x, hz.y + bob);
 
       ctx.restore();
     }
@@ -2960,6 +3513,9 @@ export class Game {
     // Power-ups
     this._renderPowerups(ctx);
 
+    // Hazards
+    this._renderHazards(ctx);
+
     // Particles
     this._renderParticles(ctx);
 
@@ -2993,6 +3549,36 @@ export class Game {
     if (this.revealTimer > 0 || this.trinityRevealTimer > 0) {
       this._renderRevealOverlay(ctx);
     }
+
+    // Darkness hazard overlay
+    if (this.blindTimer > 0) {
+      ctx.save();
+      const blindAlpha = Math.min(0.6, this.blindTimer * 0.2);
+      ctx.fillStyle = '#000';
+      ctx.globalAlpha = blindAlpha;
+      ctx.fillRect(0, 0, C.CANVAS_W, C.CANVAS_H);
+      // Small circle of visibility around the ball
+      for (const ball of this.balls) {
+        if (!ball.attached) {
+          ctx.globalCompositeOperation = 'destination-out';
+          const grad = ctx.createRadialGradient(ball.x, ball.y, 0, ball.x, ball.y, 100);
+          grad.addColorStop(0, 'rgba(0,0,0,1)');
+          grad.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = grad;
+          ctx.fillRect(ball.x - 100, ball.y - 100, 200, 200);
+          ctx.globalCompositeOperation = 'source-over';
+        }
+      }
+      // Also show paddle area
+      ctx.globalCompositeOperation = 'destination-out';
+      const pGrad = ctx.createRadialGradient(this.paddle.x, this.paddle.y, 0, this.paddle.x, this.paddle.y, 80);
+      pGrad.addColorStop(0, 'rgba(0,0,0,1)');
+      pGrad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = pGrad;
+      ctx.fillRect(this.paddle.x - 80, this.paddle.y - 80, 160, 160);
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.restore();
+    }
   }
 
   _renderPowerTimers(ctx) {
@@ -3023,6 +3609,27 @@ export class Game {
       ctx.fillStyle = C.TRINITY_BALLS.spirit.color;
       ctx.globalAlpha = 0.7;
       ctx.fillText(`SPIRIT REVEAL ${this.trinityRevealTimer.toFixed(1)}s`, C.PLAY_RECT.x + 15, ty);
+      ty += 16;
+    }
+
+    // Hazard timers (red)
+    if (this.shrinkTimer > 0) {
+      ctx.fillStyle = C.COLORS.bad;
+      ctx.globalAlpha = 0.8;
+      ctx.fillText(`⚠ SHRINK ${this.shrinkTimer.toFixed(1)}s`, C.PLAY_RECT.x + 15, ty);
+      ty += 16;
+    }
+    if (this.speedUpTimer > 0) {
+      ctx.fillStyle = '#FF6B35';
+      ctx.globalAlpha = 0.8;
+      ctx.fillText(`⚡ SPEED UP ${this.speedUpTimer.toFixed(1)}s`, C.PLAY_RECT.x + 15, ty);
+      ty += 16;
+    }
+    if (this.blindTimer > 0) {
+      ctx.fillStyle = '#4A0E0E';
+      ctx.globalAlpha = 0.8;
+      ctx.fillText(`🌑 DARKNESS ${this.blindTimer.toFixed(1)}s`, C.PLAY_RECT.x + 15, ty);
+      ty += 16;
     }
 
     // Trinity ball active indicators
@@ -3220,27 +3827,12 @@ export class Game {
       ctx.globalAlpha = fadeIn;
     }
 
-    // Timer bar
-    const timerBarW = 400;
-    const timerBarH = 6;
-    const timerBarX = cx - timerBarW / 2;
-    const timerBarY = C.CANVAS_H * 0.20;
+    // Digital countdown timer — top-right corner
     const timerProgress = clamp(this.quizTimer / C.QUIZ_DURATION, 0, 1);
-
-    // Timer background
-    ctx.fillStyle = 'rgba(255,255,255,0.1)';
-    ctx.beginPath();
-    ctx.roundRect(timerBarX, timerBarY, timerBarW, timerBarH, 3);
-    ctx.fill();
-
-    // Timer fill
+    const timerSec = Math.max(0, Math.ceil(this.quizTimer));
     const timerColor = timerProgress > 0.3 ? C.COLORS.good : C.COLORS.bad;
-    ctx.fillStyle = timerColor;
-    ctx.globalAlpha = fadeIn * 0.8;
-    ctx.beginPath();
-    ctx.roundRect(timerBarX, timerBarY, timerBarW * timerProgress, timerBarH, 3);
-    ctx.fill();
-    ctx.globalAlpha = fadeIn;
+    const timerUrgent = timerProgress <= 0.2;
+    this._renderCornerTimer(ctx, fadeIn, timerSec, timerProgress, timerColor, timerUrgent);
 
     // Progress dots
     const dotY = C.CANVAS_H * 0.25;
@@ -3349,23 +3941,76 @@ export class Game {
       });
     }
 
-    // Feedback
+    // Feedback — big and prominent
     if (this.quizFeedback) {
-      ctx.font = "bold 20px 'Rajdhani', sans-serif";
+      const fbT = this.quizFeedback.timer / (this.quizFeedback.color === C.COLORS.good ? 2.8 : 3.2);
+      const isCorrect = this.quizFeedback.color === C.COLORS.good;
+      const fbScale = isCorrect
+        ? 1 + Math.sin(fbT * Math.PI * 4) * 0.08
+        : 1 + Math.sin(this.stateTime * 20) * 0.04 * clamp(fbT * 3, 0, 1);
+
+      ctx.save();
+      ctx.translate(cx, C.CANVAS_H * 0.72);
+      ctx.scale(fbScale, fbScale);
+      ctx.font = "900 32px 'Rajdhani', sans-serif";
       ctx.fillStyle = this.quizFeedback.color;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.globalAlpha = fadeIn * clamp(this.quizFeedback.timer * 2, 0, 1);
-      ctx.fillText(this.quizFeedback.text, cx, C.CANVAS_H * 0.75);
+      ctx.shadowColor = this.quizFeedback.color;
+      ctx.shadowBlur = 14;
+      ctx.globalAlpha = fadeIn * clamp(this.quizFeedback.timer * 1.5, 0, 1);
+      // White outline for readability
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 3;
+      ctx.strokeText(this.quizFeedback.text, 0, 0);
+      ctx.fillText(this.quizFeedback.text, 0, 0);
+      ctx.shadowBlur = 0;
+      ctx.restore();
     }
 
-    // Quiz score
-    ctx.font = C.FONT.hud;
+    // Quiz score — large animated display
+    const scoreScale = 1 + Math.sin(this.stateTime * 3) * 0.03;
+    ctx.save();
+    ctx.translate(cx, C.CANVAS_H * 0.88);
+    ctx.scale(scoreScale, scoreScale);
+    ctx.font = "900 28px 'Orbitron', sans-serif";
     ctx.fillStyle = C.COLORS.god;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.globalAlpha = fadeIn * 0.8;
-    ctx.fillText(`Quiz Bonus: +${this.quizScore}`, cx, C.CANVAS_H * 0.9);
+    ctx.shadowColor = C.COLORS.godGlow;
+    ctx.shadowBlur = 10;
+    ctx.globalAlpha = fadeIn * 0.9;
+    ctx.fillText(`QUIZ BONUS: +${this.quizScore}`, 0, 0);
+    ctx.shadowBlur = 0;
+    ctx.restore();
+
+    // Quiz complete summary during end pause
+    if (this._quizEndPause > 0) {
+      const correctCount = this.quizLessons.filter(l => l.correct).length;
+      const total = this.quizLessons.length;
+      const allCorrect = correctCount === total;
+
+      ctx.font = "900 38px 'Orbitron', sans-serif";
+      ctx.fillStyle = allCorrect ? C.COLORS.god : C.COLORS.playFrame;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.shadowColor = allCorrect ? C.COLORS.godGlow : 'rgba(117,215,230,0.4)';
+      ctx.shadowBlur = 18;
+      ctx.globalAlpha = fadeIn;
+      const compText = allCorrect ? 'PERFECT QUIZ!' : 'QUIZ COMPLETE!';
+      ctx.fillText(compText, cx, C.CANVAS_H * 0.45);
+      ctx.shadowBlur = 0;
+
+      ctx.font = "600 22px 'Rajdhani', sans-serif";
+      ctx.fillStyle = '#b0c4de';
+      ctx.globalAlpha = fadeIn * 0.8;
+      ctx.fillText(`${correctCount}/${total} correct  \u2022  +${this.quizScore} points`, cx, C.CANVAS_H * 0.52);
+
+      ctx.font = "500 16px 'Rajdhani', sans-serif";
+      ctx.fillStyle = C.COLORS.playFrame;
+      ctx.globalAlpha = fadeIn * 0.5;
+      ctx.fillText('Mini-game starting soon...', cx, C.CANVAS_H * 0.58);
+    }
 
     ctx.restore();
   }
@@ -3402,26 +4047,13 @@ export class Game {
     ctx.fillText(titleMap[this.miniGameType] || 'MINI GAME', cx, C.CANVAS_H * 0.08);
     ctx.shadowBlur = 0;
 
-    // Timer bar
-    const timerBarW = 400;
-    const timerBarH = 6;
-    const timerBarX = cx - timerBarW / 2;
-    const timerBarY = C.CANVAS_H * 0.13;
-    const maxTimer = this.miniGameType === 'category_sort' ? 10 : C.MINIGAME_DURATION;
+    // Digital countdown timer — top-right corner
+    const maxTimer = this.miniGameType === 'category_sort' ? C.CATEGORY_SORT_DURATION : C.MINIGAME_DURATION;
     const timerProgress = clamp(this.miniTimer / maxTimer, 0, 1);
-
-    ctx.fillStyle = 'rgba(255,255,255,0.1)';
-    ctx.beginPath();
-    ctx.roundRect(timerBarX, timerBarY, timerBarW, timerBarH, 3);
-    ctx.fill();
-
+    const timerSec = Math.max(0, Math.ceil(this.miniTimer));
     const timerColor = timerProgress > 0.3 ? C.COLORS.good : C.COLORS.bad;
-    ctx.fillStyle = timerColor;
-    ctx.globalAlpha = fadeIn * 0.8;
-    ctx.beginPath();
-    ctx.roundRect(timerBarX, timerBarY, timerBarW * timerProgress, timerBarH, 3);
-    ctx.fill();
-    ctx.globalAlpha = fadeIn;
+    const timerUrgent = timerProgress <= 0.2;
+    this._renderCornerTimer(ctx, fadeIn, timerSec, timerProgress, timerColor, timerUrgent);
 
     // Verse reference
     if (this.currentVerse) {
@@ -3445,27 +4077,56 @@ export class Game {
         break;
     }
 
-    // Feedback
+    // Feedback — big and prominent
     if (this.miniFeedback) {
-      ctx.font = "bold 18px 'Rajdhani', sans-serif";
+      const isCorrect = this.miniFeedback.color === C.COLORS.good;
+      const fbScale = isCorrect
+        ? 1 + Math.sin(this.stateTime * 12) * 0.06
+        : 1 + Math.sin(this.stateTime * 20) * 0.04;
+
+      ctx.save();
+      ctx.translate(cx, C.CANVAS_H * 0.90);
+      ctx.scale(fbScale, fbScale);
+      ctx.font = "900 30px 'Rajdhani', sans-serif";
       ctx.fillStyle = this.miniFeedback.color;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.globalAlpha = fadeIn * clamp(this.miniFeedback.timer * 3, 0, 1);
-      ctx.fillText(this.miniFeedback.text, cx, C.CANVAS_H * 0.92);
+      ctx.shadowColor = this.miniFeedback.color;
+      ctx.shadowBlur = 12;
+      ctx.globalAlpha = fadeIn * clamp(this.miniFeedback.timer * 1.5, 0, 1);
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 3;
+      ctx.strokeText(this.miniFeedback.text, 0, 0);
+      ctx.fillText(this.miniFeedback.text, 0, 0);
+      ctx.shadowBlur = 0;
+      ctx.restore();
     }
 
-    // Completion message
+    // Completion message — large with celebration
     if (this.miniComplete) {
-      ctx.font = "bold 24px 'Rajdhani', sans-serif";
+      const compScale = 1 + Math.sin(this.stateTime * 4) * 0.05;
+      ctx.save();
+      ctx.translate(cx, C.CANVAS_H * 0.84);
+      ctx.scale(compScale, compScale);
+      ctx.font = "900 34px 'Orbitron', sans-serif";
       ctx.fillStyle = C.COLORS.good;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.globalAlpha = fadeIn;
       ctx.shadowColor = C.COLORS.goodGlow;
-      ctx.shadowBlur = 10;
-      ctx.fillText(`Mini-Game Complete! +${this.miniScore}`, cx, C.CANVAS_H * 0.86);
+      ctx.shadowBlur = 16;
+      ctx.globalAlpha = fadeIn;
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+      ctx.lineWidth = 2;
+      ctx.strokeText(`COMPLETE! +${this.miniScore}`, 0, 0);
+      ctx.fillText(`COMPLETE! +${this.miniScore}`, 0, 0);
       ctx.shadowBlur = 0;
+
+      // Sub-text: "Get Ready for Level X"
+      ctx.font = "500 18px 'Rajdhani', sans-serif";
+      ctx.fillStyle = C.COLORS.playFrame;
+      ctx.globalAlpha = fadeIn * 0.7;
+      ctx.fillText(`Get ready for Level ${this.level + 1}...`, 0, 34);
+      ctx.restore();
     }
 
     ctx.restore();
@@ -3671,86 +4332,117 @@ export class Game {
 
   _renderCategorySort(ctx, fadeIn) {
     const cx = C.CANVAS_W / 2;
+    const categories = C.LESSON_CATEGORIES;
 
     // Instructions
-    ctx.font = "500 16px 'Rajdhani', sans-serif";
+    ctx.font = "600 16px 'Rajdhani', sans-serif";
     ctx.fillStyle = C.COLORS.playFrame;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.globalAlpha = fadeIn * 0.7;
-    ctx.fillText('Watch as the verse phrases are sorted by category', cx, C.CANVAS_H * 0.22);
+    ctx.globalAlpha = fadeIn * 0.8;
+    const hasSelected = this._sortSelectedPhrase >= 0;
+    const instrText = hasSelected
+      ? 'Now click the correct category box below'
+      : 'Click a phrase, then place it in the right category';
+    ctx.fillText(instrText, cx, C.CANVAS_H * 0.19);
     ctx.globalAlpha = fadeIn;
 
-    // Category columns
+    // ── Unsorted phrase buttons at top ─────────────
+    const phraseY = C.CANVAS_H * 0.22;
+    const btnH = 34;
+    const btnGap = 6;
+    const btnW = Math.min(C.CANVAS_W - 80, 580);
+    const btnX = cx - btnW / 2;
+
+    let visIdx = 0;
+    for (let i = 0; i < this.miniPhrases.length; i++) {
+      const phrase = this.miniPhrases[i];
+      if (phrase.placed) continue;
+
+      const by = phraseY + visIdx * (btnH + btnGap);
+      if (by + btnH > C.CANVAS_H * 0.55) break;
+      const isSelected = this._sortSelectedPhrase === i;
+
+      // Button bg
+      ctx.fillStyle = isSelected ? 'rgba(117,215,230,0.2)' : 'rgba(255,255,255,0.06)';
+      ctx.globalAlpha = fadeIn;
+      ctx.beginPath();
+      ctx.roundRect(btnX, by, btnW, btnH, 5);
+      ctx.fill();
+
+      // Border — highlighted if selected
+      ctx.strokeStyle = isSelected ? C.COLORS.playFrame : 'rgba(255,255,255,0.2)';
+      ctx.lineWidth = isSelected ? 2.5 : 1;
+      ctx.globalAlpha = fadeIn * (isSelected ? 1 : 0.6);
+      ctx.beginPath();
+      ctx.roundRect(btnX, by, btnW, btnH, 5);
+      ctx.stroke();
+
+      // Phrase text
+      ctx.font = "600 18px 'Rajdhani', sans-serif";
+      ctx.fillStyle = isSelected ? C.COLORS.playFrame : '#d0d8e0';
+      ctx.globalAlpha = fadeIn;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const displayText = phrase.text.length > 50 ? phrase.text.substring(0, 47) + '...' : phrase.text;
+      ctx.fillText(displayText, cx, by + btnH / 2);
+
+      visIdx++;
+    }
+
+    // ── Category drop boxes at bottom ─────────────
     const colW = 200;
     const colGap = 20;
     const colStartX = cx - (colW * 3 + colGap * 2) / 2;
-    const colY = C.CANVAS_H * 0.30;
-    const colH = C.CANVAS_H * 0.50;
+    const colY = C.CANVAS_H * 0.58;
+    const colH = C.CANVAS_H * 0.30;
 
-    const categories = C.LESSON_CATEGORIES;
     categories.forEach((cat, ci) => {
-      const cx2 = colStartX + ci * (colW + colGap);
+      const bx = colStartX + ci * (colW + colGap);
 
-      // Column header
+      // Box background — glow when phrase is selected (ready to drop)
+      const glowAlpha = hasSelected ? 0.15 + Math.sin(this.stateTime * 4 + ci) * 0.05 : 0.06;
       ctx.fillStyle = cat.color;
-      ctx.globalAlpha = fadeIn * 0.3;
+      ctx.globalAlpha = fadeIn * glowAlpha;
       ctx.beginPath();
-      ctx.roundRect(cx2, colY, colW, 32, [5, 5, 0, 0]);
+      ctx.roundRect(bx, colY, colW, colH, 8);
       ctx.fill();
 
-      ctx.font = "bold 14px 'Rajdhani', sans-serif";
+      // Box header
+      ctx.fillStyle = cat.color;
+      ctx.globalAlpha = fadeIn * 0.4;
+      ctx.beginPath();
+      ctx.roundRect(bx, colY, colW, 36, [8, 8, 0, 0]);
+      ctx.fill();
+
+      ctx.font = "bold 16px 'Rajdhani', sans-serif";
       ctx.fillStyle = cat.color;
       ctx.globalAlpha = fadeIn;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(`${cat.icon} ${cat.label}`, cx2 + colW / 2, colY + 16);
+      ctx.fillText(`${cat.icon} ${cat.label}`, bx + colW / 2, colY + 18);
 
-      // Column body
-      ctx.fillStyle = 'rgba(255,255,255,0.03)';
-      ctx.globalAlpha = fadeIn * 0.5;
-      ctx.beginPath();
-      ctx.roundRect(cx2, colY + 32, colW, colH - 32, [0, 0, 5, 5]);
-      ctx.fill();
-
+      // Box border — pulses when waiting for drop
       ctx.strokeStyle = cat.color;
-      ctx.lineWidth = 1;
-      ctx.globalAlpha = fadeIn * 0.2;
+      ctx.lineWidth = hasSelected ? 2 : 1;
+      ctx.globalAlpha = fadeIn * (hasSelected ? 0.6 + Math.sin(this.stateTime * 5 + ci) * 0.2 : 0.25);
       ctx.beginPath();
-      ctx.roundRect(cx2, colY, colW, colH, 5);
+      ctx.roundRect(bx, colY, colW, colH, 8);
       ctx.stroke();
-    });
 
-    // Place revealed phrases in their columns
-    const categorized = { god: [], good: [], bad: [] };
-    this.miniPhrases.forEach(phrase => {
-      if (phrase.revealed) {
-        const cat = phrase.category;
-        if (categorized[cat]) {
-          categorized[cat].push(phrase.text);
-        } else {
-          // Put in 'other' items under 'good' for simplicity
-          categorized.good.push(phrase.text);
-        }
-      }
-    });
-
-    categories.forEach((cat, ci) => {
-      const cx2 = colStartX + ci * (colW + colGap);
-      const items = categorized[cat.key] || [];
-      let iy = colY + 42;
-
+      // ── Already placed phrases inside this box ──
+      let iy = colY + 44;
       ctx.font = "500 14px 'Rajdhani', sans-serif";
-      items.forEach(text => {
-        ctx.fillStyle = cat.color;
-        ctx.globalAlpha = fadeIn * 0.85;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'top';
-
-        // Truncate if too long
-        const displayText = text.length > 22 ? text.substring(0, 19) + '...' : text;
-        ctx.fillText(displayText, cx2 + colW / 2, iy);
-        iy += 22;
+      this.miniPhrases.forEach(phrase => {
+        if (phrase.placed && phrase.placedCategory === cat.key) {
+          ctx.fillStyle = phrase.correct ? cat.color : C.COLORS.bad;
+          ctx.globalAlpha = fadeIn * 0.85;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'top';
+          const t = phrase.text.length > 24 ? phrase.text.substring(0, 21) + '...' : phrase.text;
+          ctx.fillText((phrase.correct ? '\u2713 ' : '\u2717 ') + t, bx + colW / 2, iy);
+          iy += 20;
+        }
       });
     });
   }

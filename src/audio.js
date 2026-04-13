@@ -164,6 +164,28 @@ export class AudioManager {
     setTimeout(() => this._tone(1100, 0.08, 'sine', 0.08), 40);
   }
 
+  playWrongAnswer() {
+    // Harsh buzzer — two dissonant low tones
+    this._tone(150, 0.25, 'sawtooth', 0.2);
+    this._tone(180, 0.25, 'square', 0.15);
+    setTimeout(() => {
+      this._tone(120, 0.3, 'sawtooth', 0.15);
+    }, 120);
+  }
+
+  playHazardDrop() {
+    // Ominous descending tone when hazard appears
+    this._sweep(400, 150, 0.3, 'sawtooth', 0.12);
+    this._tone(200, 0.15, 'square', 0.1);
+  }
+
+  playCorrectAnswer() {
+    // Cheerful rising ding
+    this._tone(660, 0.08, 'sine', 0.15);
+    setTimeout(() => this._tone(880, 0.1, 'sine', 0.12), 60);
+    setTimeout(() => this._tone(1100, 0.15, 'sine', 0.1), 120);
+  }
+
   // ── Ambient music patterns ──────────────────────────────
 
   startMusic(scene = 'serve') {

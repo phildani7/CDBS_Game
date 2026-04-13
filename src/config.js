@@ -84,7 +84,12 @@ export const COLORS = {
 
   // Heaven surface
   heavenGold: '#FFD700',
-  heavenGlow: 'rgba(255, 215, 0, 0.25)'
+  heavenGlow: 'rgba(255, 215, 0, 0.25)',
+
+  // Earth surface
+  earthGreen: '#4CAF50',
+  earthDarkGreen: '#2E7D32',
+  earthBrown: '#5D4037'
 };
 
 // Power-ups with CDBS symbols
@@ -100,6 +105,16 @@ export const POWERUP_TYPES = [
   { kind: 'trinity',label: '☩ Trinity',   symbol: '☩',  color: '#FF8C00', duration: 0 }
 ];
 
+// Hazards (negative drops from red/bad bricks)
+export const HAZARD_CHANCE = 0.55;         // Chance to drop hazard when red brick is hit
+export const HAZARD_FALL_SPEED = 170;      // Slightly faster than powerups
+export const HAZARD_TYPES = [
+  { kind: 'shrink',  label: '⚠ Shrink',   symbol: '⚠', color: '#E53E3E', duration: 8 },
+  { kind: 'speed',   label: '⚡ Speed Up', symbol: '⚡', color: '#FF6B35', duration: 8 },
+  { kind: 'blind',   label: '🌑 Darkness', symbol: '🌑', color: '#4A0E0E', duration: 5 },
+  { kind: 'drain',   label: '💀 -100pts',  symbol: '💀', color: '#8B0000', duration: 0 }
+];
+
 // Guard
 export const GUARD_TEXT = '⟦:::: SAFEGUARD ::::⟧';
 export const GUARD_COLOR = '#a4f094';
@@ -113,7 +128,8 @@ export const SHAKE = {
   guardSave: 1.8,
   lifeLoss: 3.2,
   waveClear: 2.8,
-  badBrick: 3.5
+  badBrick: 3.5,
+  wrongAnswer: 5.0
 };
 
 // Lives
@@ -124,8 +140,9 @@ export const MAX_LIVES = 6;
 export const INTRO_DURATION = 2.34;
 export const CLEAR_DURATION = 2.18;
 export const OPENING_DURATION = 3.1;
-export const QUIZ_DURATION = 30;
-export const MINIGAME_DURATION = 40;
+export const QUIZ_DURATION = 45;
+export const MINIGAME_DURATION = 60;
+export const CATEGORY_SORT_DURATION = 35;
 
 // Order bonus – points awarded based on which category brick is hit first
 export const ORDER_BONUS = {
@@ -181,10 +198,17 @@ export const BRICK_FONT_SIZES = [30, 28, 26, 24, 22, 20, 18, 16];
 export const BRICK_FONT_FAMILY = "'Rajdhani', sans-serif";
 export const BRICK_STROKE_COLOR = 'rgba(5, 10, 16, 0.65)';
 
-// Text wall
+// Text wall (PreText-style interactive displacement)
 export const WALL_FONT_SIZE = 13;
 export const WALL_LINE_HEIGHT = 16;
 export const WALL_FONT = "13px 'Share Tech Mono', monospace";
+export const WALL_CHAR_W = 7.8;            // monospace char width at 13px
+export const WALL_REPEL_RADIUS = 60;       // ball pushes chars within this radius
+export const WALL_REPEL_STRENGTH = 2800;   // force magnitude
+export const WALL_SPRING = 6.0;            // spring-back speed (higher = snappier)
+export const WALL_DAMPING = 0.88;          // velocity damping per frame
+export const WALL_PARTICLE_REPEL = 36;     // smaller repel radius for particles
+export const WALL_PARTICLE_STRENGTH = 800; // weaker force for particles
 
 // Background particles
 export const BG_GLYPH_COUNT = 54;
@@ -219,6 +243,17 @@ export const YOUTUBE_CHANNEL = '@CartoonForChrist';
 export const YOUTUBE_PLAYLIST = 'PL_zwO2E6LyLJUq9r68bF-zXd8lw_phslx';
 // Videos loaded dynamically from src/data/youtube.json in main.js
 
+// Category labels (shown when bricks break so kids understand WHY)
+export const CATEGORY_LABELS = {
+  god:       '✦ About God',
+  good:      '✓ Good for us',
+  bad:       '✗ Warning!',
+  connector: '→ Connector',
+  earth:     '🌍 Earth',
+  royal:     '👑 Royalty',
+  other:     '· Neutral'
+};
+
 // Lesson categories for quiz
 export const LESSON_CATEGORIES = [
   { key: 'god',  label: 'About God',        color: COLORS.god,  icon: '✦' },
@@ -227,7 +262,7 @@ export const LESSON_CATEGORIES = [
 ];
 
 // Mini-game types
-export const MINIGAME_TYPES = ['reassemble', 'missing_word', 'category_sort'];
+export const MINIGAME_TYPES = ['reassemble', 'missing_word'];
 
 // Activity scoring
 export const QUIZ_CORRECT_POINTS = 75;       // Per correct quiz answer
